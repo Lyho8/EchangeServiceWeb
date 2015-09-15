@@ -3,6 +3,8 @@ package com.dta.model;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import java.util.*;
+
 @Entity
 public class Categorie {
 
@@ -13,8 +15,18 @@ public class Categorie {
 	@NotNull
 	private String libelle;
 	
+	@OneToMany(mappedBy="categorie")
+	private List<Annonce> annonces;
+	
 	public Categorie(){
 		super();
+	}
+
+	public Categorie(int id, String libelle, List<Annonce> annonces) {
+		super();
+		this.id = id;
+		this.libelle = libelle;
+		this.annonces = annonces;
 	}
 
 	public Categorie(int id, String libelle) {
@@ -37,6 +49,14 @@ public class Categorie {
 
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
+	}
+
+	public List<Annonce> getAnnonces() {
+		return annonces;
+	}
+
+	public void setAnnonces(List<Annonce> annonces) {
+		this.annonces = annonces;
 	}
 	
 }
