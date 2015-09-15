@@ -13,8 +13,10 @@ public class Paiement {
 	private int id;
 	
 	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateDemande;
 	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateValidation;
 	
 	@NotNull

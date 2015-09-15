@@ -24,6 +24,7 @@ public class Annonce {
 	private Type type;
 	
 	@NotNull
+	@Temporal(TemporalType.DATE)
 	private Date dateCreation;
 	
 	@NotNull

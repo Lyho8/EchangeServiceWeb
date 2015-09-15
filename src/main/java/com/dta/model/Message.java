@@ -2,7 +2,6 @@ package com.dta.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-
 import java.util.*;
 
 @Entity
@@ -17,6 +16,7 @@ public class Message {
 	private String contenu;
 	
 	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateCreation;
 	
 	@NotNull

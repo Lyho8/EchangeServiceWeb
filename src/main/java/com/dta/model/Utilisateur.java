@@ -30,6 +30,7 @@ public class Utilisateur {
 	private String motDePasse;
 	
 	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateInscription;
 	
 	@NotNull
