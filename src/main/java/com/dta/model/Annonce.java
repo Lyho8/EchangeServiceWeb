@@ -3,6 +3,8 @@ package com.dta.model;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import org.eclipse.persistence.annotations.PrivateOwned;
+
 import java.util.*;
 
 @Entity
@@ -19,23 +21,51 @@ public class Annonce {
 	private boolean active;
 	
 	@NotNull
-	private Type categorie;
+	private Type type;
 	
 	@NotNull
 	private Date dateCreation;
+	
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name="idUtilisateur")
+	private Utilisateur auteur;
+	
+	@OneToMany(mappedBy="annonce", cascade=CascadeType.ALL)
+	@PrivateOwned
+	private List<Commentaire> commentaires;
+	
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name="idCategorie")
+	private Categorie categorie;
 	
 	public Annonce(){
 		super();
 	}
 
-	public Annonce(int id, String description, boolean active, Type categorie,
+	public Annonce(int id, String description, boolean active, Type type,
 			Date dateCreation) {
 		super();
 		this.id = id;
 		this.description = description;
 		this.active = active;
-		this.categorie = categorie;
+		this.type = type;
 		this.dateCreation = dateCreation;
+	}
+
+	public Annonce(int id, String description, boolean active, Type type,
+			Date dateCreation, Utilisateur auteur,
+			List<Commentaire> commentaires, Categorie categorie) {
+		super();
+		this.id = id;
+		this.description = description;
+		this.active = active;
+		this.type = type;
+		this.dateCreation = dateCreation;
+		this.auteur = auteur;
+		this.commentaires = commentaires;
+		this.categorie = categorie;
 	}
 
 	public int getId() {
@@ -62,12 +92,12 @@ public class Annonce {
 		this.active = active;
 	}
 
-	public Type getCategorie() {
-		return categorie;
+	public Type getType() {
+		return type;
 	}
 
-	public void setCategorie(Type categorie) {
-		this.categorie = categorie;
+	public void setCategorie(Type type) {
+		this.type = type;
 	}
 
 	public Date getDateCreation() {
@@ -76,6 +106,34 @@ public class Annonce {
 
 	public void setDateCreation(Date dateCreation) {
 		this.dateCreation = dateCreation;
+	}
+
+	public Utilisateur getAuteur() {
+		return auteur;
+	}
+
+	public void setAuteur(Utilisateur auteur) {
+		this.auteur = auteur;
+	}
+
+	public List<Commentaire> getCommentaires() {
+		return commentaires;
+	}
+
+	public void setCommentaires(List<Commentaire> commentaires) {
+		this.commentaires = commentaires;
+	}
+
+	public Categorie getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
 	}
 	
 }

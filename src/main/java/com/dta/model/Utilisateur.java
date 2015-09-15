@@ -2,6 +2,9 @@ package com.dta.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+
+import org.eclipse.persistence.annotations.*;
+
 import java.util.*;
 
 @Entity
@@ -32,6 +35,18 @@ public class Utilisateur {
 	@NotNull
 	private int solde = 0;
 	
+	@OneToMany(mappedBy="auteur", cascade={ CascadeType.PERSIST , CascadeType.DETACH })
+	@PrivateOwned
+	private List<Message> messages;
+	
+	@OneToMany(mappedBy="auteur", cascade={ CascadeType.PERSIST , CascadeType.DETACH })
+	@PrivateOwned
+	private List<Annonce> annonces;
+	
+	@ManyToMany
+	@JoinTable(name = "usr_msg", joinColumns = {@JoinColumn(name = "idUsr")}, inverseJoinColumns = {@JoinColumn(name = "idMsg")})
+	private List<Message> messagesRecus;
+	
 	public Utilisateur(){
 		super();
 	}
@@ -45,6 +60,23 @@ public class Utilisateur {
 		this.login = login;
 		this.motDePasse = motDePasse;
 		this.solde = solde;
+	}
+
+	public Utilisateur(int id, String nom, String prenom, String login,
+			String motDePasse, Date dateInscription, int solde,
+			List<Message> messages, List<Annonce> annonces,
+			List<Message> messagesRecus) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.login = login;
+		this.motDePasse = motDePasse;
+		this.dateInscription = dateInscription;
+		this.solde = solde;
+		this.messages = messages;
+		this.annonces = annonces;
+		this.messagesRecus = messagesRecus;
 	}
 
 	public int getId() {
@@ -93,6 +125,38 @@ public class Utilisateur {
 
 	public void setSolde(int solde) {
 		this.solde = solde;
+	}
+
+	public Date getDateInscription() {
+		return dateInscription;
+	}
+
+	public void setDateInscription(Date dateInscription) {
+		this.dateInscription = dateInscription;
+	}
+
+	public List<Message> getMessages() {
+		return messages;
+	}
+
+	public void setMessages(List<Message> messages) {
+		this.messages = messages;
+	}
+
+	public List<Annonce> getAnnonces() {
+		return annonces;
+	}
+
+	public void setAnnonces(List<Annonce> annonces) {
+		this.annonces = annonces;
+	}
+
+	public List<Message> getMessagesRecus() {
+		return messagesRecus;
+	}
+
+	public void setMessagesRecus(List<Message> messagesRecus) {
+		this.messagesRecus = messagesRecus;
 	}
 
 }
