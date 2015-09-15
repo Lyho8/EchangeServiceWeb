@@ -2,6 +2,7 @@ package com.dta.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.*;
 
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
@@ -13,6 +14,9 @@ public class Message {
 	
 	@NotNull
 	private String contenu;
+	
+	@NotNull
+	private Date dateCreation;
 	
 	public Message(){
 		super();
