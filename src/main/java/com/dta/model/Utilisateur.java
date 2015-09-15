@@ -2,6 +2,7 @@ package com.dta.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.*;
 
 @Entity
 public class Utilisateur {
@@ -24,6 +25,9 @@ public class Utilisateur {
 	@NotNull
 	@Size(max = 50, min = 6)
 	private String motDePasse;
+	
+	@NotNull
+	private Date dateInscription;
 	
 	@NotNull
 	private int solde = 0;
