@@ -1,4 +1,4 @@
-package com.dta.spring;
+package com.dta.controller;
 
 import java.text.DateFormat;
 import java.util.Date;

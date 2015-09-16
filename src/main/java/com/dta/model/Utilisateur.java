@@ -29,6 +29,8 @@ public class Utilisateur {
 	@Size(max = 50, min = 6)
 	private String motDePasse;
 	
+	private boolean actif;
+	
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateInscription;
@@ -84,6 +86,27 @@ public class Utilisateur {
 		this.messages = messages;
 		this.annonces = annonces;
 		this.messagesRecus = messagesRecus;
+	}
+
+	public Utilisateur(int id, String nom, String prenom, String login,
+			String motDePasse, boolean actif, Date dateInscription, int solde,
+			List<Message> messages, List<Annonce> annonces,
+			List<Message> messagesRecus, List<Paiement> paiementsEmis,
+			List<Paiement> paiementsRecus) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.login = login;
+		this.motDePasse = motDePasse;
+		this.actif = actif;
+		this.dateInscription = dateInscription;
+		this.solde = solde;
+		this.messages = messages;
+		this.annonces = annonces;
+		this.messagesRecus = messagesRecus;
+		this.paiementsEmis = paiementsEmis;
+		this.paiementsRecus = paiementsRecus;
 	}
 
 	public int getId() {
@@ -164,6 +187,30 @@ public class Utilisateur {
 
 	public void setMessagesRecus(List<Message> messagesRecus) {
 		this.messagesRecus = messagesRecus;
+	}
+
+	public boolean isActif() {
+		return actif;
+	}
+
+	public void setActif(boolean actif) {
+		this.actif = actif;
+	}
+
+	public List<Paiement> getPaiementsEmis() {
+		return paiementsEmis;
+	}
+
+	public void setPaiementsEmis(List<Paiement> paiementsEmis) {
+		this.paiementsEmis = paiementsEmis;
+	}
+
+	public List<Paiement> getPaiementsRecus() {
+		return paiementsRecus;
+	}
+
+	public void setPaiementsRecus(List<Paiement> paiementsRecus) {
+		this.paiementsRecus = paiementsRecus;
 	}
 
 }

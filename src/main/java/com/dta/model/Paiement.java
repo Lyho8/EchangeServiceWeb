@@ -53,6 +53,20 @@ public class Paiement {
 		this.message = message;
 	}
 
+	public Paiement(int id, Date dateDemande, Date dateValidation,
+			boolean valide, int montant, String message, Utilisateur emetteur,
+			Utilisateur recepteur) {
+		super();
+		this.id = id;
+		this.dateDemande = dateDemande;
+		this.dateValidation = dateValidation;
+		this.valide = valide;
+		this.montant = montant;
+		this.message = message;
+		this.emetteur = emetteur;
+		this.recepteur = recepteur;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -99,6 +113,22 @@ public class Paiement {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public Utilisateur getEmetteur() {
+		return emetteur;
+	}
+
+	public void setEmetteur(Utilisateur emetteur) {
+		this.emetteur = emetteur;
+	}
+
+	public Utilisateur getRecepteur() {
+		return recepteur;
+	}
+
+	public void setRecepteur(Utilisateur recepteur) {
+		this.recepteur = recepteur;
 	}
 	
 }
