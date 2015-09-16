@@ -28,7 +28,7 @@ public class MessageController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MessageController.class);
 	
-	@Resource (name="messagesMetier")
+	@Resource (name="messageMetier")
 	private IMessagesMetier IMM;
 	
 	/**

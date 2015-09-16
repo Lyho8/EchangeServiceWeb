@@ -22,9 +22,7 @@
 		<property name="entityManagerFactory" ref="entityManagerFactory"></property>
 	</bean>
 	
-	<bean id="encoder" class="com.dta.utils.MyPassEncoder"></bean>		
-	
-	<bean id="messagesMetier" class="com.dta.metier.IMessagesMetier"></bean>
+	<bean id="encoder" class="com.dta.utils.MyPassEncoder"></bean>
 	
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
