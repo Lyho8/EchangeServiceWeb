@@ -5,6 +5,8 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.dao.metier.IMessagesMetier;
+import com.dta.metier.IMessagesMetier;
 import com.dta.model.Utilisateur;
 
 /**
@@ -26,16 +28,16 @@ public class MessageController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MessageController.class);
 	
-	@Autowired
+	@Resource (name="messagesMetier")
 	private IMessagesMetier IMM;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public String home(Model model, Principal principal) {
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public String home(Model model, Utilisateur u) {
 
-		model.addAttribute("MesClients",IMM.listerMessageRecu(principal.));	
+		model.addAttribute("MesMessagesR",IMM.listerMessageRecu(u));	
 		
 		return "messages";
 	}

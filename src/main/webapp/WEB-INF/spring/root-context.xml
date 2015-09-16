@@ -24,6 +24,8 @@
 	
 	<bean id="encoder" class="com.dta.utils.MyPassEncoder"></bean>		
 	
+	<bean id="messagesMetier" class="com.dta.metier.IMessagesMetier"></bean>
+	
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="persistenceUnitName" value="DTASpringModel"></property>
