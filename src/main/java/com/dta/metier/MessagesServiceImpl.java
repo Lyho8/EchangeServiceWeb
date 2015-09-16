@@ -11,7 +11,7 @@ import com.dta.dao.IMessageDao;
 import com.dta.model.MessagePrive;
 import com.dta.model.Utilisateur;
 
-public class MessagesMetierImpl implements IMessagesMetier {
+public class MessagesServiceImpl implements IMessagesService {
 
 
 	@Resource(name="messageDao")

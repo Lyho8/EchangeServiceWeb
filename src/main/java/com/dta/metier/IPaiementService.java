@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.dta.model.*;
 
-public interface IPaiementMetier {
+public interface IPaiementService {
 
 	public void creerPaiement(Paiement p);
 

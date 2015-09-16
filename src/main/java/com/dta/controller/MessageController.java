@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.dta.metier.IMessagesMetier;
+import com.dta.metier.IMessagesService;
 import com.dta.model.Utilisateur;
 
 /**
@@ -29,7 +29,7 @@ public class MessageController {
 	private static final Logger logger = LoggerFactory.getLogger(MessageController.class);
 	
 	@Resource (name="messageMetier")
-	private IMessagesMetier IMM;
+	private IMessagesService ms;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -37,7 +37,7 @@ public class MessageController {
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String home(Model model, Utilisateur u) {
 
-		model.addAttribute("MesMessagesR",IMM.listerMessageRecu(u));	
+		model.addAttribute("MesMessagesR",ms.listerMessageRecu(u));	
 		
 		return "messages";
 	}
@@ -51,9 +51,9 @@ public class MessageController {
 	@RequestMapping(value = "/supprimer", method = RequestMethod.GET)
 	public String supprMessage(@RequestParam (value="id") int idMessageP, Utilisateur u,Model model) {
 		
-		IMM.supprimerMessage(idMessageP);
+		ms.supprimerMessage(idMessageP);
 		
-		IMM.listerMessageRecu(u);
+		ms.listerMessageRecu(u);
 		
 		return "messages_new";
 	}

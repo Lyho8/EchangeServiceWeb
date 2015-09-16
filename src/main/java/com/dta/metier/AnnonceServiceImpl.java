@@ -10,7 +10,7 @@ import com.dta.model.Annonce;
 import com.dta.model.Categorie;
 import com.dta.model.Utilisateur;
 
-public class AnnonceMetierImpl implements IAnnonceMetier {
+public class AnnonceServiceImpl implements IAnnonceService {
 	private IAnnonceDao dao;
 
 	public IAnnonceDao getDao() {
