@@ -10,7 +10,7 @@
 			Nouveau paiement
 		</h1>
 		
-		<form:form method="post" action="/projetf/paiement/nouveau/${ dest.id }"
+		<form:form method="post" action="/projetf/paiement/nouveau/1"
 		modelAttribute="paiement">
 		<table class="table table-striped table-bordered">
 			<tr>
@@ -35,6 +35,9 @@
 				<td><form:input path="message" /></td>
 				<%--Show errors for firstname field --%>
 				<td><form:errors path="message" /></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="Valider" /></td>
 			</tr>
 		</table>
 	</form:form>

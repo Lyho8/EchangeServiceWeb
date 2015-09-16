@@ -6,7 +6,7 @@ import com.dta.model.*;
 
 public interface IPaiementMetier {
 
-	public void creerPaiement(Paiement c);
+	public void creerPaiement(Paiement p);
 
 	public List<Paiement> listerPaiements();
 
@@ -14,7 +14,7 @@ public interface IPaiementMetier {
 
 	public Paiement chercherPaiement(int id);
 
-	public void actualiserPaiement(Paiement c);
+	public void actualiserPaiement(Paiement p);
 
 	public List<Paiement> chercherPaiements(Utilisateur u);
 	

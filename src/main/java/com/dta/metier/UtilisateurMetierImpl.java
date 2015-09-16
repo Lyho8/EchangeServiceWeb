@@ -54,7 +54,7 @@ public class UtilisateurMetierImpl implements IUtilisateurMetier {
 	}
 
 	@Transactional(readOnly=true)
-	public Utilisateur editerUtilisateur(int idUtilisateur) {
+	public Utilisateur chercherUtilisateur(int idUtilisateur) {
 		return dao.editerUtilisateur(idUtilisateur);
 	}
 
