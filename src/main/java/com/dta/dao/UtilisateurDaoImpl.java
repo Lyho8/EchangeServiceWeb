@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.dta.model.Utilisateur;
 
 @Repository("dao")
-public class UserDaoImpl implements IUserDao {
+public class UtilisateurDaoImpl implements IUtilisateurDao {
 
 	@PersistenceContext
 	private EntityManager em = null;

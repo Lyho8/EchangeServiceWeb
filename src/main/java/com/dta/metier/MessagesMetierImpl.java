@@ -1,9 +1,10 @@
-package com.dao.metier;
+package com.dta.metier;
 
 import java.util.List;
 
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.dta.dao.IMessageDao;
 import com.dta.model.MessagePrive;
 import com.dta.model.Utilisateur;
