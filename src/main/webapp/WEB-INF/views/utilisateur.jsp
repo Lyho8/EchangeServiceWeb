@@ -7,11 +7,16 @@
 
 <t:template>
 	<jsp:body>
-<h1>
-	Créez votre compte !
-</h1>
 
-	<form:form method="POST" action="" modelAttribute="">
+
+<a href="<%=request.getContextPath()%>/projetf">vers Accueil</a>
+	********
+
+<h3>
+	Création d'un compte.
+</h3>
+
+	<form:form method="POST" action="/projetf/utilisateur" modelAttribute="utilisateur">
 		<table>
 			
 			<tr>
