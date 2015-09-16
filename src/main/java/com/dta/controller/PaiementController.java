@@ -20,23 +20,23 @@ import com.dta.model.Paiement;
 public class PaiementController {
 
 	@Resource(name = "paiementMetier")
-	private IPaiementMetier pm;
+	private IPaiementService ps;
 	
 	@Resource(name = "utilisateurMetier")
-	private IUtilisateurMetier um;
+	private IUtilisateurService us;
 
 	/**
 	 * Affiche les paiements
 	 */
 	@RequestMapping(value = "/paiement", method = RequestMethod.GET)
 	public String homePaiement(Locale locale, Model model) {
-		model.addAttribute("paiements", pm.listerPaiements());
+		model.addAttribute("paiements", ps.listerPaiements());
 		return "paiement";
 	}
 
 	@RequestMapping(value = "/paiement/nouveau/{id}", method = RequestMethod.GET)
 	public String newPaiementForm(@PathVariable int id, Locale locale, Model model) {
-		model.addAttribute("dest", um.chercherUtilisateur(id));
+		model.addAttribute("dest", us.chercherUtilisateur(id));
 		model.addAttribute("paiement", new Paiement());
 		return "paiement_nouveau";
 	}
@@ -44,9 +44,9 @@ public class PaiementController {
 	@RequestMapping(value = "/paiement/nouveau/{id}", method = RequestMethod.POST)
 	public String newPaiementPost(@Valid Paiement p, BindingResult bindingResult, @PathVariable int id, Locale locale, Model model) {
 		
-		p.setRecepteur(um.chercherUtilisateur(id));
+		p.setRecepteur(us.chercherUtilisateur(id));
 		
-		p.setEmetteur(um.chercherUtilisateur(1));
+		p.setEmetteur(us.chercherUtilisateur(1));
 		
 		p.setDateDemande(new Date());
 		
@@ -56,7 +56,9 @@ public class PaiementController {
 //			return "paiement_nouveau";
 //		}
 		
-		pm.actualiserPaiement(p);
+		ps.actualiserPaiement(p);
+		
+		model.addAttribute("paiements", ps.listerPaiements());
 		
 		return "paiement";
 	}

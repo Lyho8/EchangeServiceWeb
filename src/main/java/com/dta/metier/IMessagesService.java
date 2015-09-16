@@ -5,7 +5,7 @@ import java.util.List;
 import com.dta.model.MessagePrive;
 import com.dta.model.Utilisateur;
 
-public interface IMessagesMetier {
+public interface IMessagesService {
 
 	public void creerMessage(MessagePrive mp);
 	public void supprimerMessage(int idMessageP);

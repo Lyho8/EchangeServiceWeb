@@ -6,7 +6,7 @@ import com.dta.model.Annonce;
 import com.dta.model.Categorie;
 import com.dta.model.Utilisateur;
 
-public interface IAnnonceMetier {
+public interface IAnnonceService {
 
 	public abstract void creerAnnonce(Annonce annonce);
 

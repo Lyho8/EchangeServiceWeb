@@ -11,16 +11,16 @@ import com.dta.model.Utilisateur;
 
 
 
-public class UtilisateurMetierImpl implements IUtilisateurMetier {
+public class UtilisateurServiceImpl implements IUtilisateurService {
 
 	@Resource(name = "utilisateurDao")
 	private IUtilisateurDao dao;
 
-	public UtilisateurMetierImpl() {
+	public UtilisateurServiceImpl() {
 		super();
 	}
 
-	public UtilisateurMetierImpl(IUtilisateurDao dao) {
+	public UtilisateurServiceImpl(IUtilisateurDao dao) {
 		super();
 		this.dao = dao;
 	}

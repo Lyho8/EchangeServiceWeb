@@ -11,14 +11,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.dta.metier.IAnnonceMetier;
+import com.dta.metier.IAnnonceService;
 import com.dta.model.Annonce;
 
 @Controller
 @RequestMapping(value = "annonces")
 public class AnnonceController {
 	@Resource(name="annonceMetier")
-	private IAnnonceMetier annonceMetier;
+	private IAnnonceService as;
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String home(Model model) {
@@ -65,7 +65,7 @@ public class AnnonceController {
 			return "annonces_nouvelle";
 		}
 		
-		annonceMetier.creerAnnonce(annonce);
+		as.creerAnnonce(annonce);
 		return "redirect:/annonces/voir/" + annonce.getId();
 	}
 	

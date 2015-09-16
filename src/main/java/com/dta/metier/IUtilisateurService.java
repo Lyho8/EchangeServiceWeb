@@ -5,7 +5,7 @@ import java.util.List;
 import com.dta.model.Utilisateur;
 
 
-public interface IUtilisateurMetier {
+public interface IUtilisateurService {
 		public void creerUtilisateur(Utilisateur u); 
 
 		public List<Utilisateur> listerUtilisateurs();

@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.*;
 import com.dta.model.*;
 import com.dta.dao.*;
 
-public class PaiementMetierImpl implements IPaiementMetier {
+public class PaiementServiceImpl implements IPaiementService {
 
 	@Resource(name="paiementDao")
 	private IPaiementDao dao;

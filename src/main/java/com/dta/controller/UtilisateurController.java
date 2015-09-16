@@ -9,14 +9,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import com.dta.metier.IUtilisateurMetier;
+import com.dta.metier.IUtilisateurService;
 import com.dta.model.Utilisateur;
 
 @Controller
 public class UtilisateurController {
 
 	@Resource(name = "utilisateurMetier")
-	private IUtilisateurMetier ium;
+	private IUtilisateurService ms;
 
 	// TODO ajouter un utilisateur.
 	@RequestMapping(value = "/utilisateur", method = RequestMethod.POST)
@@ -24,9 +24,9 @@ public class UtilisateurController {
 			Model model) {
 
 		if (u.getId() == 0)
-			ium.creerUtilisateur(u);
+			ms.creerUtilisateur(u);
 		else
-			ium.actualiserUtilisateur(u);
+			ms.actualiserUtilisateur(u);
 
 		model.addAttribute("utilisateur", new Utilisateur());
 
@@ -37,7 +37,7 @@ public class UtilisateurController {
 	@RequestMapping(value = "/editerUtilisateur/{id}")
 	public String updateClient(@PathVariable(value = "id") int id, Model model) {
 
-		Utilisateur u1 = ium.chercherUtilisateur(id);
+		Utilisateur u1 = ms.chercherUtilisateur(id);
 
 		model.addAttribute("utilisateur", u1);
 
