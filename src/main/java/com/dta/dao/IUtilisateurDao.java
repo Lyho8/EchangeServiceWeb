@@ -5,7 +5,7 @@ import java.util.List;
 import com.dta.model.Utilisateur;
 
 
-public interface IUserDao {
+public interface IUtilisateurDao {
 
 	public void creerUtilisateur(Utilisateur u) /*throws Exception*/; 
 

@@ -6,30 +6,30 @@ import javax.annotation.Resource;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import com.dta.dao.IUserDao;
+import com.dta.dao.IUtilisateurDao;
 import com.dta.model.Utilisateur;
 
 
 
-public class UserMetierImpl implements IUserMetier {
+public class UtilisateurMetierImpl implements IUtilisateurMetier {
 
 	@Resource(name = "dao")
-	private IUserDao iud;
+	private IUtilisateurDao iud;
 
-	public UserMetierImpl() {
+	public UtilisateurMetierImpl() {
 		super();
 	}
 
-	public UserMetierImpl(IUserDao iud) {
+	public UtilisateurMetierImpl(IUtilisateurDao iud) {
 		super();
 		this.iud = iud;
 	}
 
-	public IUserDao getIud() {
+	public IUtilisateurDao getIud() {
 		return iud;
 	}
 
-	public void setIud(IUserDao iud) {
+	public void setIud(IUtilisateurDao iud) {
 		this.iud = iud;
 	}
 

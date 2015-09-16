@@ -5,10 +5,9 @@ import java.util.List;
 import com.dta.model.Utilisateur;
 
 
-public interface IUserMetier {
+public interface IUtilisateurMetier {
 
 	
-	public interface IUtilisateurMetier {
 
 		public void creerUtilisateur(Utilisateur u); 
 
@@ -22,5 +21,5 @@ public interface IUserMetier {
 
 		public List<Utilisateur> chercherUtilisateurs(String motCle);
 		
-	}
+	
 }
