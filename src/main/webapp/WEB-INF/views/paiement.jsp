@@ -11,10 +11,10 @@
 		</h1>
 		
 		<div class="row">
-			<c:forEach items="${ paiements }" var="p"}>			
+			<c:forEach items="${ paiements }" var="p">			
 			  <div class="col-sm-2">
 			    <div class="thumbnail">
-			      <table>
+			      <table class="table table-striped table-bordered">
 			      	<tr>
 			      		<th>Id</th>
 			      		<th>Montant</th>
