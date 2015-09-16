@@ -6,6 +6,11 @@
 	DTA Echange-Service
 </h1>
 
+<!-- div de test pour les nouvelles pages -->
+<div>
+	<a href="/projetf/messages">Page des messages</a>
+</div>
+
 <div class="row">
   <div class="col-sm-2">
     <div class="thumbnail">
