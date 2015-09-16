@@ -73,6 +73,9 @@
 	
 	<bean id="messageMetier" class="com.dta.metier.MessagesMetierImpl"></bean>
 
+	<bean id="annonceDao" class="com.dta.dao.AnnonceDaoImpl"></bean>
+	
+	<bean id="annonceMetier" class="com.dta.metier.AnnonceMetierImpl"></bean>
 
     <context:property-placeholder location="classpath:jdbc.properties"/>
 	
