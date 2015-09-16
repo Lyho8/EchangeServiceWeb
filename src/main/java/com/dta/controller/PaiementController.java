@@ -12,17 +12,26 @@ import com.dta.metier.*;
  */
 @Controller
 public class PaiementController {
-	
-	@Resource(name="paiementMetier")
+
+	@Resource(name = "paiementMetier")
 	private IPaiementMetier pm;
 	
+	@Resource(name = "utilisateurMetier")
+	private IUtilisateurMetier um;
+
 	/**
 	 * Affiche les paiements
 	 */
 	@RequestMapping(value = "/paiement", method = RequestMethod.GET)
 	public String homePaiement(Locale locale, Model model) {
-		model.addAttribute("paiements", pm.listerPaiements());		
+		model.addAttribute("paiements", pm.listerPaiements());
 		return "paiement";
 	}
-	
+
+	@RequestMapping(value = "/paiement/nouveau/{id}", method = RequestMethod.POST)
+	public String newPaiement(@PathVariable int id, Locale locale, Model model) {
+		model.addAttribute("dest", um.editerUtilisateur(id));
+		return "paiement_nouveau";
+	}
+
 }

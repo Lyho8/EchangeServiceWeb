@@ -8,7 +8,7 @@ import com.dta.dao.*;
 
 public class PaiementMetierImpl implements IPaiementMetier {
 
-	@Resource(name="daoPaiement")
+	@Resource(name="paiementDao")
 	private IPaiementDao dao;
 
 	public void setDao(IPaiementDao dao) {

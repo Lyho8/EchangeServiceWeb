@@ -7,7 +7,7 @@
 <t:template>
 	<jsp:body>
 		<h1>
-			DTA Echange-Service
+			Liste des paiements
 		</h1>
 		
 		<div class="row">
@@ -28,6 +28,8 @@
 			  </div>
 			</c:forEach>
 		</div>
+		
+		<a href="/projetf/paiement/nouveau/1">Nouveau paiement pour utilisateur 1</a>
 		
 
     </jsp:body>

@@ -2,6 +2,8 @@ package com.dta.metier;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +14,8 @@ import com.dta.model.Utilisateur;
 public class MessagesMetierImpl implements IMessagesMetier {
 
 
-	IMessageDao dao;
+	@Resource(name="messageDao")
+	private IMessageDao dao;
 
 	public void setDao(IMessageDao dao) {
 		this.dao = dao;
