@@ -1,4 +1,4 @@
-package com.dta.spring;
+package com.dta.controller;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -9,8 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.bankonet.model.Client;
 import com.dta.metier.IUtilisateurMetier;
 import com.dta.model.Utilisateur;
 
@@ -39,7 +37,7 @@ public class UtilisateurController {
 	@RequestMapping(value = "/editerUtilisateur/{id}")
 	public String updateClient(@PathVariable(value = "id") int id, Model model) {
 
-		Utilisateur u1 = ium.editerUtilisateur(id);
+		Utilisateur u1 = ium.chercherUtilisateur(id);
 
 		model.addAttribute("utilisateur", u1);
 
