@@ -67,6 +67,8 @@
 	
 	<bean id="utilisateurMetier" class="com.dta.metier.UtilisateurServiceImpl"></bean>
 	
+	<bean id="mail" class="com.dta.metier.MailServiceImpl"></bean>
+	
 	<bean id="messageDao" class="com.dta.dao.MessageDaoImpl"></bean>
 	
 	<bean id="messageMetier" class="com.dta.metier.MessagesServiceImpl"></bean>
