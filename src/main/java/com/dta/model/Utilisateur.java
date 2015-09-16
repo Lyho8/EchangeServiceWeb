@@ -48,6 +48,12 @@ public class Utilisateur {
 	@JoinTable(name = "usr_msg", joinColumns = {@JoinColumn(name = "idUsr")}, inverseJoinColumns = {@JoinColumn(name = "idMsg")})
 	private List<Message> messagesRecus;
 	
+	@OneToMany(mappedBy="emetteur")
+	private List<Paiement> paiementsEmis;
+	
+	@OneToMany(mappedBy="recepteur")
+	private List<Paiement> paiementsRecus;
+	
 	public Utilisateur(){
 		super();
 	}

@@ -28,6 +28,16 @@ public class Paiement {
 	@NotNull
 	private String message = "";
 	
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name="idEmetteur")
+	private Utilisateur emetteur;
+	
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name="idRecepteur")
+	private Utilisateur recepteur;
+	
 	public Paiement(){
 		super();
 	}
