@@ -1,52 +1,51 @@
 package com.dta.metier;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.*;
+import java.util.*;
+import javax.annotation.*;
+import org.springframework.transaction.annotation.*;
 import com.dta.model.*;
 import com.dta.dao.*;
 
 public class PaiementMetierImpl implements IPaiementMetier {
 
-	@Autowired
+	@Resource(name="daoPaiement")
 	private IPaiementDao dao;
-	
-	@Override
-	public void creerPaiement(Paiement c) {
-		// TODO Auto-generated method stub
-		
+
+	public void setDao(IPaiementDao dao) {
+		this.dao = dao;
 	}
 
-	@Override
+	@Transactional
+	public void creerPaiement(Paiement p) {
+		dao.creerPaiement(p);
+	}
+
+	@Transactional(readOnly = true)
 	public List<Paiement> listerPaiements() {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.listerPaiements();
 	}
 
-	@Override
-	public void supprimerPaiement(int id) {
-		// TODO Auto-generated method stub
-		
+	@Transactional
+	public void supprimerPaiement(int idPaiement) {
+		dao.supprimerPaiement(idPaiement);
 	}
 
-	@Override
-	public Paiement chercherPaiement(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional(readOnly = true)
+	public Paiement chercherPaiement(int idPaiement) {
+		return dao.chercherPaiement(idPaiement);
 	}
 
-	@Override
-	public void actualiserPaiement(Paiement c) {
-		// TODO Auto-generated method stub
-		
+	@Transactional
+	public void actualiserPaiement(Paiement p) {
+		dao.actualiserPaiement(p);
+
 	}
 
-	@Override
+	@Transactional(readOnly = true)
 	public List<Paiement> chercherPaiements(Utilisateur u) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Paiement> mylist = new ArrayList<Paiement>();
+		mylist = dao.chercherPaiements(u);
+		return mylist;
 	}
 
-	
-	
 }
