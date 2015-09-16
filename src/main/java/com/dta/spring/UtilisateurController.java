@@ -16,7 +16,7 @@ import com.dta.model.Utilisateur;
 @Controller
 public class UtilisateurController {
 
-	@Resource(name = "metier")
+	@Resource(name = "utilisateurMetier")
 	private IUtilisateurMetier ium;
 
 	
