@@ -3,13 +3,8 @@
 <t:template>
 	<jsp:body>
 <h1>
-	DTA Echange-Service
+	Liste des annonces
 </h1>
-
-<!-- div de test pour les nouvelles pages -->
-<div>
-	<a href="/projetf/messages">Page des messages</a>
-</div>
 
 <div class="row">
   <div class="col-sm-2">

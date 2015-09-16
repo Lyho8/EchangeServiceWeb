@@ -16,7 +16,13 @@ public class Message {
 	private String contenu;
 	
 	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateCreation;
+	
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name="idUtilisateur")
+	private Utilisateur auteur;
 	
 	public Message(){
 		super();
@@ -26,6 +32,14 @@ public class Message {
 		super();
 		this.id = id;
 		this.contenu = contenu;
+	}
+
+	public Message(int id, String contenu, Date dateCreation, Utilisateur auteur) {
+		super();
+		this.id = id;
+		this.contenu = contenu;
+		this.dateCreation = dateCreation;
+		this.auteur = auteur;
 	}
 
 	public int getId() {
@@ -43,7 +57,21 @@ public class Message {
 	public void setContenu(String contenu) {
 		this.contenu = contenu;
 	}
-	
-	
+
+	public Date getDateCreation() {
+		return dateCreation;
+	}
+
+	public void setDateCreation(Date dateCreation) {
+		this.dateCreation = dateCreation;
+	}
+
+	public Utilisateur getAuteur() {
+		return auteur;
+	}
+
+	public void setAuteur(Utilisateur auteur) {
+		this.auteur = auteur;
+	}	
 	
 }

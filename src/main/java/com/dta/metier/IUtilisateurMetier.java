@@ -6,9 +6,6 @@ import com.dta.model.Utilisateur;
 
 
 public interface IUtilisateurMetier {
-
-	
-
 		public void creerUtilisateur(Utilisateur u); 
 
 		public List<Utilisateur> listerUtilisateurs();
@@ -20,6 +17,4 @@ public interface IUtilisateurMetier {
 		public void actualiserUtilisateur(Utilisateur c);
 
 		public List<Utilisateur> chercherUtilisateurs(String motCle);
-		
-	
 }
