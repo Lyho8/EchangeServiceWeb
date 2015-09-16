@@ -18,9 +18,10 @@ public class UtilisateurController {
 	@Resource(name = "utilisateurMetier")
 	private IUtilisateurMetier ium;
 
+	
 	// TODO ajouter un utilisateur.
 	@RequestMapping(value = "/utilisateur", method = RequestMethod.POST)
-	public String home(@Valid Utilisateur u, BindingResult bindingResult,
+	public String ajout(@Valid Utilisateur u, BindingResult bindingResult,
 			Model model) {
 
 		if (u.getId() == 0)
@@ -29,18 +30,20 @@ public class UtilisateurController {
 			ium.actualiserUtilisateur(u);
 
 		model.addAttribute("utilisateur", new Utilisateur());
-
+		model.addAttribute("listeUtilisateurs", ium.listerUtilisateurs());
+		
 		return "utilisateur";
 	}
 
 	// TODO actualiser un utilisateur.
-	@RequestMapping(value = "/editerUtilisateur/{id}")
-	public String updateClient(@PathVariable(value = "id") int id, Model model) {
+	@RequestMapping(value = "/editerUtilisateur/{id}", method = RequestMethod.GET)
+	public String editer(@PathVariable(value = "id") int id, Model model) {
 
 		Utilisateur u1 = ium.chercherUtilisateur(id);
 
 		model.addAttribute("utilisateur", u1);
-
+		model.addAttribute("listeUtilisateurs", ium.listerUtilisateurs());
+		
 		return "utilisateur";
 	}
 
