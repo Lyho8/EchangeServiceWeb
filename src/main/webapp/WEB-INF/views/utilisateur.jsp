@@ -51,7 +51,7 @@
 			
 		</table>
 
-		<input type="submit" value="Register" />
+		<input type="submit" value="Envoyer" />
 	</form:form>
 	</jsp:body>
 </t:template>
