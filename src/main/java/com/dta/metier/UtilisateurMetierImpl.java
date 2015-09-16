@@ -25,11 +25,11 @@ public class UtilisateurMetierImpl implements IUtilisateurMetier {
 		this.dao = dao;
 	}
 
-	public IUtilisateurDao getIud() {
+	public IUtilisateurDao getDao() {
 		return dao;
 	}
 
-	public void setIud(IUtilisateurDao dao) {
+	public void setDao(IUtilisateurDao dao) {
 		this.dao = dao;
 	}
 
@@ -54,7 +54,7 @@ public class UtilisateurMetierImpl implements IUtilisateurMetier {
 	}
 
 	@Transactional(readOnly=true)
-	public Utilisateur editerUtilisateur(int idUtilisateur) {
+	public Utilisateur chercherUtilisateur(int idUtilisateur) {
 		return dao.editerUtilisateur(idUtilisateur);
 	}
 
