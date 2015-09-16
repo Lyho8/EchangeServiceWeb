@@ -22,7 +22,7 @@
 			<ul class="nav navbar-nav">
 				<li role="presentation"
 					<c:if test="${urlCourante=='home'}">class="active"</c:if>><a
-					href="#">Page d'accueil</a></li>
+					href="/projetf">Page d'accueil</a></li>
 				<li role="presentation"
 					<c:if test="${urlCourante=='annonces'}">class="active"</c:if>><a
 					href="#">Annonces</a></li>
