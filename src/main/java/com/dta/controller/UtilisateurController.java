@@ -30,7 +30,7 @@ public class UtilisateurController {
 			ms.actualiserUtilisateur(u);
 
 		model.addAttribute("utilisateur", new Utilisateur());
-		model.addAttribute("listeUtilisateurs", ium.listerUtilisateurs());
+		model.addAttribute("listeUtilisateurs", ms.listerUtilisateurs());
 		
 		return "utilisateur";
 	}
@@ -42,7 +42,7 @@ public class UtilisateurController {
 		Utilisateur u1 = ms.chercherUtilisateur(id);
 
 		model.addAttribute("utilisateur", u1);
-		model.addAttribute("listeUtilisateurs", ium.listerUtilisateurs());
+		model.addAttribute("listeUtilisateurs", ms.listerUtilisateurs());
 		
 		return "utilisateur";
 	}

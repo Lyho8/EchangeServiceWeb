@@ -61,19 +61,19 @@
 	
 	<bean id="paiementDao" class="com.dta.dao.PaiementDaoImpl"></bean>
 	
-	<bean id="paiementMetier" class="com.dta.metier.PaiementMetierImpl"></bean>
+	<bean id="paiementMetier" class="com.dta.metier.PaiementServiceImpl"></bean>
 	
 	<bean id="utilisateurDao" class="com.dta.dao.UtilisateurDaoImpl"></bean>
 	
-	<bean id="utilisateurMetier" class="com.dta.metier.UtilisateurMetierImpl"></bean>
+	<bean id="utilisateurMetier" class="com.dta.metier.UtilisateurServiceImpl"></bean>
 	
 	<bean id="messageDao" class="com.dta.dao.MessageDaoImpl"></bean>
 	
-	<bean id="messageMetier" class="com.dta.metier.MessagesMetierImpl"></bean>
+	<bean id="messageMetier" class="com.dta.metier.MessagesServiceImpl"></bean>
 
 	<bean id="annonceDao" class="com.dta.dao.AnnonceDaoImpl"></bean>
 	
-	<bean id="annonceMetier" class="com.dta.metier.AnnonceMetierImpl"></bean>
+	<bean id="annonceMetier" class="com.dta.metier.AnnonceServiceImpl"></bean>
 
     <context:property-placeholder location="classpath:jdbc.properties"/>
 	
