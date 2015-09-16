@@ -19,7 +19,6 @@ public interface IUserDao {
 
 	public List<Utilisateur> chercherUtilisateurs(String motCle);
 
-	
-	
+
 	
 }
