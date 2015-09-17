@@ -6,14 +6,16 @@ import javax.annotation.*;
 import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.*;
 
 import com.dta.model.*;
 import com.dta.dao.*;
 
+@Service
 public class PaiementServiceImpl implements IPaiementService {
 
-	@Resource(name="paiementDao")
+	@Autowired
 	private IPaiementDao dao;
 	
 	@Autowired

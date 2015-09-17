@@ -6,6 +6,7 @@ import java.util.*;
 import javax.annotation.*;
 import javax.validation.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.validation.BindingResult;
@@ -24,10 +25,10 @@ import com.dta.model.Utilisateur;
 @Controller
 public class PaiementController {
 
-	@Resource(name = "paiementMetier")
+	@Autowired
 	private IPaiementService ps;
 	
-	@Resource(name = "utilisateurMetier")
+	@Autowired
 	private IUtilisateurService us;
 
 	/**

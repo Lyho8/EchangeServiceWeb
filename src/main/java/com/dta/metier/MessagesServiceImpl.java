@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,10 +13,10 @@ import com.dta.dao.IMessageDao;
 import com.dta.model.MessagePrive;
 import com.dta.model.Utilisateur;
 
+@Service
 public class MessagesServiceImpl implements IMessagesService {
 
-
-	@Resource(name="messageDao")
+	@Autowired
 	private IMessageDao dao;
 
 	public void setDao(IMessageDao dao) {

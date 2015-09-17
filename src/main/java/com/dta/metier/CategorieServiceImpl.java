@@ -4,15 +4,18 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dta.dao.ICategorieDao;
 import com.dta.model.Categorie;
 
+@Service
 public class CategorieServiceImpl implements ICategorieService {
 	
-	@Resource(name="categorieDao")
+	@Autowired
 	private ICategorieDao dao;
 
 	public ICategorieDao getDao() {
