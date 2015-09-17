@@ -41,7 +41,7 @@ public class UtilisateurDaoImpl implements IUtilisateurDao {
 	}
 
 	@Override
-	public Utilisateur editerUtilisateur(int idUtilisateur) {
+	public Utilisateur chercherUtilisateur(int idUtilisateur) {
 		Utilisateur u1 = em.find(Utilisateur.class, idUtilisateur);
 		return u1;
 
