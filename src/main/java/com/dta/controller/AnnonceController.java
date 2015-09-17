@@ -17,6 +17,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -53,6 +54,7 @@ public class AnnonceController {
 
 		Annonce annonce = new Annonce();
 		annonce.setAuteur(us.chercherUtilisateur(1)); // fake user (ça devrait être l'utilisateur connecté)
+		
 		model.addAttribute("annonce", annonce);
 		model.addAttribute("types", types);
 		model.addAttribute("categories", cs.listerCategories());
@@ -62,12 +64,6 @@ public class AnnonceController {
 
 	@RequestMapping(value = "/nouvelle", method = RequestMethod.POST)
 	public String creer(@Valid @ModelAttribute("annonce") Annonce annonce, BindingResult result, Model model) {
-
-		System.err.println("has errors? " + result.hasErrors());
-		for(ObjectError err : result.getAllErrors()) {
-			System.err.println(err);
-		}
-		
 		if (result.hasErrors()) {
 			model.addAttribute("categories", cs.listerCategories());
 			return "annonces_nouvelle";
@@ -79,7 +75,8 @@ public class AnnonceController {
 	}
 
 	@RequestMapping(value = "/voir/{id}", method = RequestMethod.GET)
-	public String voir() {
+	public String voir(@PathVariable int id, Model model) {
+		model.addAttribute("annonce", as.chercherAnnonce(id));
 		return "annonces_annonce";
 	}
 
