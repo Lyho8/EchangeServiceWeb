@@ -13,7 +13,7 @@ public interface IUtilisateurDao {
 
 	public void supprimerUtilisateur(int idUtilisateur); 
 	
-	public Utilisateur editerUtilisateur(int idUtilisateur); 
+	public Utilisateur chercherUtilisateur(int idUtilisateur); 
 
 	public void actualiserUtilisateur(Utilisateur u);
 

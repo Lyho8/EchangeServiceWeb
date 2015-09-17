@@ -43,9 +43,7 @@
 
 		<input type="submit" value="Envoyer" />
 	</form:form>
-	
-	
-	<hr>
+
 	
 	</jsp:body>
 </t:template>

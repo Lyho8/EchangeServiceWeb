@@ -55,7 +55,7 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
 
 	@Transactional(readOnly=true)
 	public Utilisateur chercherUtilisateur(int idUtilisateur) {
-		return dao.editerUtilisateur(idUtilisateur);
+		return dao.chercherUtilisateur(idUtilisateur);
 	}
 
 	@Transactional
