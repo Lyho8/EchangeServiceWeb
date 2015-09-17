@@ -34,4 +34,8 @@ public interface IPaiementService {
 	
 	public void creerPaiementDirectFromForm(Paiement p, int idE);
 	
+	public void validerPaiement(Paiement p);
+	
+	public void refuserPaiement(Paiement p);
+	
 }

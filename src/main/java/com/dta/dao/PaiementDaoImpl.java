@@ -76,14 +76,14 @@ public class PaiementDaoImpl implements IPaiementDao {
 	@Transactional(readOnly = true, propagation = Propagation.MANDATORY)
 	public List<Paiement> chercherPaiementsInvalides() {
 		Query req = entityManager
-				.createQuery("select p from Paiement p  where p.valide=0");
+				.createQuery("select p from Paiement p  where p.valide=0 and p.dateValidation is null");
 		return req.getResultList();
 	}
 
 	@Transactional(readOnly = true, propagation = Propagation.MANDATORY)
 	public List<Paiement> chercherPaiementsInvalidesE(Utilisateur u) {
 		Query req = entityManager
-				.createQuery("select p from Paiement p  where p.emetteur.id=:id and p.valide=0");
+				.createQuery("select p from Paiement p  where p.emetteur.id=:id and p.valide=0 and p.dateValidation is null");
 		req.setParameter("id", u.getId());
 		return req.getResultList();
 	}
@@ -91,7 +91,7 @@ public class PaiementDaoImpl implements IPaiementDao {
 	@Transactional(readOnly = true, propagation = Propagation.MANDATORY)
 	public List<Paiement> chercherPaiementsInvalidesR(Utilisateur u) {
 		Query req = entityManager
-				.createQuery("select p from Paiement p  where p.recepteur.id=:id and p.valide=0");
+				.createQuery("select p from Paiement p  where p.recepteur.id=:id and p.valide=0 and p.dateValidation is null");
 		req.setParameter("id", u.getId());
 		return req.getResultList();
 	}

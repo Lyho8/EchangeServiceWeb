@@ -166,18 +166,26 @@ public class PaiementController {
 	
 	
 	//Acceptation du paiement.
+	@RequestMapping(value="/paiement/valider/{id}")
+	public String validerPaiement(@PathVariable int id, Locale locale, Model model){
+		
+		ps.validerPaiement(ps.chercherPaiement(id));
+		
+		model.addAttribute("paiementsE", ps.chercherPaiementsInvalidesE(us.chercherUtilisateur(id)));
+		model.addAttribute("paiementsR", ps.chercherPaiementsInvalidesR(us.chercherUtilisateur(id)));
+		
+		return "paiement_utilisateur";
+	}
 	
-	
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		binder.registerCustomEditor(Utilisateur.class, new PropertyEditorSupport() {
-			@Override
-			public void setAsText(String text) {
-				int id = Integer.parseInt(text);
-				Utilisateur u = us.chercherUtilisateur(id);
-				setValue(u);
-			}
-		});
+	@RequestMapping(value="/paiement/refuser/{id}")
+	public String refuserPaiement(@PathVariable int id, Locale locale, Model model){
+		
+		ps.refuserPaiement(ps.chercherPaiement(id));
+		
+		model.addAttribute("paiementsE", ps.chercherPaiementsInvalidesE(us.chercherUtilisateur(id)));
+		model.addAttribute("paiementsR", ps.chercherPaiementsInvalidesR(us.chercherUtilisateur(id)));
+		
+		return "paiement_utilisateur";
 	}
 
 }

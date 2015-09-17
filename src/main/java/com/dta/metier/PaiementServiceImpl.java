@@ -127,5 +127,28 @@ public class PaiementServiceImpl implements IPaiementService {
 			utilisateurDao.actualiserUtilisateur(recepteur);
 		}
 	}
+	
+	@Transactional
+	public void validerPaiement(Paiement p){
+		Utilisateur e = p.getEmetteur();
+		Utilisateur r = p.getRecepteur();
+		
+		e.setSolde(e.getSolde()-p.getMontant());
+		r.setSolde(r.getSolde()+p.getMontant());
+		utilisateurDao.actualiserUtilisateur(e);
+		utilisateurDao.actualiserUtilisateur(r);
+		
+		p.setValide(true);
+		p.setDateValidation(new Date());
+		dao.actualiserPaiement(p);
+		
+	}
+	
+	@Transactional
+	public void refuserPaiement(Paiement p){
+		p.setDateValidation(new Date());
+		dao.actualiserPaiement(p);
+		
+	}
 
 }
