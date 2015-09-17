@@ -10,7 +10,7 @@
 			Nouveau paiement
 		</h1>
 		
-		<form:form method="post" action="/projetf/paiement/nouveau/1"
+		<form:form method="post" action="/projetf/paiement/nouveau"
 		modelAttribute="paiement">
 		<table class="table table-striped table-bordered">
 			<tr>
@@ -37,7 +37,7 @@
 			<tr>
 				<td><form:label path="recepteur"></form:label></td>
 				<td><form:select path="recepteur">
-					<c:forEach items="${users}" var="u"><form:option value="${ u }">${ u.login } (${ u.nom } ${ u.prenom })</form:option></c:forEach>
+					<form:options items="${ users }" itemLabel="login" itemValue="id" />
 				</form:select></td>
 			</tr>			
 			<tr>

@@ -14,8 +14,16 @@ public interface IPaiementDao {
 
 	public Paiement chercherPaiement(int id);
 
-	public void actualiserPaiement(Paiement c);
+	public void actualiserPaiement(Paiement p);
 
-	public List<Paiement> chercherPaiements(Utilisateur u);
+	public List<Paiement> chercherPaiementsE(Utilisateur u);
+	
+	public List<Paiement> chercherPaiementsR(Utilisateur u);
+	
+	public List<Paiement> chercherPaiementsInvalides();
+	
+	public List<Paiement> chercherPaiementsInvalidesE(Utilisateur u);
+	
+	public List<Paiement> chercherPaiementsInvalidesR(Utilisateur u);
 
 }

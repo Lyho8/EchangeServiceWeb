@@ -13,20 +13,24 @@
 		<div class="row">
 						
 			  <div class="col-sm-2">
-			    <div class="thumbnail">
 			      <table class="table table-striped table-bordered">
 			      	<tr>
 			      		<th>Id</th>
 			      		<th>Montant</th>
+			      		<th>Message</th>
+			      		<th>Emetteur</th>
+			      		<th>Recepteur</th>
 			      	</tr>
 			      	<c:forEach items="${ paiements }" var="p">
 			      	<tr>			      	
 			      		<td>${ p.id }</td>
 			      		<td>${ p.montant }</td>
+			      		<td>${ p.message }</td>
+			      		<td>${ p.emetteur.login }</td>
+			      		<td>${ p.recepteur.login }</td>
 			      	</tr>
 			      	</c:forEach>
 			      </table>
-			    </div>
 			  </div>
 			
 		</div>

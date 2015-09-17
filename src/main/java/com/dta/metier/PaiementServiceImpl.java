@@ -1,8 +1,13 @@
 package com.dta.metier;
 
 import java.util.*;
+
 import javax.annotation.*;
+import javax.persistence.Query;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.*;
+
 import com.dta.model.*;
 import com.dta.dao.*;
 
@@ -10,6 +15,9 @@ public class PaiementServiceImpl implements IPaiementService {
 
 	@Resource(name="paiementDao")
 	private IPaiementDao dao;
+	
+	@Autowired
+	private IUtilisateurDao utilisateurDao;
 
 	public void setDao(IPaiementDao dao) {
 		this.dao = dao;
@@ -42,10 +50,38 @@ public class PaiementServiceImpl implements IPaiementService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<Paiement> chercherPaiements(Utilisateur u) {
-		List<Paiement> mylist = new ArrayList<Paiement>();
-		mylist = dao.chercherPaiements(u);
-		return mylist;
+	public List<Paiement> chercherPaiementsE(Utilisateur u) {
+		return dao.chercherPaiementsE(u);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Paiement> chercherPaiementsR(Utilisateur u) {
+		return dao.chercherPaiementsR(u);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Paiement> chercherPaiementsInvalides() {
+		return dao.chercherPaiementsInvalides();
+	}
+
+	@Transactional(readOnly = true)
+	public List<Paiement> chercherPaiementsInvalidesE(Utilisateur u) {
+		return dao.chercherPaiementsInvalidesE(u);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Paiement> chercherPaiementsInvalidesR(Utilisateur u) {
+		return dao.chercherPaiementsInvalidesR(u);
+	}
+	
+	@Transactional
+	public void creerPaiementFromForm(Paiement p, int idE, int idR){
+		p.setEmetteur(utilisateurDao.chercherUtilisateur(idE));
+		p.setRecepteur(utilisateurDao.chercherUtilisateur(idR));
+		p.setDateDemande(new Date());
+		p.setValide(false);
+		
+		dao.creerPaiement(p);
 	}
 
 }

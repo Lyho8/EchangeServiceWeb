@@ -56,9 +56,40 @@ public class PaiementDaoImpl implements IPaiementDao {
 	}
 
 	@Transactional(readOnly = true, propagation = Propagation.MANDATORY)
-	public List<Paiement> chercherPaiements(Utilisateur u) {
+	public List<Paiement> chercherPaiementsE(Utilisateur u) {
 		Query req = entityManager
-				.createQuery("select p from Paiement p  where p.e=:id");
+				.createQuery("select p from Paiement p  where p.emetteur.id=:id");
+		req.setParameter("id", u.getId());
+		return req.getResultList();
+	}
+	
+	@Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+	public List<Paiement> chercherPaiementsR(Utilisateur u) {
+		Query req = entityManager
+				.createQuery("select p from Paiement p  where p.recepteur.id=:id");
+		req.setParameter("id", u.getId());
+		return req.getResultList();
+	}
+
+	@Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+	public List<Paiement> chercherPaiementsInvalides() {
+		Query req = entityManager
+				.createQuery("select p from Paiement p  where p.valide=0");
+		return req.getResultList();
+	}
+
+	@Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+	public List<Paiement> chercherPaiementsInvalidesE(Utilisateur u) {
+		Query req = entityManager
+				.createQuery("select p from Paiement p  where p.emetteur.id=:id and p.valide=0");
+		req.setParameter("id", u.getId());
+		return req.getResultList();
+	}
+	
+	@Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+	public List<Paiement> chercherPaiementsInvalidesR(Utilisateur u) {
+		Query req = entityManager
+				.createQuery("select p from Paiement p  where p.recepteur.id=:id and p.valide=0");
 		req.setParameter("id", u.getId());
 		return req.getResultList();
 	}
