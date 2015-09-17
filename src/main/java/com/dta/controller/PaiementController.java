@@ -8,6 +8,7 @@ import javax.validation.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import com.dta.metier.*;
@@ -52,6 +53,10 @@ public class PaiementController {
 		
 		p.setValide(false);
 		
+//		for(ObjectError e : bindingResult.getAllErrors()){
+//			System.err.println(e);
+//		}
+//		
 //		if (bindingResult.hasErrors()) {
 //			return "paiement_nouveau";
 //		}
@@ -71,8 +76,11 @@ public class PaiementController {
 	}
 	
 	@RequestMapping(value = "/paiement/nouveau", method = RequestMethod.POST)
-	public String newPaiementPost(@Valid Paiement p, BindingResult bindingResult, Locale locale, Model model) {
+	public String newPaiementPost(Paiement p, @RequestParam("recepteur") int idr, BindingResult bindingResult, Locale locale, Model model) {
 
+		System.out.println("\n\n\n\n\n"+idr+"\n\n\n\n\n");
+		
+		p.setRecepteur(us.chercherUtilisateur(idr));
 		
 		p.setEmetteur(us.chercherUtilisateur(1));
 		
@@ -80,8 +88,12 @@ public class PaiementController {
 		
 		p.setValide(false);
 		
+//		for(ObjectError e : bindingResult.getAllErrors()){
+//			System.err.println(e);
+//		}
+//		
 //		if (bindingResult.hasErrors()) {
-//			return "paiement_nouveau";
+//			return "paiement_nouveau_dest";
 //		}
 		
 		ps.creerPaiement(p);

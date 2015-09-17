@@ -18,11 +18,17 @@
 			      	<tr>
 			      		<th>Id</th>
 			      		<th>Montant</th>
+			      		<th>Message</th>
+			      		<th>Emetteur</th>
+			      		<th>Recepteur</th>
 			      	</tr>
 			      	<c:forEach items="${ paiements }" var="p">
 			      	<tr>			      	
 			      		<td>${ p.id }</td>
 			      		<td>${ p.montant }</td>
+			      		<td>${ p.message }</td>
+			      		<td>${ p.emetteur.login } (${ p.emetteur.nom } ${ p.emetteur.prenom })</td>
+			      		<td>${ p.recepteur.login } (${ p.recepteur.nom } ${ p.recepteur.prenom })</td>
 			      	</tr>
 			      	</c:forEach>
 			      </table>
