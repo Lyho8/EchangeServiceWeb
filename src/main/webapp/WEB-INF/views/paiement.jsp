@@ -11,7 +11,7 @@
 		</h1>
 		
 		<div class="row">
-			<c:forEach items="${ paiements }" var="p">			
+						
 			  <div class="col-sm-2">
 			    <div class="thumbnail">
 			      <table class="table table-striped table-bordered">
@@ -19,16 +19,19 @@
 			      		<th>Id</th>
 			      		<th>Montant</th>
 			      	</tr>
-			      	<tr>
+			      	<c:forEach items="${ paiements }" var="p">
+			      	<tr>			      	
 			      		<td>${ p.id }</td>
 			      		<td>${ p.montant }</td>
 			      	</tr>
+			      	</c:forEach>
 			      </table>
 			    </div>
 			  </div>
-			</c:forEach>
+			
 		</div>
 		
+		<a href="/projetf/paiement/nouveau">Nouveau paiement pour utilisateur au choix</a>
 		<a href="/projetf/paiement/nouveau/1">Nouveau paiement pour utilisateur 1</a>
 		
 

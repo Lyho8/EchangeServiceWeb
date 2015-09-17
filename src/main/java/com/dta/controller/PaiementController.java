@@ -56,11 +56,43 @@ public class PaiementController {
 //			return "paiement_nouveau";
 //		}
 		
-		ps.actualiserPaiement(p);
+		ps.creerPaiement(p);
 		
 		model.addAttribute("paiements", ps.listerPaiements());
 		
 		return "paiement";
 	}
+	
+	@RequestMapping(value = "/paiement/nouveau", method = RequestMethod.GET)
+	public String newPaiementForm(Locale locale, Model model) {
+		model.addAttribute("paiement", new Paiement());
+		model.addAttribute("users", us.listerUtilisateurs());
+		return "paiement_nouveau_dest";
+	}
+	
+	@RequestMapping(value = "/paiement/nouveau", method = RequestMethod.POST)
+	public String newPaiementPost(@Valid Paiement p, BindingResult bindingResult, Locale locale, Model model) {
+
+		
+		p.setEmetteur(us.chercherUtilisateur(1));
+		
+		p.setDateDemande(new Date());
+		
+		p.setValide(false);
+		
+//		if (bindingResult.hasErrors()) {
+//			return "paiement_nouveau";
+//		}
+		
+		ps.creerPaiement(p);
+		
+		model.addAttribute("paiements", ps.listerPaiements());
+		
+		return "paiement";
+	}
+	
+	//Liste des paiements à accepter.
+	
+	//Acceptation du paiement.
 
 }

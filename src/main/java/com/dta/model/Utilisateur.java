@@ -11,7 +11,7 @@ import java.util.*;
 public class Utilisateur {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	@NotNull

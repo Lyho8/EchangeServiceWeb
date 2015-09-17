@@ -24,7 +24,6 @@
 						Montant :
 					</form:label></td>
 				<td><form:input path="montant" /></td>
-				<%--Show errors for name field --%>
 				<td><form:errors path="montant" /></td>
 			</tr>
 			<tr>
@@ -33,13 +32,12 @@
 						Message :
 					</form:label></td>
 				<td><form:input path="message" /></td>
-				<%--Show errors for firstname field --%>
 				<td><form:errors path="message" /></td>
 			</tr>
 			<tr>
-				<td><form:label path="destinataire"></form:label></td>
-				<td><form:select path="destinaire">
-					<c:forEach items="users" var="u"><form:option value="${ u }">${ u.login } (${ u.nom } ${ u.prenom })</form:option></c:forEach>
+				<td><form:label path="recepteur"></form:label></td>
+				<td><form:select path="recepteur">
+					<c:forEach items="${users}" var="u"><form:option value="${ u }">${ u.login } (${ u.nom } ${ u.prenom })</form:option></c:forEach>
 				</form:select></td>
 			</tr>			
 			<tr>
