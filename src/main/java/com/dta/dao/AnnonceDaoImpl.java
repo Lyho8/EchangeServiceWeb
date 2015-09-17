@@ -5,10 +5,13 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.stereotype.Repository;
+
 import com.dta.model.Annonce;
 import com.dta.model.Categorie;
 import com.dta.model.Utilisateur;
 
+@Repository
 public class AnnonceDaoImpl implements IAnnonceDao {
 
 	@PersistenceContext

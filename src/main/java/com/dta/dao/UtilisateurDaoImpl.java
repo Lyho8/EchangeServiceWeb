@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.dta.model.Utilisateur;
 
-@Repository("dao")
+@Repository
 public class UtilisateurDaoImpl implements IUtilisateurDao {
 
 	@PersistenceContext

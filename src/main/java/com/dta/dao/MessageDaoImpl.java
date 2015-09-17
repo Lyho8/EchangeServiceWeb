@@ -6,9 +6,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.springframework.stereotype.Repository;
+
 import com.dta.model.MessagePrive;
 import com.dta.model.Utilisateur;
 
+@Repository
 public class MessageDaoImpl implements IMessageDao {
 
 	@PersistenceContext

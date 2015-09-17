@@ -41,13 +41,13 @@ public class MessageController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MessageController.class);
 	
-	@Resource (name="messageMetier")
+	@Autowired
 	private IMessagesService ms;
 	
 	@Autowired
 	private ICategorieService cs;
 	
-	@Resource(name = "utilisateurMetier")
+	@Autowired
 	private IUtilisateurService us;
 	
 	/* Page d'accueil de message avec l'affichage des messages reçus */
