@@ -8,7 +8,7 @@
 
 <!-- div de test pour les nouvelles pages -->
 <div>
-	<a href="/projetf/messages">Page des messages</a>
+	<a href="/projetf/messages/1">Page des messages</a>
 </div>
 
 <div class="row">
