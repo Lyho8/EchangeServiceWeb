@@ -35,10 +35,10 @@
 				<td><form:errors path="message" /></td>
 			</tr>
 			<tr>
-				<td><label>Récepteur : <label></td>
-				<td><select name="recepteur">
-					<c:forEach items="${users}" var="u"><option value="${ u.id }">${ u.login } (${ u.nom } ${ u.prenom })</option></c:forEach>
-				</select></td>
+				<td><form:label path="recepteur"></form:label></td>
+				<td><form:select path="recepteur">
+					<form:options items="${ users }" itemLabel="login" itemValue="id" />
+				</form:select></td>
 			</tr>			
 			<tr>
 				<td><input type="submit" value="Valider" /></td>

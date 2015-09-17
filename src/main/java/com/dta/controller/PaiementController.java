@@ -1,5 +1,6 @@
 package com.dta.controller;
 
+import java.beans.PropertyEditorSupport;
 import java.util.*;
 
 import javax.annotation.*;
@@ -9,10 +10,13 @@ import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import com.dta.metier.*;
+import com.dta.model.Categorie;
 import com.dta.model.Paiement;
+import com.dta.model.Utilisateur;
 
 /**
  * Handles requests for the application home page.
@@ -76,12 +80,8 @@ public class PaiementController {
 	}
 	
 	@RequestMapping(value = "/paiement/nouveau", method = RequestMethod.POST)
-	public String newPaiementPost(Paiement p, @RequestParam("recepteur") int idr, BindingResult bindingResult, Locale locale, Model model) {
+	public String newPaiementPost(@Valid Paiement p, BindingResult bindingResult, Locale locale, Model model) {
 
-		System.out.println("\n\n\n\n\n"+idr+"\n\n\n\n\n");
-		
-		p.setRecepteur(us.chercherUtilisateur(idr));
-		
 		p.setEmetteur(us.chercherUtilisateur(1));
 		
 		p.setDateDemande(new Date());
@@ -104,7 +104,26 @@ public class PaiementController {
 	}
 	
 	//Liste des paiements à accepter.
+	@RequestMapping(value = "/paiement/en_attente", method = RequestMethod.GET)
+	public String paiementNonValide(Locale locale, Model model) {
+		model.addAttribute("paiements", ps.listerPaiements());
+		return "paiement";
+	}
+	
 	
 	//Acceptation du paiement.
+	
+	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(Utilisateur.class, new PropertyEditorSupport() {
+			@Override
+			public void setAsText(String text) {
+				int id = Integer.parseInt(text);
+				Utilisateur u = us.chercherUtilisateur(id);
+				setValue(u);
+			}
+		});
+	}
 
 }
