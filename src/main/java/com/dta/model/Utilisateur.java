@@ -35,7 +35,6 @@ public class Utilisateur {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateInscription;
 	
-	@NotNull
 	private int solde = 0;
 	
 	@OneToMany(mappedBy="auteur", cascade={ CascadeType.PERSIST , CascadeType.DETACH })
