@@ -17,7 +17,7 @@
           ceci concerne la dercription de l'annonce, 
           ceci concerne la dercription de l'annonce
         </p>
-        <p><a href="#" class="btn btn-primary" role="button">Voir l'annonce</a> </p>
+        <p><a href="projetf/annonces/voir/1" class="btn btn-primary" role="button">Voir l'annonce</a> </p>
       </div>
     </div>
   </div>
@@ -31,7 +31,7 @@
           ceci concerne la dercription de l'annonce, 
           ceci concerne la dercription de l'annonce
         </p>
-        <p><a href="#" class="btn btn-primary" role="button">Voir l'annonce</a> </p>
+        <p><a href="projetf/annonces/voir/2" class="btn btn-primary" role="button">Voir l'annonce</a> </p>
       </div>
     </div>
   </div>

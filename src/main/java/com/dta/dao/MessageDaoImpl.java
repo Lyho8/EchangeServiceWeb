@@ -31,7 +31,8 @@ public class MessageDaoImpl implements IMessageDao {
 	}
 
 	public void supprimerMessage(int idMessageP) {
-		// TODO Auto-generated method stub
+		MessagePrive mp=entityManager.find(MessagePrive.class,idMessageP);
+		entityManager.remove(mp);
 		
 	}
 
