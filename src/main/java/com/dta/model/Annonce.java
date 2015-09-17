@@ -43,6 +43,8 @@ public class Annonce {
 	
 	public Annonce(){
 		super();
+		
+		dateCreation = new Date();
 	}
 
 	public Annonce(int id, String description, boolean active, Type type,

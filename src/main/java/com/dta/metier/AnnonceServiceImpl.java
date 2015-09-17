@@ -2,6 +2,8 @@ package com.dta.metier;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +13,8 @@ import com.dta.model.Categorie;
 import com.dta.model.Utilisateur;
 
 public class AnnonceServiceImpl implements IAnnonceService {
+	
+	@Resource(name="annonceDao")
 	private IAnnonceDao dao;
 
 	public IAnnonceDao getDao() {

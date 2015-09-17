@@ -8,17 +8,17 @@
 </h1>
 
 <ul class="nav nav-tabs">
-  <li role="presentation"><a href="/projetf/messages">Messages reçus</a></li>
-  <li role="presentation"><a href="/projetf/messages/envoyes">Messages envoyés</a></li>
-  <li role="presentation" class="active"><a href="/projetf/messages/new">Nouveau message</a></li>
+  <li role="presentation"><a href="/projetf/messages/1">Messages reçus</a></li>
+  <li role="presentation"><a href="/projetf/messages/envoyes/1">Messages envoyés</a></li>
+  <li role="presentation" class="active"><a href="/projetf/messages/new/1">Nouveau message</a></li>
 </ul>
 
 <div class="panel panel-info">
 	<form:form method="post" modelAttribute="messagePrive"
-				action="/projetf/messages/new/envoie">
+				action="/projetf/messages/new/envoie/1">
 		<div class="field_group">
 			<form:label path="destinataires">
-				Destinataire : </form:label>
+				Destinataire(s) : </form:label>
 			<form:input type="text" path="destinataires" required="required" />
 			<form:errors path="destinataires" />
 		</div>
