@@ -38,6 +38,13 @@ public class PaiementController {
 		model.addAttribute("paiements", ps.listerPaiements());
 		return "paiement";
 	}
+	
+	@RequestMapping(value = "/paiement/{id}", method = RequestMethod.GET)
+	public String homePaiement(@PathVariable int id, Locale locale, Model model) {
+		model.addAttribute("paiementsE", ps.chercherPaiementsE(us.chercherUtilisateur(id)));
+		model.addAttribute("paiementsR", ps.chercherPaiementsR(us.chercherUtilisateur(id)));
+		return "paiement_utilisateur";
+	}
 
 	@RequestMapping(value = "/paiement/nouveau/{id}", method = RequestMethod.GET)
 	public String newPaiementForm(@PathVariable int id, Locale locale, Model model) {
@@ -49,14 +56,14 @@ public class PaiementController {
 	@RequestMapping(value = "/paiement/nouveau/{id}", method = RequestMethod.POST)
 	public String newPaiementPost(@Valid Paiement p, BindingResult bindingResult, @PathVariable int id, Locale locale, Model model) {
 		
-		p.setRecepteur(us.chercherUtilisateur(id));
-		
-		p.setEmetteur(us.chercherUtilisateur(1));
-		
-		p.setDateDemande(new Date());
-		
-		p.setValide(false);
-		
+//		p.setRecepteur(us.chercherUtilisateur(id));
+//		
+//		p.setEmetteur(us.chercherUtilisateur(1));
+//		
+//		p.setDateDemande(new Date());
+//		
+//		p.setValide(false);
+//		
 //		for(ObjectError e : bindingResult.getAllErrors()){
 //			System.err.println(e);
 //		}
@@ -65,7 +72,7 @@ public class PaiementController {
 //			return "paiement_nouveau";
 //		}
 		
-		ps.creerPaiement(p);
+		ps.creerPaiementFromForm(p, 1, id);
 		
 		model.addAttribute("paiements", ps.listerPaiements());
 		
@@ -106,8 +113,15 @@ public class PaiementController {
 	//Liste des paiements à accepter.
 	@RequestMapping(value = "/paiement/en_attente", method = RequestMethod.GET)
 	public String paiementNonValide(Locale locale, Model model) {
-		model.addAttribute("paiements", ps.listerPaiements());
-		return "paiement";
+		model.addAttribute("paiements", ps.chercherPaiementsInvalides());
+		return "paiement_utilisateur";
+	}
+	
+	@RequestMapping(value = "/paiement/en_attente/{id}", method = RequestMethod.GET)
+	public String paiementNonValideById(@PathVariable int id, Locale locale, Model model) {
+		model.addAttribute("paiementsE", ps.chercherPaiementsInvalidesE(us.chercherUtilisateur(id)));
+		model.addAttribute("paiementsR", ps.chercherPaiementsInvalidesR(us.chercherUtilisateur(id)));
+		return "paiement_utilisateur";
 	}
 	
 	

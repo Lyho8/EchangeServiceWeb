@@ -16,6 +16,16 @@ public interface IPaiementService {
 
 	public void actualiserPaiement(Paiement p);
 
-	public List<Paiement> chercherPaiements(Utilisateur u);
+	public List<Paiement> chercherPaiementsE(Utilisateur u);
+	
+	public List<Paiement> chercherPaiementsR(Utilisateur u);
+	
+	public List<Paiement> chercherPaiementsInvalides();
+	
+	public List<Paiement> chercherPaiementsInvalidesE(Utilisateur u);
+	
+	public List<Paiement> chercherPaiementsInvalidesR(Utilisateur u);
+	
+	public void creerPaiementFromForm(Paiement p, int idE, int idR);
 	
 }
