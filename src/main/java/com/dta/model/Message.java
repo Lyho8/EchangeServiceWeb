@@ -2,6 +2,7 @@ package com.dta.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+
 import java.util.*;
 
 @Entity
@@ -9,7 +10,7 @@ import java.util.*;
 public class Message {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
 	@NotNull

@@ -9,7 +9,7 @@ import java.util.*;
 public class Categorie {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
 	@NotNull

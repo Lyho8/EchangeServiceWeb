@@ -24,7 +24,6 @@
 						Montant :
 					</form:label></td>
 				<td><form:input path="montant" /></td>
-				<%--Show errors for name field --%>
 				<td><form:errors path="montant" /></td>
 			</tr>
 			<tr>
@@ -33,7 +32,6 @@
 						Message :
 					</form:label></td>
 				<td><form:input path="message" /></td>
-				<%--Show errors for firstname field --%>
 				<td><form:errors path="message" /></td>
 			</tr>
 			<tr>
