@@ -29,7 +29,7 @@ public class AnnonceDaoImpl implements IAnnonceDao {
 
 	@Override
 	public List<Annonce> rechercherAnnonces(Categorie categorie) {
-		return entityManager.createQuery("SELECT a FROM Annonce a WHERE a.categorie.nom = :categorie", Annonce.class).setParameter("categorie", categorie.getId()).getResultList();
+		return entityManager.createQuery("SELECT a FROM Annonce a WHERE a.categorie.libelle = :categorie", Annonce.class).setParameter("categorie", categorie.getId()).getResultList();
 	}
 
 	@Override

@@ -9,10 +9,13 @@
 
 <form:form method="post" modelAttribute="annonce" action="/projetf/annonces/nouvelle">
 	<form:hidden path="id" />
+	<form:hidden path="auteur.id" />
 	<table id="form">
 		<tr>
 			<td>Type:</td>
-			<td><form:select path="type" items="${types}" /></td>
+			<td><form:select path="type">
+				<form:options/>
+			</form:select></td>
 			<td><form:errors path="type" /></td>
 		</tr>
 		<tr>
@@ -22,7 +25,9 @@
 		</tr>
 		<tr>
 			<td>Catégorie:</td>
-			<td><form:select path="categorie" items="${categories}" /></td>
+			<td><form:select path="categorie">
+				<form:options items="${categories}" itemLabel="libelle" itemValue="id" />
+			</form:select></td>
 			<td><form:errors path="categorie" /></td>
 		</tr>
 		<tr>
