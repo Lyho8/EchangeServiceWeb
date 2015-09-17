@@ -85,5 +85,47 @@ public class PaiementServiceImpl implements IPaiementService {
 		
 		dao.creerPaiement(p);
 	}
+	
+	@Transactional
+	public void creerPaiementFromForm(Paiement p, int idE){
+		p.setEmetteur(utilisateurDao.chercherUtilisateur(idE));
+		p.setDateDemande(new Date());
+		p.setValide(false);
+		
+		dao.creerPaiement(p);
+	}
+	
+	@Transactional
+	public void creerPaiementDirectFromForm(Paiement p, int idE, int idR){
+		Utilisateur emetteur = utilisateurDao.chercherUtilisateur(idE);
+		Utilisateur recepteur = utilisateurDao.chercherUtilisateur(idR);
+		p.setRecepteur(recepteur);
+		creerPaiementDirect(p, emetteur, recepteur);
+		
+	}
+	
+	@Transactional
+	public void creerPaiementDirectFromForm(Paiement p, int idE){
+		Utilisateur emetteur = utilisateurDao.chercherUtilisateur(idE);
+		Utilisateur recepteur = p.getRecepteur();
+		creerPaiementDirect(p, emetteur, recepteur);
+	}
+	
+	
+	private void creerPaiementDirect(Paiement p, Utilisateur emetteur, Utilisateur recepteur){
+		if(emetteur.getSolde()+10>=p.getMontant()){
+			p.setEmetteur(emetteur);
+			p.setDateDemande(new Date());
+			p.setDateValidation(new Date());
+			p.setValide(true);
+			
+			dao.creerPaiement(p);
+			
+			emetteur.setSolde(emetteur.getSolde()-p.getMontant());
+			recepteur.setSolde(recepteur.getSolde()+p.getMontant());
+			utilisateurDao.actualiserUtilisateur(emetteur);
+			utilisateurDao.actualiserUtilisateur(recepteur);
+		}
+	}
 
 }

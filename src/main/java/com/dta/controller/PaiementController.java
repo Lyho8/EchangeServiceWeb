@@ -47,24 +47,17 @@ public class PaiementController {
 		return "paiement_utilisateur";
 	}
 
-	@RequestMapping(value = "/paiement/nouveau/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/paiement/demande/{id}", method = RequestMethod.GET)
 	public String newPaiementForm(@PathVariable int id, Locale locale, Model model) {
 		model.addAttribute("dest", us.chercherUtilisateur(id));
 		model.addAttribute("paiement", new Paiement());
+		model.addAttribute("idR", id);
 		return "paiement_nouveau";
 	}
 	
-	@RequestMapping(value = "/paiement/nouveau/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/paiement/demande/{id}", method = RequestMethod.POST)
 	public String newPaiementPost(@Valid Paiement p, BindingResult bindingResult, @PathVariable int id, Locale locale, Model model) {
 		
-//		p.setRecepteur(us.chercherUtilisateur(id));
-//		
-//		p.setEmetteur(us.chercherUtilisateur(1));
-//		
-//		p.setDateDemande(new Date());
-//		
-//		p.setValide(false);
-//		
 //		for(ObjectError e : bindingResult.getAllErrors()){
 //			System.err.println(e);
 //		}
@@ -80,21 +73,16 @@ public class PaiementController {
 		return "paiement";
 	}
 	
-	@RequestMapping(value = "/paiement/nouveau", method = RequestMethod.GET)
+	@RequestMapping(value = "/paiement/demande", method = RequestMethod.GET)
 	public String newPaiementForm(Locale locale, Model model) {
 		model.addAttribute("paiement", new Paiement());
 		model.addAttribute("users", us.listerUtilisateurs());
 		return "paiement_nouveau_dest";
 	}
 	
-	@RequestMapping(value = "/paiement/nouveau", method = RequestMethod.POST)
+	@RequestMapping(value = "/paiement/demande", method = RequestMethod.POST)
 	public String newPaiementPost(@Valid Paiement p, BindingResult bindingResult, Locale locale, Model model) {
 
-		p.setEmetteur(us.chercherUtilisateur(1));
-		
-		p.setDateDemande(new Date());
-		
-		p.setValide(false);
 		
 //		for(ObjectError e : bindingResult.getAllErrors()){
 //			System.err.println(e);
@@ -104,7 +92,58 @@ public class PaiementController {
 //			return "paiement_nouveau_dest";
 //		}
 		
-		ps.creerPaiement(p);
+		ps.creerPaiementFromForm(p, 1);
+		
+		model.addAttribute("paiements", ps.listerPaiements());
+		
+		return "paiement";
+	}
+	
+	@RequestMapping(value = "/paiement/direct/{id}", method = RequestMethod.GET)
+	public String newPaiementDirectForm(@PathVariable int id, Locale locale, Model model) {
+		model.addAttribute("dest", us.chercherUtilisateur(id));
+		model.addAttribute("paiement", new Paiement());
+		model.addAttribute("idR", id);
+		return "paiement_direct";
+	}
+	
+	@RequestMapping(value = "/paiement/direct/{id}", method = RequestMethod.POST)
+	public String newPaiementDirectPost(@Valid Paiement p, BindingResult bindingResult, @PathVariable int id, Locale locale, Model model) {
+		
+//		for(ObjectError e : bindingResult.getAllErrors()){
+//			System.err.println(e);
+//		}
+//		
+//		if (bindingResult.hasErrors()) {
+//			return "paiement_nouveau";
+//		}
+		
+		ps.creerPaiementDirectFromForm(p, 1, id);
+		
+		model.addAttribute("paiements", ps.listerPaiements());
+		
+		return "paiement";
+	}
+	
+	@RequestMapping(value = "/paiement/direct", method = RequestMethod.GET)
+	public String newPaiementDirectForm(Locale locale, Model model) {
+		model.addAttribute("paiement", new Paiement());
+		model.addAttribute("users", us.listerUtilisateurs());
+		return "paiement_direct_dest";
+	}
+	
+	@RequestMapping(value = "/paiement/direct", method = RequestMethod.POST)
+	public String newPaiementDirectPost(@Valid Paiement p, BindingResult bindingResult, Locale locale, Model model) {
+		
+//		for(ObjectError e : bindingResult.getAllErrors()){
+//			System.err.println(e);
+//		}
+//		
+//		if (bindingResult.hasErrors()) {
+//			return "paiement_nouveau_dest";
+//		}
+		
+		ps.creerPaiementDirectFromForm(p, 1);
 		
 		model.addAttribute("paiements", ps.listerPaiements());
 		

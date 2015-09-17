@@ -28,4 +28,10 @@ public interface IPaiementService {
 	
 	public void creerPaiementFromForm(Paiement p, int idE, int idR);
 	
+	public void creerPaiementFromForm(Paiement p, int idE);
+	
+	public void creerPaiementDirectFromForm(Paiement p, int idE, int idR);
+	
+	public void creerPaiementDirectFromForm(Paiement p, int idE);
+	
 }
