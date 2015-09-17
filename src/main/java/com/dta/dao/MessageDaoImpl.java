@@ -38,7 +38,7 @@ public class MessageDaoImpl implements IMessageDao {
 	}
 
 	public List<MessagePrive> listerMessageRecu(Utilisateur u) {
-		Query req=entityManager.createQuery("select mp from MessagePrive mp where mp.destinataires.login=:login").setParameter("login", u.getLogin());
+		Query req=entityManager.createQuery("select mp from MessagePrive mp join mp.destinataires d where d.login=:login").setParameter("login", u.getLogin());
 		return  req.getResultList();
 	}
 
