@@ -24,11 +24,8 @@
 					<c:if test="${urlCourante=='home'}">class="active"</c:if>><a
 					href="/projetf">Page d'accueil</a></li>
 				<li role="presentation"
-					<c:if test="${urlCourante=='utilisateurBienvenue'}">class="active"</c:if>><a
-					href="/projetf/utilisateurs_liste">Liste des utilisateurs</a></li>
-				<li role="presentation"
 					<c:if test="${urlCourante=='annonces'}">class="active"</c:if>><a
-					href="#">Annonces</a></li>
+					href="/projetf/annonces">Annonces</a></li>
 				<li role="presentation"
 					<c:if test="${urlCourante=='inscriptionConnection'}">class="active"</c:if>><a
 					href="#">Inscription/Connection</a></li>
@@ -49,6 +46,13 @@
 					<li role="presentation"><a href="#">Publier une annonce</a></li>
 					<li role="presentation"><a href="#">Messages</a></li>
 					<li role="presentation"><a href="#">Faire un paiement</a></li>
+				</ul>
+			</c:if>
+						<!-- Menu de gestion de l'admin  -->
+			<c:if test="${userConnecte==true}">
+				<ul class="dropdown-menu">
+					<li role="presentation"><a href="#">Gérer les annonces</a></li>
+					<li role="presentation"><a href="#">Gérer les utilisateurs</a></li>
 				</ul>
 			</c:if>
 		</div>

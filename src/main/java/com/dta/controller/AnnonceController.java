@@ -2,6 +2,7 @@ package com.dta.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.validation.Valid;
 
@@ -17,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dta.metier.IAnnonceService;
 import com.dta.metier.ICategorieService;
+import com.dta.metier.ICommentaireService;
 import com.dta.metier.IUtilisateurService;
 import com.dta.model.Annonce;
+import com.dta.model.Commentaire;
 import com.dta.model.Type;
 
 @Controller
@@ -29,10 +32,13 @@ public class AnnonceController {
 
 	@Autowired
 	private ICategorieService cs;
-	
+
 	@Autowired
 	private IUtilisateurService us;
-	
+
+	@Autowired
+	private ICommentaireService coms;
+
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String home(Model model) {
 		return "annonces_home";
@@ -45,8 +51,10 @@ public class AnnonceController {
 		types.add(Type.OFFRE);
 
 		Annonce annonce = new Annonce();
-		annonce.setAuteur(us.chercherUtilisateur(1)); // fake user (ça devrait être l'utilisateur connecté)
-		
+		annonce.setAuteur(us.chercherUtilisateur(1)); // fake user (ça devrait
+														// être l'utilisateur
+														// connecté)
+
 		model.addAttribute("annonce", annonce);
 		model.addAttribute("types", types);
 		model.addAttribute("categories", cs.listerCategories());
@@ -55,16 +63,17 @@ public class AnnonceController {
 	}
 
 	@RequestMapping(value = "/nouvelle", method = RequestMethod.POST)
-	public String creer(@Valid @ModelAttribute("annonce") Annonce annonce, BindingResult result, Model model) {
+	public String creer(@Valid @ModelAttribute("annonce") Annonce annonce,
+			BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			//for(ObjectError e : result.getAllErrors()) {
-			//	System.err.println(e);
-			//}
-			
+			// for(ObjectError e : result.getAllErrors()) {
+			// System.err.println(e);
+			// }
+
 			model.addAttribute("categories", cs.listerCategories());
 			return "annonces_nouvelle";
 		}
-		
+
 		annonce.setActive(true);
 		as.creerAnnonce(annonce);
 		return "redirect:/annonces/voir/" + annonce.getId();
@@ -74,5 +83,19 @@ public class AnnonceController {
 	public String voir(@PathVariable int id, Model model) {
 		model.addAttribute("annonce", as.chercherAnnonce(id));
 		return "annonces_annonce";
+	}
+
+	@RequestMapping(value = "/voir/{id}/commenter", method = RequestMethod.POST)
+	public String newMessagePost(@Valid Commentaire com,
+			BindingResult BindingResult, Model model, @PathVariable int id,
+			Locale locale) {
+
+		for (ObjectError oe : BindingResult.getAllErrors()) {
+			System.out.println(oe);
+		}
+
+		coms.creerCommentaire(com);
+
+		return "messages_new";
 	}
 }
