@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,19 +40,19 @@ public class MessageController {
 	private IUtilisateurService us;
 	
 	/* Page d'accueil de message avec l'affichage des messages reçus */
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String home(Model model, Utilisateur u) {
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public String home(@PathVariable (value="id") int idUtilisateur,Model model) {
 
-		model.addAttribute("MesMessagesR",ms.listerMessageRecu(u));	
+		model.addAttribute("MesMessagesR",ms.listerMessageRecu(us.chercherUtilisateur(idUtilisateur)));	
 		
 		return "messages";
 	}
 	
 	/* Page d'affichage des messages envoyés */
-	@RequestMapping(value = "/envoyes", method = RequestMethod.GET)
-	public String messageEnvoye(Model model, Utilisateur u) {
+	@RequestMapping(value = "/envoyes/{id}", method = RequestMethod.GET)
+	public String messageEnvoye(@PathVariable (value="id") int idUtilisateur,Model model) {
 
-		model.addAttribute("MesMessagesE",ms.listerMessageEnvoie(u));	
+		model.addAttribute("MesMessagesE",ms.listerMessageEnvoie(us.chercherUtilisateur(idUtilisateur)));	
 		
 		return "messages_envoyes";
 	}
@@ -63,8 +64,8 @@ public class MessageController {
 		return "messages_new";
 	}
 	
-	@RequestMapping(value = "/new/{id}", method = RequestMethod.POST)
-	public String newMessagePost(@Valid MessagePrive mp, Model model,  @PathVariable int id, Locale locale) {
+	@RequestMapping(value = "/new/envoie/{id}", method = RequestMethod.POST)
+	public String newMessagePost(@Valid MessagePrive mp,BindingResult BindingResult, Model model,  @PathVariable int id, Locale locale) {
 		
 		mp.setAuteur(us.chercherUtilisateur(id));
 		mp.setDateCreation(new Date());
@@ -72,12 +73,12 @@ public class MessageController {
 		return "messages_new";
 	}
 	
-	@RequestMapping(value = "/supprimer", method = RequestMethod.GET)
-	public String supprMessage(@RequestParam (value="id") int idMessageP, Utilisateur u,Model model) {
+	@RequestMapping(value = "/supprimer/{id}", method = RequestMethod.GET)
+	public String supprMessage(@RequestParam (value="id") int idMessageP, @PathVariable (value="id") int idUtilisateur,Model model) {
 		
 		ms.supprimerMessage(idMessageP);
 		
-		ms.listerMessageRecu(u);
+		ms.listerMessageRecu(us.chercherUtilisateur(idUtilisateur));
 		
 		return "messages_new";
 	}

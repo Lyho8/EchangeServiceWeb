@@ -8,8 +8,8 @@
 </h1>
 
 <ul class="nav nav-tabs">
-  <li role="presentation"><a href="/projetf/messages">Messages reçus</a></li>
-  <li role="presentation"><a href="/projetf/messages/envoyes">Messages envoyés</a></li>
+  <li role="presentation"><a href="/projetf/messages/1">Messages reçus</a></li>
+  <li role="presentation"><a href="/projetf/messages/envoyes/1">Messages envoyés</a></li>
   <li role="presentation" class="active"><a href="/projetf/messages/new/1">Nouveau message</a></li>
 </ul>
 
