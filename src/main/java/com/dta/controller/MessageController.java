@@ -1,8 +1,11 @@
 package com.dta.controller;
 
+import java.beans.PropertyEditorSupport;
 import java.security.Principal;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.annotation.Resource;
@@ -14,13 +17,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.dta.metier.ICategorieService;
 import com.dta.metier.IMessagesService;
 import com.dta.metier.IUtilisateurService;
+import com.dta.model.Categorie;
 import com.dta.model.MessagePrive;
 import com.dta.model.Utilisateur;
 
@@ -35,6 +43,9 @@ public class MessageController {
 	
 	@Resource (name="messageMetier")
 	private IMessagesService ms;
+	
+	@Autowired
+	private ICategorieService cs;
 	
 	@Resource(name = "utilisateurMetier")
 	private IUtilisateurService us;
@@ -60,15 +71,22 @@ public class MessageController {
 	@RequestMapping(value = "/new/{id}", method = RequestMethod.GET)
 	public String newMessageForm( Model model,  @PathVariable int id) {
 		
-		model.addAttribute("messagePrive",new MessagePrive());	
+		MessagePrive mp = new MessagePrive();
+		mp.setAuteur(us.chercherUtilisateur(id));
+		
+		model.addAttribute("messagePrive",mp);	
+		
 		return "messages_new";
 	}
 	
 	@RequestMapping(value = "/new/envoie/{id}", method = RequestMethod.POST)
 	public String newMessagePost(@Valid MessagePrive mp,BindingResult BindingResult, Model model,  @PathVariable int id, Locale locale) {
 		
-		mp.setAuteur(us.chercherUtilisateur(id));
-		mp.setDateCreation(new Date());
+		for (ObjectError oe : BindingResult.getAllErrors()) {
+			System.out.println(oe);
+		}
+		
+		ms.creerMessage(mp);
 		
 		return "messages_new";
 	}
@@ -83,4 +101,18 @@ public class MessageController {
 		return "messages_new";
 	}
 	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(List.class, new PropertyEditorSupport() {
+			@Override
+			public void setAsText(String text) {
+				List<Utilisateur> lu= new ArrayList<Utilisateur>();
+				lu.add(us.chercherUtilisateur(1));
+				lu.add(us.chercherUtilisateur(2));
+				
+				setValue(lu);
+			}
+		});
+	}
+
 }

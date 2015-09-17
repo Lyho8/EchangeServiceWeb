@@ -16,10 +16,11 @@
 <div class="panel panel-info">
 	<form:form method="post" modelAttribute="messagePrive"
 				action="/projetf/messages/new/envoie/1">
+		<form:hidden path="auteur.id"/>
 		<div class="field_group">
 			<form:label path="destinataires">
 				Destinataire(s) : </form:label>
-			<form:input type="text" path="destinataires" required="required" />
+			<form:textarea path="destinataires" required="required" />
 			<form:errors path="destinataires" />
 		</div>
 		<br>
