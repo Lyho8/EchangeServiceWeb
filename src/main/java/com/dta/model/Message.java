@@ -27,12 +27,16 @@ public class Message {
 	
 	public Message(){
 		super();
+		this.dateCreation = new Date();
 	}
+	
+	
 
 	public Message(int id, String contenu) {
 		super();
 		this.id = id;
 		this.contenu = contenu;
+		this.dateCreation = new Date();
 	}
 
 	public Message(int id, String contenu, Date dateCreation, Utilisateur auteur) {
