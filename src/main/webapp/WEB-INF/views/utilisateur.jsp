@@ -27,6 +27,12 @@
 				<td><form:input path="nom" /></td>
  				<td><form:errors path="nom"></form:errors></td> 
 			</tr>
+			
+			<tr>
+				<td><form:label path="email">Entrez votre email :</form:label></td>
+				<td><form:input path="email" /></td>
+ 				<td><form:errors path="email"></form:errors></td> 
+			</tr>
 
 			<tr>
 				<td><form:label path="login">Entrez votre login :</form:label></td>

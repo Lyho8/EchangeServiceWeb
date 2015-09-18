@@ -40,6 +40,7 @@ public class UtilisateurController {
 	@RequestMapping(value = "/utilisateurBienvenue", method = RequestMethod.GET)
 	public String bienvenue(Model model) {
 
+		
 		model.addAttribute("utilisateur", new Utilisateur());
 //		model.addAttribute("listeUtilisateurs", ms.listerUtilisateurs());
 
@@ -57,8 +58,9 @@ public class UtilisateurController {
 
 			Date time = new Date();
 			u.setDateInscription(time);
-			u.setSolde(10);
+			u.setSolde(0);
 			u.setActif(true);
+			
 			ms.creerUtilisateur(u);
 			
 		} else
