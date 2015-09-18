@@ -18,7 +18,6 @@
 			<th> NOM </th>
 			<th> SOLDE </th>
 			<th> MODIFIER </th>
-			<th> SUPPRIMER </th>
 		</tr>
 
 
@@ -29,11 +28,11 @@
 				<td> ${utilisateur.prenom} </td>
 				<td> ${utilisateur.nom} </td>
 				<td> ${utilisateur.solde} </td>
-				<td><a href="utilisateurModifier?id=${utilisateur.id}"> Modifier </a></td>
-				<td><a href="utilisateurSupprimer?id=${utilisateur.id}"> Supprimer </a></td>
+				<td><a href="utilisateur/actualiser?id=${utilisateur.id}"> Modifier </a></td>
 			</tr>
 
 		</c:forEach>
+	
 	</table>
 	
 	</jsp:body>

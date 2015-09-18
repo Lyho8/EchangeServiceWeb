@@ -12,7 +12,7 @@
 	******** --%>
 <h3> Création d'un compte. </h3>
 
-	<form:form method="POST" action="/projetf/utilisateurBdd" modelAttribute="utilisateur">
+	<form:form method="POST" action="/projetf/utilisateur/formulaire" modelAttribute="utilisateur">
 	
 		<table class="table table-bordered">
 			
