@@ -133,14 +133,19 @@ public class PaiementServiceImpl implements IPaiementService {
 		Utilisateur e = p.getEmetteur();
 		Utilisateur r = p.getRecepteur();
 		
-		e.setSolde(e.getSolde()-p.getMontant());
-		r.setSolde(r.getSolde()+p.getMontant());
-		utilisateurDao.actualiserUtilisateur(e);
-		utilisateurDao.actualiserUtilisateur(r);
-		
-		p.setValide(true);
-		p.setDateValidation(new Date());
-		dao.actualiserPaiement(p);
+		if(e.getSolde()+10<p.getMontant()){
+			refuserPaiement(p);
+		}
+		else{
+			e.setSolde(e.getSolde()-p.getMontant());
+			r.setSolde(r.getSolde()+p.getMontant());
+			utilisateurDao.actualiserUtilisateur(e);
+			utilisateurDao.actualiserUtilisateur(r);
+			
+			p.setValide(true);
+			p.setDateValidation(new Date());
+			dao.actualiserPaiement(p);
+		}
 		
 	}
 	
