@@ -159,8 +159,9 @@ public class PaiementController {
 	
 	@RequestMapping(value = "/paiement/en_attente/{id}", method = RequestMethod.GET)
 	public String paiementNonValideById(@PathVariable int id, Locale locale, Model model) {
-		model.addAttribute("paiementsE", ps.chercherPaiementsInvalidesE(us.chercherUtilisateur(id)));
-		model.addAttribute("paiementsR", ps.chercherPaiementsInvalidesR(us.chercherUtilisateur(id)));
+		Utilisateur e = us.chercherUtilisateur(id);
+		model.addAttribute("paiementsE", ps.chercherPaiementsInvalidesE(e));
+		model.addAttribute("paiementsR", ps.chercherPaiementsInvalidesR(e));
 		return "paiement_utilisateur";
 	}
 	
@@ -169,10 +170,18 @@ public class PaiementController {
 	@RequestMapping(value="/paiement/valider/{id}")
 	public String validerPaiement(@PathVariable int id, Locale locale, Model model){
 		
-		ps.validerPaiement(ps.chercherPaiement(id));
+		Paiement p = ps.chercherPaiement(id);
 		
-		model.addAttribute("paiementsE", ps.chercherPaiementsInvalidesE(us.chercherUtilisateur(id)));
-		model.addAttribute("paiementsR", ps.chercherPaiementsInvalidesR(us.chercherUtilisateur(id)));
+		if(p.getEmetteur().getSolde()+10<p.getMontant()){
+			ps.validerPaiement(p);
+		}
+		else{
+			ps.refuserPaiement(p);
+		}
+		
+		
+		model.addAttribute("paiementsE", ps.chercherPaiementsInvalidesE(p.getEmetteur()));
+		model.addAttribute("paiementsR", ps.chercherPaiementsInvalidesR(p.getRecepteur()));
 		
 		return "paiement_utilisateur";
 	}
@@ -180,10 +189,12 @@ public class PaiementController {
 	@RequestMapping(value="/paiement/refuser/{id}")
 	public String refuserPaiement(@PathVariable int id, Locale locale, Model model){
 		
-		ps.refuserPaiement(ps.chercherPaiement(id));
+		Paiement p = ps.chercherPaiement(id);
 		
-		model.addAttribute("paiementsE", ps.chercherPaiementsInvalidesE(us.chercherUtilisateur(id)));
-		model.addAttribute("paiementsR", ps.chercherPaiementsInvalidesR(us.chercherUtilisateur(id)));
+		ps.refuserPaiement(p);
+		
+		model.addAttribute("paiementsE", ps.chercherPaiementsInvalidesE(p.getEmetteur()));
+		model.addAttribute("paiementsR", ps.chercherPaiementsInvalidesR(p.getEmetteur()));
 		
 		return "paiement_utilisateur";
 	}
