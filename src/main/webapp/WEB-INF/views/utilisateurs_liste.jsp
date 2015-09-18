@@ -10,15 +10,15 @@
 	
 	<h3>Liste des utilisateurs :</h3>
 
-	<table cellspacing="2px" cellpadding="2px;" rules="all"
-		style="border: solid 1px black;">
+	<table class="table table-bordered">
 
 		<tr>
 			<th> ID </th>
 			<th> PRENOM </th>
 			<th> NOM </th>
 			<th> SOLDE </th>
-			<th> PAIEMENT </th>
+			<th> MODIFIER </th>
+			<th> SUPPRIMER </th>
 		</tr>
 
 
@@ -29,7 +29,8 @@
 				<td> ${utilisateur.prenom} </td>
 				<td> ${utilisateur.nom} </td>
 				<td> ${utilisateur.solde} </td>
-				<td><a href="#"> Paiement </a></td>
+				<td><a href="utilisateurModifier?id=${utilisateur.id}"> Modifier </a></td>
+				<td><a href="utilisateurSupprimer?id=${utilisateur.id}"> Supprimer </a></td>
 			</tr>
 
 		</c:forEach>

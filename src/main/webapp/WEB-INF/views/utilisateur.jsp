@@ -13,7 +13,8 @@
 <h3> Création d'un compte. </h3>
 
 	<form:form method="POST" action="/projetf/utilisateurBdd" modelAttribute="utilisateur">
-		<table>
+	
+		<table class="table table-bordered">
 			
 			<tr>
 				<td><form:label path="prenom">Entrez votre prénom : </form:label></td>
@@ -40,6 +41,8 @@
  			</tr>
 			
 		</table>
+		
+		<form:hidden path="id"/>
 
 		<input type="submit" value="Envoyer" />
 	</form:form>
@@ -47,4 +50,7 @@
 	
 	</jsp:body>
 </t:template>
+
+
+
 	

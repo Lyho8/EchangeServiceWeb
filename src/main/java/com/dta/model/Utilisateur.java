@@ -14,6 +14,7 @@ public class Utilisateur {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
+
 	@NotNull
 	@Size(max = 60, min = 3)
 	private String nom = "";

@@ -24,9 +24,6 @@
 					<c:if test="${urlCourante=='home'}">class="active"</c:if>><a
 					href="/projetf">Page d'accueil</a></li>
 				<li role="presentation"
-					<c:if test="${urlCourante=='utilisateurBienvenue'}">class="active"</c:if>><a
-					href="/projetf/utilisateurs_liste">Liste des utilisateurs</a></li>
-				<li role="presentation"
 					<c:if test="${urlCourante=='annonces'}">class="active"</c:if>><a
 					href="#">Annonces</a></li>
 				<li role="presentation"
