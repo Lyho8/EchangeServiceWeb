@@ -7,10 +7,10 @@
 <t:template>
 	<jsp:body>
 		<h1>
-			Nouvelle demande de paiement
+			Nouveau paiement
 		</h1>
 		
-		<form:form method="post" action="/projetf/paiement/demande"
+		<form:form method="post" action="/projetf/paiement/direct"
 		modelAttribute="paiement">
 		<table class="table table-striped table-bordered">
 			<tr>
