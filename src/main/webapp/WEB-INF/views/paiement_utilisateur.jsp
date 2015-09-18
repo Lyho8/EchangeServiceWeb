@@ -20,7 +20,10 @@
 			      		<th>Montant</th>
 			      		<th>Message</th>
 			      		<th>Emetteur</th>
-			      		<th>Recepteur</th>
+			      		<th>Récepteur</th>
+			      		<th>Statut</th>
+			      		<th>Accepter</th>
+			      		<th>Refuser</th>
 			      	</tr>
 			      	<c:forEach items="${ paiementsE }" var="p">
 			      	<tr>			      	
@@ -29,6 +32,9 @@
 			      		<td>${ p.message }</td>
 			      		<td>${ p.emetteur.login }</td>
 			      		<td>${ p.recepteur.login }</td>
+			      		<td>${ p.valide }</td>
+			      		<td><c:if test="${ p.valide==false }"><a href="/projetf/paiement/valider/${ p.id }">Accepter</a></c:if></td>
+			      		<td><c:if test="${ p.valide==false }"><a href="/projetf/paiement/refuser/${ p.id }">Refuser</a></c:if></td>
 			      	</tr>
 			      	</c:forEach>
 			      </table>

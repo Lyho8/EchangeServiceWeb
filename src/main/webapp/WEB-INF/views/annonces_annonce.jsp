@@ -1,13 +1,47 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <t:template>
 	<jsp:body>
 	
-	<h1>${ annonce.type } de ${ annonce.auteur.login }</h1>
-	
-	<div>${ annonce.description }</div>
+	<div class="row">
+  <div class="col-sm-2">
+    <div class="thumbnail">
+      <img src="http://www.mot-a-mot.com/media/annonce/annonce_2.jpg"
+						alt="annonce de test">
+      <div class="caption">
+        <h3>${ annonce.type } de ${ annonce.auteur.login }</h3>
+        <p>${ annonce.description }</p>
+      </div>
+      
+	<!-- affichage des commentaires de l'annonce -->
 	<c:forEach items="${ annonce.commentaires }" var="commentaire">
-		<p>${ commentaire.auteur.login } : ${ commentaire.contenu }</p>
+		<div class="panel panel-default">
+		  <div class="panel-heading">${ commentaire.auteur.login }</div>
+		  <div class="panel-body"> ${ commentaire.contenu }</div>
+		</div>
 	</c:forEach>
+	
+	<!-- formulaire pour ajouter un commentaire sur l'annonce -->
+<!-- 	<div class="panel panel-info"> -->
+<%-- 		<form:form method="post" modelAttribute="commentaire" --%>
+<%-- 								action="/projetf/annonces/voir/{id}/commenter"> --%>
+<%-- 			<form:hidden path="auteur.id" /> --%> 
+<!-- 			<div class="field_group"> -->
+<%-- 				<form:label path="contenu"></form:label> --%>
+<%-- 				<form:input type="text" path="contenu" value="Votre message ici ..." /> --%>
+<%-- 				<form:errors path="contenu" /> --%>
+<!-- 			</div> -->
+<!-- 			<br> -->
+<!-- 			<div class="field_group"> -->
+<!-- 				<input type="submit" value="Commenter" /> -->
+<!-- 			</div> -->
+<%-- 		</form:form> --%>
+<!-- 	</div> -->
+	
+    </div>
+  </div>
+  </div>	
+	
     </jsp:body>
 </t:template>

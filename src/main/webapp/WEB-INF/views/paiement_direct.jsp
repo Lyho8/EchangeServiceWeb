@@ -7,10 +7,10 @@
 <t:template>
 	<jsp:body>
 		<h1>
-			Nouvelle demande de paiement
+			Nouveau paiement
 		</h1>
 		
-		<form:form method="post" action="/projetf/paiement/demande"
+		<form:form method="post" action="/projetf/paiement/direct/${ idR }"
 		modelAttribute="paiement">
 		<table class="table table-striped table-bordered">
 			<tr>
@@ -34,12 +34,6 @@
 				<td><form:input path="message" /></td>
 				<td><form:errors path="message" /></td>
 			</tr>
-			<tr>
-				<td><form:label path="recepteur"></form:label></td>
-				<td><form:select path="recepteur">
-					<form:options items="${ users }" itemLabel="login" itemValue="id" />
-				</form:select></td>
-			</tr>			
 			<tr>
 				<td><input type="submit" value="Valider" /></td>
 			</tr>

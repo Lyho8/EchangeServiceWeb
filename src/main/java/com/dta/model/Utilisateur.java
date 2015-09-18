@@ -56,6 +56,11 @@ public class Utilisateur {
 	@OneToMany(mappedBy="recepteur")
 	private List<Paiement> paiementsRecus;
 	
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name="idRole")
+	private Role role;
+	
 	public Utilisateur(){
 		super();
 	}

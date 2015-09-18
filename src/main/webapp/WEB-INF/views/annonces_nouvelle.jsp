@@ -1,11 +1,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
+
 <t:template>
 	<jsp:body>
 <h1>
 	Ajout d'une tâche
 </h1>
+<sec:authentication property="principal.username"/>
 
 <form:form method="post" modelAttribute="annonce" action="/projetf/annonces/nouvelle">
 	<form:hidden path="id" />
