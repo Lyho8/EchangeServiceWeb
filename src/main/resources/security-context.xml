@@ -19,7 +19,7 @@
 			<security:jdbc-user-service
 				data-source-ref="dataSource"
 				users-by-username-query="select login, motdepasse, actif from utilisateur where login=?"
-				authorities-by-username-query="select u.login, r.nom from utilisateur u, role_table r where u.idRole=r.id and u.login=?" />
+				authorities-by-username-query="select u.login, u.role from utilisateur u where u.login=?" />
 		</security:authentication-provider>
 	</security:authentication-manager>
 
