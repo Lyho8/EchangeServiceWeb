@@ -14,7 +14,6 @@ public class Utilisateur {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-
 	@NotNull
 	@Size(max = 60, min = 3)
 	private String nom = "";
@@ -55,11 +54,6 @@ public class Utilisateur {
 	
 	@OneToMany(mappedBy="recepteur")
 	private List<Paiement> paiementsRecus;
-	
-	@NotNull
-	@ManyToOne
-	@JoinColumn(name="idRole")
-	private Role role;
 	
 	public Utilisateur(){
 		super();
