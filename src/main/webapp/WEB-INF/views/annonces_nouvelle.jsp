@@ -8,7 +8,6 @@
 <h1>
 	Ajout d'une tâche
 </h1>
-<sec:authentication property="principal.username"/>
 
 <form:form method="post" modelAttribute="annonce" action="/projetf/annonces/nouvelle">
 	<form:hidden path="id" />

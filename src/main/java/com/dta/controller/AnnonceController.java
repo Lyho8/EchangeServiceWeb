@@ -7,6 +7,7 @@ import java.util.Locale;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -44,6 +45,7 @@ public class AnnonceController {
 		return "annonces_home";
 	}
 
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@RequestMapping(value = "/nouvelle", method = RequestMethod.GET)
 	public String nouvelle(Model model) {
 		List<Type> types = new ArrayList<Type>();
@@ -62,6 +64,7 @@ public class AnnonceController {
 		return "annonces_nouvelle";
 	}
 
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@RequestMapping(value = "/nouvelle", method = RequestMethod.POST)
 	public String creer(@Valid @ModelAttribute("annonce") Annonce annonce,
 			BindingResult result, Model model) {
