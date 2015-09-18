@@ -11,5 +11,14 @@ public class Commentaire extends Message {
 	@ManyToOne
 	@JoinColumn(name="idAnnonce")
 	private Annonce annonce;
+
+	public Annonce getAnnonce() {
+		return annonce;
+	}
+
+	public void setAnnonce(Annonce annonce) {
+		this.annonce = annonce;
+	}
+	
 	
 }
