@@ -1,41 +1,5 @@
 package com.dta.model;
 
-import java.util.List;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
-
-@Entity(name = "role_table")
-public class Role {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
-	
-	@NotNull
-	private String nom;
-	
-	@NotNull
-	@OneToMany(mappedBy="role")
-	private List<Utilisateur> utilisateurs;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getNom() {
-		return nom;
-	}
-
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-	
+public enum Role {
+	ROLE_USER,ROLE_ADMIN
 }

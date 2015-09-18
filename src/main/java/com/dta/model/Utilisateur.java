@@ -1,17 +1,31 @@
 package com.dta.model;
 
-import javax.persistence.*;
-import javax.validation.constraints.*;
+import java.util.Date;
+import java.util.List;
 
-import org.eclipse.persistence.annotations.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import java.util.*;
+import org.eclipse.persistence.annotations.PrivateOwned;
 
 @Entity
 public class Utilisateur {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@NotNull
@@ -21,68 +35,73 @@ public class Utilisateur {
 	@Size(max = 60, min = 3)
 	private String prenom = "";
 
+	@Size(max = 255, min = 6)
+	private String email = "";
+
 	@NotNull
 	@Size(max = 16, min = 2)
+	@Column(unique = true)
 	private String login;
 
 	@NotNull
 	@Size(max = 50, min = 6)
 	private String motDePasse;
-	
+
 	private boolean actif;
-	
+
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateInscription;
-	
+
 	private int solde = 0;
-	
-	@OneToMany(mappedBy="auteur", cascade={ CascadeType.PERSIST , CascadeType.DETACH })
+
+	@OneToMany(mappedBy = "auteur", cascade = { CascadeType.PERSIST,
+			CascadeType.DETACH })
 	@PrivateOwned
 	private List<Message> messages;
-	
-	@OneToMany(mappedBy="auteur", cascade={ CascadeType.PERSIST , CascadeType.DETACH })
+
+	@OneToMany(mappedBy = "auteur", cascade = { CascadeType.PERSIST,
+			CascadeType.DETACH })
 	@PrivateOwned
 	private List<Annonce> annonces;
-	
+
 	@ManyToMany
-	@JoinTable(name = "usr_msg", joinColumns = {@JoinColumn(name = "idUsr")}, inverseJoinColumns = {@JoinColumn(name = "idMsg")})
+	@JoinTable(name = "usr_msg", joinColumns = { @JoinColumn(name = "idUsr") }, inverseJoinColumns = { @JoinColumn(name = "idMsg") })
 	private List<Message> messagesRecus;
-	
-	@OneToMany(mappedBy="emetteur")
+
+	@OneToMany(mappedBy = "emetteur")
 	private List<Paiement> paiementsEmis;
-	
-	@OneToMany(mappedBy="recepteur")
+
+	@OneToMany(mappedBy = "recepteur")
 	private List<Paiement> paiementsRecus;
-	
-	@NotNull
-	@ManyToOne
-	@JoinColumn(name="idRole")
-	private Role role;
-	
-	public Utilisateur(){
+
+	private Role role = Role.ROLE_USER;
+
+	public Utilisateur() {
 		super();
 	}
 
-	public Utilisateur(int id, String nom, String prenom, String login,
-			String motDePasse, int solde) {
+	public Utilisateur(int id, String nom, String prenom, String email,
+			String login, String motDePasse, int solde) {
 		super();
 		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
+		this.email = email;
 		this.login = login;
 		this.motDePasse = motDePasse;
 		this.solde = solde;
 	}
 
-	public Utilisateur(int id, String nom, String prenom, String login,
-			String motDePasse, Date dateInscription, int solde,
+	public Utilisateur(int id, String nom, String prenom, String email,
+			String login, String motDePasse, Date dateInscription, int solde,
 			List<Message> messages, List<Annonce> annonces,
 			List<Message> messagesRecus) {
 		super();
 		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
+		this.email = email;
 		this.login = login;
 		this.motDePasse = motDePasse;
 		this.dateInscription = dateInscription;
@@ -92,11 +111,11 @@ public class Utilisateur {
 		this.messagesRecus = messagesRecus;
 	}
 
-	public Utilisateur(int id, String nom, String prenom, String login,
-			String motDePasse, boolean actif, Date dateInscription, int solde,
-			List<Message> messages, List<Annonce> annonces,
-			List<Message> messagesRecus, List<Paiement> paiementsEmis,
-			List<Paiement> paiementsRecus) {
+	public Utilisateur(int id, String nom, String prenom, String email,
+			String login, String motDePasse, boolean actif,
+			Date dateInscription, int solde, List<Message> messages,
+			List<Annonce> annonces, List<Message> messagesRecus,
+			List<Paiement> paiementsEmis, List<Paiement> paiementsRecus) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -111,6 +130,22 @@ public class Utilisateur {
 		this.messagesRecus = messagesRecus;
 		this.paiementsEmis = paiementsEmis;
 		this.paiementsRecus = paiementsRecus;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	public int getId() {
