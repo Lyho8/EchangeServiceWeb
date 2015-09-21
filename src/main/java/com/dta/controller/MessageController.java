@@ -14,6 +14,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,6 +37,7 @@ import com.dta.model.Utilisateur;
  * Handles requests for the application home page.
  */
 @Controller
+@Secured({"ROLE_USER", "ROLE_ADMIN"})
 @RequestMapping(value = "/messages")
 public class MessageController {
 	
@@ -79,6 +81,7 @@ public class MessageController {
 		return "messages_new";
 	}
 	
+	/* Page de formulaire pour envoyé un nouveau message */
 	@RequestMapping(value = "/new/envoie/{id}", method = RequestMethod.POST)
 	public String newMessagePost(@Valid MessagePrive mp,BindingResult BindingResult, Model model,  @PathVariable int id, Locale locale) {
 		

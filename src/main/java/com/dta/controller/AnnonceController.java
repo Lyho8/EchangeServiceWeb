@@ -87,7 +87,12 @@ public class AnnonceController {
 		
 		Annonce annonce = as.chercherAnnonce(id);
 
-		model.addAttribute("commentaire", coms.listerCommentaire(annonce));
+		Commentaire com = new Commentaire();
+		
+		com.setAuteur(us.chercherUtilisateur(1)); // forcage user 1
+		com.setAnnonce(annonce);
+		
+		model.addAttribute("commentaire", com);
 		
 		model.addAttribute("annonce", annonce);  
 		return "annonces_annonce";
@@ -102,18 +107,14 @@ public class AnnonceController {
 		
 		Annonce annonce = as.chercherAnnonce(id);
 		
-		com.setAuteur(us.chercherUtilisateur(1)); // forcage user 1
-		com.setAnnonce(as.chercherAnnonce(id));
 		coms.creerCommentaire(com);
-		
-		List<Commentaire> listCom = new ArrayList<Commentaire>();
+	
+		List<Commentaire> listCom = annonce.getCommentaires();
 		
 		listCom.add(com);
 		
-		annonce.setCommentaires(listCom);
+		as.actualiserAnnonce(annonce);
 		
-		model.addAttribute("annonce", annonce);  
-		model.addAttribute("commentaire", coms.listerCommentaire(annonce));
-		return "annonces_annonce";
+		return "redirect:/annonces/voir/" + id;
 	}
 }
