@@ -15,10 +15,10 @@
       </div>
       
 	<!-- affichage des commentaires de l'annonce -->
-	<c:forEach items="${ annonce.commentaires }" var="commentaire">
+	<c:forEach items="${ annonce.commentaires }" var="comm">
 		<div class="panel panel-default">
-		  <div class="panel-heading">${ commentaire.auteur.login }</div>
-		  <div class="panel-body"> ${ commentaire.contenu }</div>
+		  <div class="panel-heading">${ comm.auteur.login }</div>
+		  <div class="panel-body"> ${ comm.contenu }</div>
 		</div>
 	</c:forEach>
 	
@@ -26,8 +26,8 @@
 	<div class="panel panel-info">
 		<form:form method="post" modelAttribute="commentaire"
  							action="/projetf/annonces/voir/${id}">  
-<%--  			<form:hidden path="auteur.id" />  --%>
-<%--  			<form:hidden path="annonce.id" />  --%>
+ 			<form:hidden path="auteur.id" />  
+ 			<form:hidden path="annonce.id" />  
 			<div class="field_group">
  				<form:label path="contenu"></form:label>  
  				<form:input type="text" path="contenu" value="Votre message ici ..." />  
