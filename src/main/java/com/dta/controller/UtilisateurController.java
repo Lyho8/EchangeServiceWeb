@@ -1,7 +1,5 @@
 package com.dta.controller;
 
-import java.util.Date;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +14,16 @@ import com.dta.metier.IUtilisateurService;
 import com.dta.model.Utilisateur;
 
 @Controller
+@RequestMapping(value="utilisateur")
 public class UtilisateurController {
 
+	
+	
 	@Autowired
 	private IUtilisateurService ms;
 
 	// TODO afficher le formulaire
-	@RequestMapping(value = "/utilisateurs_liste", method = RequestMethod.GET)
+	@RequestMapping(value = "/utilisateur/liste", method = RequestMethod.GET)
 	public String listerUtilisateur(Model model) {
 
 		model.addAttribute("listeUtilisateurs", ms.listerUtilisateurs());
@@ -35,7 +36,6 @@ public class UtilisateurController {
 	public String bienvenue(Model model) {
 
 		model.addAttribute("utilisateur", new Utilisateur());
-		// model.addAttribute("listeUtilisateurs", ms.listerUtilisateurs());
 
 		return "utilisateur_formulaire";
 	}
@@ -46,23 +46,14 @@ public class UtilisateurController {
 			Model model) {
 
 		if (u.getId() == 0) {
-			// System.out.println(m.email());
-
-			Date time = new Date();
-			u.setDateInscription(time);
-			u.setSolde(0);
-			u.setActif(true);
 
 			ms.creerUtilisateur(u);
 
 		} else
 
 			ms.actualiserUtilisateur(u);
-
-		// model.addAttribute("utilisateur", new Utilisateur());
-		model.addAttribute("listeUtilisateurs", ms.listerUtilisateurs());
-
-		return "utilisateurs_liste";
+	
+		return "redirect:/connexion";
 	}
 
 	// TODO actualiser un utilisateur.

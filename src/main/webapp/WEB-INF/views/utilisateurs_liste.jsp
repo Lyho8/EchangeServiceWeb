@@ -28,7 +28,7 @@
 				<td> ${utilisateur.prenom} </td>
 				<td> ${utilisateur.nom} </td>
 				<td> ${utilisateur.solde} </td>
-				<td><a href="utilisateur/actualiser?id=${utilisateur.id}"> Modifier </a></td>
+				<td><a href="/projetf/utilisateur/actualiser?id=${utilisateur.id}"> Modifier </a></td>
 			</tr>
 
 		</c:forEach>

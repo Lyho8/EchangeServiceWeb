@@ -10,7 +10,7 @@
 
 <%-- <a href="<%=request.getContextPath()%>/projetf">vers Accueil</a>
 	******** --%>
-<h3> Création d'un compte. </h3>
+<h3> Entrez vos coordonnées :</h3>
 
 	<form:form method="POST" action="/projetf/utilisateur/formulaire" modelAttribute="utilisateur">
 	
@@ -42,7 +42,7 @@
 			
 			<tr>
 				<td><form:label path="motDePasse">Entrez votre mot de passe :</form:label></td>
-				<td><form:input path="motDePasse" /></td>
+				<td><form:password path="motDePasse" /></td>
  				<td><form:errors path="motDePasse"></form:errors></td>
  			</tr>
 			
