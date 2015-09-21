@@ -52,7 +52,7 @@ public class Utilisateur {
 
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date dateInscription;
+	private Date dateInscription=new Date();
 
 	private int solde = 0;
 
