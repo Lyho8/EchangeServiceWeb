@@ -12,7 +12,7 @@ import com.dta.model.Annonce;
 import com.dta.model.Commentaire;
 
 @Service
-public class CommenantaireServiceImpl implements ICommentaireService {
+public class CommentaireServiceImpl implements ICommentaireService {
 
 	@Autowired
 	private ICommentaireDao dao;

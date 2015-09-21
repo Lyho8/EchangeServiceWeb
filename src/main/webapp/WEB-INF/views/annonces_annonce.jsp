@@ -23,21 +23,22 @@
 	</c:forEach>
 	
 	<!-- formulaire pour ajouter un commentaire sur l'annonce -->
-<!-- 	<div class="panel panel-info"> -->
-<%-- 		<form:form method="post" modelAttribute="commentaire" --%>
-<%-- 								action="/projetf/annonces/voir/{id}/commenter"> --%>
-<%-- 			<form:hidden path="auteur.id" /> --%> 
-<!-- 			<div class="field_group"> -->
-<%-- 				<form:label path="contenu"></form:label> --%>
-<%-- 				<form:input type="text" path="contenu" value="Votre message ici ..." /> --%>
-<%-- 				<form:errors path="contenu" /> --%>
-<!-- 			</div> -->
-<!-- 			<br> -->
-<!-- 			<div class="field_group"> -->
-<!-- 				<input type="submit" value="Commenter" /> -->
-<!-- 			</div> -->
-<%-- 		</form:form> --%>
-<!-- 	</div> -->
+	<div class="panel panel-info">
+		<form:form method="post" modelAttribute="commentaire"
+ 							action="/projetf/annonces/voir/${id}">  
+<%--  			<form:hidden path="auteur.id" />  --%>
+<%--  			<form:hidden path="annonce.id" />  --%>
+			<div class="field_group">
+ 				<form:label path="contenu"></form:label>  
+ 				<form:input type="text" path="contenu" value="Votre message ici ..." />  
+ 				<form:errors path="contenu" />  
+ 			</div> 
+			<br> 
+ 		<div class="field_group">  
+ 				<input type="submit" value="Commenter" /> 
+ 			</div>  
+ 		</form:form> 
+  	</div>  
 	
     </div>
   </div>

@@ -23,6 +23,7 @@ import com.dta.metier.ICommentaireService;
 import com.dta.metier.IUtilisateurService;
 import com.dta.model.Annonce;
 import com.dta.model.Commentaire;
+import com.dta.model.MessagePrive;
 import com.dta.model.Type;
 
 @Controller
@@ -53,9 +54,7 @@ public class AnnonceController {
 		types.add(Type.OFFRE);
 
 		Annonce annonce = new Annonce();
-		annonce.setAuteur(us.chercherUtilisateur(1)); // fake user (ça devrait
-														// être l'utilisateur
-														// connecté)
+		annonce.setAuteur(us.chercherUtilisateur(1)); // forcage user 1
 
 		model.addAttribute("annonce", annonce);
 		model.addAttribute("types", types);
@@ -84,21 +83,36 @@ public class AnnonceController {
 
 	@RequestMapping(value = "/voir/{id}", method = RequestMethod.GET)
 	public String voir(@PathVariable int id, Model model) {
-		model.addAttribute("annonce", as.chercherAnnonce(id));
+		
+		Annonce annonce = as.chercherAnnonce(id);
+
+		model.addAttribute("commentaire", coms.listerCommentaire(annonce));
+		
+		model.addAttribute("annonce", annonce);  
 		return "annonces_annonce";
 	}
 
-	@RequestMapping(value = "/voir/{id}/commenter", method = RequestMethod.POST)
-	public String newMessagePost(@Valid Commentaire com,
-			BindingResult BindingResult, Model model, @PathVariable int id,
-			Locale locale) {
+	@RequestMapping(value = "/voir/{id}", method = RequestMethod.POST)
+	public String newMessagePost(@Valid Commentaire com,BindingResult BindingResult, Model model,@PathVariable int id) {
 
 		for (ObjectError oe : BindingResult.getAllErrors()) {
 			System.out.println(oe);
 		}
-
+		
+		Annonce annonce = as.chercherAnnonce(id);
+		
+		com.setAuteur(us.chercherUtilisateur(1)); // forcage user 1
+		com.setAnnonce(as.chercherAnnonce(id));
 		coms.creerCommentaire(com);
-
-		return "messages_new";
+		
+		List<Commentaire> listCom = new ArrayList<Commentaire>();
+		
+		listCom.add(com);
+		
+		annonce.setCommentaires(listCom);
+		
+		model.addAttribute("annonce", annonce);  
+		model.addAttribute("commentaire", coms.listerCommentaire(annonce));
+		return "annonces_annonce";
 	}
 }

@@ -98,7 +98,7 @@ public class MessageController {
 		
 		ms.listerMessageRecu(us.chercherUtilisateur(idUtilisateur));
 		
-		return "messages_new";
+		return "messages_envoyes";
 	}
 	
 	@InitBinder
