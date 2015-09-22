@@ -10,6 +10,7 @@
       <img src="http://www.mot-a-mot.com/media/annonce/annonce_2.jpg"
 						alt="annonce de test">
       <div class="caption">
+      	<small style="float:right">${ annonce.categorie.libelle }</small>
         <h3>${ annonce.type } de ${ annonce.auteur.login }</h3>
         <p>${ annonce.description }</p>
       </div>
@@ -30,7 +31,7 @@
  			<form:hidden path="annonce.id" />  
 			<div class="field_group">
  				<form:label path="contenu"></form:label>  
- 				<form:input type="text" path="contenu" value="Votre message ici ..." />  
+ 				<form:input type="text" path="contenu" placeholder="Votre message ici ..." />  
  				<form:errors path="contenu" />  
  			</div> 
 			<br> 

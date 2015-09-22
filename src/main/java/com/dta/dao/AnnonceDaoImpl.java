@@ -4,11 +4,13 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
 import com.dta.model.Annonce;
 import com.dta.model.Categorie;
+import com.dta.model.Type;
 import com.dta.model.Utilisateur;
 
 @Repository
@@ -71,6 +73,11 @@ public class AnnonceDaoImpl implements IAnnonceDao {
 	@Override
 	public List<Annonce> listerAnnonces(int premier, int nombre) {
 		return entityManager.createQuery("SELECT a FROM Annonce a WHERE a.active = true ORDER BY a.dateCreation DESC", Annonce.class).setFirstResult(premier).setMaxResults(nombre).getResultList();
+	}
+
+	@Override
+	public List<Annonce> listerDernieresAnnoncesParType(int nombre, Type type) {
+		return entityManager.createQuery("SELECT a FROM Annonce a WHERE a.active = true AND a.type = :type ORDER BY a.dateCreation DESC", Annonce.class).setParameter("type", type).setFirstResult(0).setMaxResults(nombre).getResultList();
 	}
 
 }

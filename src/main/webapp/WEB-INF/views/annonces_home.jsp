@@ -14,7 +14,7 @@
       <div class="caption">
         <h3>${ annonce.type } de ${ annonce.auteur.login }</h3>
         <p>${ annonce.description }</p>
-        <p><a href="<c:url value="/voir/${ annonce.id }" />" class="btn btn-primary" role="button">Voir l'annonce</a> </p>
+        <p><a href="<c:url value="/annonces/voir/${ annonce.id }" />" class="btn btn-primary" role="button">Voir l'annonce</a> </p>
       </div>
     </div>
   </div>

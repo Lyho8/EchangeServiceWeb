@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dta.dao.IAnnonceDao;
 import com.dta.model.Annonce;
 import com.dta.model.Categorie;
+import com.dta.model.Type;
 import com.dta.model.Utilisateur;
 
 @Service
@@ -66,8 +67,11 @@ public class AnnonceServiceImpl implements IAnnonceService {
 		dao.actualiserAnnonce(annonce);
 	}
 
-	@Override
 	public List<Annonce> listerAnnonces(int premier, int nombre) {
 		return dao.listerAnnonces(premier, nombre);
+	}
+	
+	public List<Annonce> listerDernieresAnnoncesParType(int nombre, Type type) {
+		return dao.listerDernieresAnnoncesParType(nombre, type);
 	}
 }

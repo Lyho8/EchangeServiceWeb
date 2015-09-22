@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.dta.model.Annonce;
 import com.dta.model.Categorie;
+import com.dta.model.Type;
 import com.dta.model.Utilisateur;
 
 public interface IAnnonceService {
@@ -11,6 +12,8 @@ public interface IAnnonceService {
 	public abstract void creerAnnonce(Annonce annonce);
 
 	public abstract List<Annonce> listerAnnonces(int premier, int nombre);
+	
+	public abstract List<Annonce> listerDernieresAnnoncesParType(int nombre, Type type);
 
 	public abstract List<Annonce> rechercherAnnonces(Utilisateur utilisateur);
 

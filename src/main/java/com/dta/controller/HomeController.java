@@ -1,47 +1,37 @@
 package com.dta.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/**
- * Handles requests for the application home page.
- */
+import com.dta.metier.IAnnonceService;
+import com.dta.model.Annonce;
+import com.dta.model.Type;
+
 @Controller
 public class HomeController {
 	
 	@PersistenceContext
-	private EntityManager em;	
+	private EntityManager em;
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	@Autowired
+	private IAnnonceService as;	
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
+		List<Annonce> demandes = as.listerDernieresAnnoncesParType(6, Type.DEMANDE);
+		List<Annonce> offres = as.listerDernieresAnnoncesParType(6, Type.OFFRE);
 		
-		//tmp : pour créer la table
-		em.createQuery("SELECT u FROM Utilisateur u").getResultList();
-		
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
+		model.addAttribute("demandes", demandes);
+		model.addAttribute("offres", offres);
 		
 		return "home";
 	}

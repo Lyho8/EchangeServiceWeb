@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.dta.model.Annonce;
 import com.dta.model.Categorie;
+import com.dta.model.Type;
 import com.dta.model.Utilisateur;
 
 public interface IAnnonceDao {
@@ -24,4 +25,6 @@ public interface IAnnonceDao {
 	void ouvrirAnnonce(Annonce annonce);
 
 	void actualiserAnnonce(Annonce annonce);
+
+	List<Annonce> listerDernieresAnnoncesParType(int nombre, Type type);
 }
