@@ -8,6 +8,7 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
+import com.dta.model.Categorie;
 import com.dta.model.MessagePrive;
 import com.dta.model.Utilisateur;
 
@@ -50,6 +51,11 @@ public class MessageDaoImpl implements IMessageDao {
 		Query req=entityManager.createQuery("select mp from MessagePrive mp where mp.titre like :x");
 		req.setParameter("x",  "%"+motCle+"%");
 		return  req.getResultList();
+	}
+	
+	
+	public MessagePrive chercherMessageParId(int idMessage) {
+		return entityManager.createQuery("SELECT mp FROM MessagePrive mp WHERE mp.id  = :id", MessagePrive.class).setParameter("id", idMessage).getSingleResult();	
 	}
 
 }

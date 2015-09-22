@@ -61,6 +61,10 @@ public class MessagesServiceImpl implements IMessagesService {
 		}
 		return dao.listerMessageRecu(u);
 	}
+
+	public MessagePrive chercherMessageParId(int idMessage) {
+		return dao.chercherMessageParId(idMessage);
+	}
 	
 	
 
