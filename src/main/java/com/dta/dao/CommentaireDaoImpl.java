@@ -38,7 +38,6 @@ public class CommentaireDaoImpl implements ICommentaireDao {
 		Query req=entityManager.createQuery("select com from Commentaire com where com.annonce=:annonce").setParameter("annonce", a);
 		return  req.getResultList();
 	}
-
 	
 	public List<Commentaire> chercherCommentaireParAuteur(String motCle) {
 		Query req=entityManager.createQuery("select com from Commentaire com where com.auteur.login like :x");

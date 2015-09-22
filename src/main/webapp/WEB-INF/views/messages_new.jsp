@@ -4,7 +4,7 @@
 <t:template>
 	<jsp:body>
 <h1>
-	Page de gestion des messages
+	Ma messagerie
 </h1>
 
 <ul class="nav nav-tabs">

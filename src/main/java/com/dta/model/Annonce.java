@@ -34,6 +34,7 @@ public class Annonce {
 	
 	@OneToMany(mappedBy="annonce", cascade=CascadeType.ALL)
 	@PrivateOwned
+	@OrderBy ("dateCreation asc")
 	private List<Commentaire> commentaires;
 	
 	@NotNull

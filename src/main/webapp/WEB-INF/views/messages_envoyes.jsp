@@ -6,7 +6,7 @@
 <t:template>
 	<jsp:body>
 <h1>
-	Page de gestion des messages
+	Ma messagerie
 </h1>
 
 <ul class="nav nav-tabs">
@@ -22,25 +22,25 @@
 				<p>Liste des messages envoyés</p>
 			</div>
 			
-			<ul class="list-group">
-				<li class="list-group-item"><c:forEach items="${MesMessagesE}"
-						var="monMessageE">
-                        Auteur :
-                        ${monMessageE.auteur.login}
-                        &nbsp;
-                        Titre :
-                        ${monMessageE.titre}
-                        &nbsp;
-                        Contenu :
-                        ${monMessageE.contenu}
-                        &nbsp;
-						<a class="glyphicon glyphicon-trash"
-							href="/projetf/messages/supprimer?id=${monMessageR.id}">Supprimer</a>
-						<br>
-					</c:forEach></li>
-
-			</ul>
-		</div>
+			<table class="table">
+                        <tr>
+	                        <td>Auteur :</td>
+	                        <td>Titre :</td>
+	                        <td>Date :</td>
+	                    </tr>
+	                    <c:forEach items="${MesMessagesE}" var="monMessageE">
+	                    <tr>
+                        	<td>${monMessageE.auteur.login}</td>
+                        	<td>${monMessageE.titre}</td>
+                        	<td>${monMessageE.dateCreation}</td>
+                        	<td><a href="/projetf/message/voir/${id}" class="btn btn-primary" role="button">
+                        		<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                        	</a></td>
+                        </tr>
+					</c:forEach>
+			</table>
+			
+</div>
 
 
     </jsp:body>

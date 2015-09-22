@@ -35,7 +35,6 @@ public class CommentaireServiceImpl implements ICommentaireService {
 	public List<Commentaire> listerCommentaire(Annonce a) {
 		return dao.listerCommentaire(a);
 	}
-
 	
 	public List<Commentaire> chercherCommentaireParAuteur(String motCle) {
 		return dao.chercherCommentaireParAuteur(motCle);
