@@ -78,11 +78,11 @@ public class PaiementController {
 //		}
 		
 		String login = SecurityContextHolder.getContext().getAuthentication().getName();
-		int idE = us.chercherUtilisateurLogin(login).getId();
+		int idR = us.chercherUtilisateurLogin(login).getId();
 		
-		ps.creerDemandePaiement(p, idE, id);
+		ps.creerDemandePaiement(p, id, idR);
 		
-		return "redirect:/paiement/"+idE;
+		return "redirect:/paiement/"+idR;
 	}
 	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
@@ -107,11 +107,11 @@ public class PaiementController {
 //		}
 		
 		String login = SecurityContextHolder.getContext().getAuthentication().getName();
-		int idE = us.chercherUtilisateurLogin(login).getId();
+		int idR = us.chercherUtilisateurLogin(login).getId();
 		
-		ps.creerDemandePaiement(p, idE, p.getRecepteur().getId());
+		ps.creerDemandePaiement(p, p.getEmetteur().getId(), idR);
 		
-		return "redirect:/paiement/"+idE;
+		return "redirect:/paiement/"+idR;
 	}
 	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
