@@ -1,22 +1,20 @@
 package com.dta.controller;
 
-import java.beans.PropertyEditorSupport;
-import java.util.*;
+import java.util.Locale;
 
-import javax.annotation.*;
-import javax.validation.*;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.stereotype.*;
-import org.springframework.ui.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.dta.metier.*;
-import com.dta.model.Categorie;
+import com.dta.metier.IPaiementService;
+import com.dta.metier.IUtilisateurService;
 import com.dta.model.Paiement;
 import com.dta.model.Utilisateur;
 
@@ -80,7 +78,7 @@ public class PaiementController {
 	@RequestMapping(value = "/paiement/demande", method = RequestMethod.GET)
 	public String newPaiementForm(Locale locale, Model model) {
 		model.addAttribute("paiement", new Paiement());
-		model.addAttribute("users", us.listerUtilisateurs());
+		model.addAttribute("users", us.listerUtilisateurs(true));
 		return "paiement_nouveau_dest";
 	}
 	
@@ -132,7 +130,7 @@ public class PaiementController {
 	@RequestMapping(value = "/paiement/direct", method = RequestMethod.GET)
 	public String newPaiementDirectForm(Locale locale, Model model) {
 		model.addAttribute("paiement", new Paiement());
-		model.addAttribute("users", us.listerUtilisateurs());
+		model.addAttribute("users", us.listerUtilisateurs(true));
 		return "paiement_direct_dest";
 	}
 	

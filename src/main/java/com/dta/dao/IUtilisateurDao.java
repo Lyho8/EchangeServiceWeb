@@ -9,7 +9,7 @@ public interface IUtilisateurDao {
 
 	public void creerUtilisateur(Utilisateur u) /*throws Exception*/; 
 
-	public List<Utilisateur> listerUtilisateurs();
+	public List<Utilisateur> listerUtilisateurs(boolean actif);
 
 	public void supprimerUtilisateur(int idUtilisateur); 
 	
