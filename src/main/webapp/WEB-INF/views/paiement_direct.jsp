@@ -12,6 +12,7 @@
 		
 		<form:form method="post" action="/projetf/paiement/direct/${ idR }"
 		modelAttribute="paiement">
+		<form:hidden path="recepteur.id" value="${ idR }"/>
 		<table class="table table-striped table-bordered">
 			<tr>
 				<td><form:label path="id">

@@ -13,7 +13,7 @@
 		<div class="row">
 						
 			  <div class="col-sm-2">
-			  	<h3>Emetteur</h3>
+			  	<h3>Emis</h3>
 			      <table class="table table-striped table-bordered">
 			      	<tr>
 			      		<th>Id</th>
@@ -33,8 +33,8 @@
 			      		<td>${ p.emetteur.login }</td>
 			      		<td>${ p.recepteur.login }</td>
 			      		<td>${ p.valide }</td>
-			      		<td><c:if test="${ p.valide==false }"><a href="/projetf/paiement/valider/${ p.id }">Accepter</a></c:if></td>
-			      		<td><c:if test="${ p.valide==false }"><a href="/projetf/paiement/refuser/${ p.id }">Refuser</a></c:if></td>
+			      		<td><c:if test="${ p.dateValidation==null }"><a href="/projetf/paiement/valider/${ p.id }">Accepter</a></c:if></td>
+			      		<td><c:if test="${ p.dateValidation==null }"><a href="/projetf/paiement/refuser/${ p.id }">Refuser</a></c:if></td>
 			      	</tr>
 			      	</c:forEach>
 			      </table>
@@ -45,7 +45,7 @@
 		  <div class="row">
 		  
 			  <div class="col-sm-2">
-			  	<h3>Récepteur</h3>
+			  	<h3>Reçus</h3>
 			      <table class="table table-striped table-bordered">
 			      	<tr>
 			      		<th>Id</th>
@@ -68,8 +68,8 @@
 			  
 		</div>
 		
-		<a href="/projetf/paiement/nouveau">Nouveau paiement pour utilisateur au choix</a>
-		<a href="/projetf/paiement/nouveau/1">Nouveau paiement pour utilisateur 1</a>
+		<a href="/projetf/paiement/demande">Nouveau paiement pour utilisateur au choix</a>
+		<a href="/projetf/paiement/demande/1">Nouveau paiement pour utilisateur 1</a>
 		
 
     </jsp:body>

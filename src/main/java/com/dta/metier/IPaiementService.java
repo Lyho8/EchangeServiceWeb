@@ -5,7 +5,7 @@ import java.util.List;
 import com.dta.model.*;
 
 public interface IPaiementService {
-
+	
 	public void creerPaiement(Paiement p);
 
 	public List<Paiement> listerPaiements();
@@ -26,13 +26,9 @@ public interface IPaiementService {
 	
 	public List<Paiement> chercherPaiementsInvalidesR(Utilisateur u);
 	
-	public void creerPaiementFromForm(Paiement p, int idE, int idR);
+	public void creerDemandePaiement(Paiement p, int idE, int idR);
 	
-	public void creerPaiementFromForm(Paiement p, int idE);
-	
-	public void creerPaiementDirectFromForm(Paiement p, int idE, int idR);
-	
-	public void creerPaiementDirectFromForm(Paiement p, int idE);
+	public void creerPaiementDirect(Paiement p, int emetteurId, int recepteurId);
 	
 	public void validerPaiement(Paiement p);
 	
