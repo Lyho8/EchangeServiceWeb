@@ -112,7 +112,7 @@ public class AnnonceController {
 		List<Commentaire> listCom = annonce.getCommentaires();
 		
 		listCom.add(com);
-		
+				
 		as.actualiserAnnonce(annonce);
 		
 		return "redirect:/annonces/voir/" + id;
