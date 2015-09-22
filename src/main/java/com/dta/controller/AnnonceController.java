@@ -2,7 +2,6 @@ package com.dta.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import javax.validation.Valid;
 
@@ -24,8 +23,8 @@ import com.dta.metier.ICommentaireService;
 import com.dta.metier.IUtilisateurService;
 import com.dta.model.Annonce;
 import com.dta.model.Commentaire;
-import com.dta.model.MessagePrive;
 import com.dta.model.Type;
+import com.dta.model.Utilisateur;
 
 @Controller
 @RequestMapping(value = "annonces")
@@ -44,6 +43,8 @@ public class AnnonceController {
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String home(Model model) {
+		List<Annonce> annonces = as.listerAnnonces(0, 50);
+		model.addAttribute("annonces", annonces);
 		return "annonces_home";
 	}
 
@@ -55,7 +56,10 @@ public class AnnonceController {
 		types.add(Type.OFFRE);
 
 		Annonce annonce = new Annonce();
-		annonce.setAuteur(us.chercherUtilisateur(1)); // forcage user 1
+		
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Utilisateur u = us.chercherUtilisateurLogin(username);
+		annonce.setAuteur(u);
 
 		model.addAttribute("annonce", annonce);
 		model.addAttribute("types", types);
@@ -89,7 +93,9 @@ public class AnnonceController {
 
 		Commentaire com = new Commentaire();
 		
-		com.setAuteur(us.chercherUtilisateur(1)); // forcage user 1
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Utilisateur u = us.chercherUtilisateurLogin(username);
+		com.setAuteur(u);
 		com.setAnnonce(annonce);
 		
 		model.addAttribute("commentaire", com);

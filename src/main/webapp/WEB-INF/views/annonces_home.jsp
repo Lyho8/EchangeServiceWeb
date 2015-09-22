@@ -7,34 +7,18 @@
 </h1>
 
 <div class="row">
+<c:forEach items="${annonces}" var="annonce">
   <div class="col-sm-2">
     <div class="thumbnail">
       <img src="http://www.mot-a-mot.com/media/annonce/annonce_2.jpg" alt="annonce de test">
       <div class="caption">
-        <h3>Annonce n1</h3>
-        <p>Description de l'annonce, ceci concerne la dercription de l'annonce,
-         ceci concerne la dercription de l'annonce,
-          ceci concerne la dercription de l'annonce, 
-          ceci concerne la dercription de l'annonce
-        </p>
-        <p><a href="/projetf/annonces/voir/1" class="btn btn-primary" role="button">Voir l'annonce</a> </p>
+        <h3>${ annonce.type } de ${ annonce.auteur.login }</h3>
+        <p>${ annonce.description }</p>
+        <p><a href="<c:url value="/annonces/voir/${ annonce.id }" />" class="btn btn-primary" role="button">Voir l'annonce</a> </p>
       </div>
     </div>
   </div>
-  <div class="col-sm-2">
-    <div class="thumbnail">
-      <img src="http://www.mot-a-mot.com/media/annonce/annonce_2.jpg" alt="annonce de test">
-      <div class="caption">
-        <h3>Annonce n2</h3>
-        <p>Description de l'annonce, ceci concerne la dercription de l'annonce,
-         ceci concerne la dercription de l'annonce,
-          ceci concerne la dercription de l'annonce, 
-          ceci concerne la dercription de l'annonce
-        </p>
-        <p><a href="/projetf/annonces/voir/2" class="btn btn-primary" role="button">Voir l'annonce</a> </p>
-      </div>
-    </div>
-  </div>
+</c:forEach>
 </div>
 
     </jsp:body>

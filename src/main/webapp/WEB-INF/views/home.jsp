@@ -6,40 +6,36 @@
 	DTA Echange-Service
 </h1>
 
-<!-- div de test pour les nouvelles pages -->
-<div>
-	<a href="/projetf/messages/1">Page des messages</a>
+<h2>Les dernières demandes</h2>
+<div class="row">
+<c:forEach items="${demandes}" var="annonce">
+  <div class="col-sm-2">
+    <div class="thumbnail">
+      <img src="http://www.mot-a-mot.com/media/annonce/annonce_2.jpg" alt="annonce de test">
+      <div class="caption">
+        <h3>${ annonce.type } de ${ annonce.auteur.login }</h3>
+        <p>${ annonce.categorie.libelle }</p>
+        <p><a href="<c:url value="/annonces/voir/${ annonce.id }" />" class="btn btn-primary" role="button">Voir l'annonce</a> </p>
+      </div>
+    </div>
+  </div>
+</c:forEach>
 </div>
 
+<h2>Les dernières offres</h2>
 <div class="row">
+<c:forEach items="${offres}" var="annonce">
   <div class="col-sm-2">
     <div class="thumbnail">
       <img src="http://www.mot-a-mot.com/media/annonce/annonce_2.jpg" alt="annonce de test">
       <div class="caption">
-        <h3>Annonce n1</h3>
-        <p>Description de l'annonce, ceci concerne la dercription de l'annonce,
-         ceci concerne la dercription de l'annonce,
-          ceci concerne la dercription de l'annonce, 
-          ceci concerne la dercription de l'annonce
-        </p>
-        <p><a href="#" class="btn btn-primary" role="button">Voir l'annonce</a> </p>
+        <h3>${ annonce.type } de ${ annonce.auteur.login }</h3>
+        <p>${ annonce.categorie.libelle }</p>
+        <p><a href="<c:url value="/annonces/voir/${ annonce.id }" />" class="btn btn-primary" role="button">Voir l'annonce</a> </p>
       </div>
     </div>
   </div>
-  <div class="col-sm-2">
-    <div class="thumbnail">
-      <img src="http://www.mot-a-mot.com/media/annonce/annonce_2.jpg" alt="annonce de test">
-      <div class="caption">
-        <h3>Annonce n2</h3>
-        <p>Description de l'annonce, ceci concerne la dercription de l'annonce,
-         ceci concerne la dercription de l'annonce,
-          ceci concerne la dercription de l'annonce, 
-          ceci concerne la dercription de l'annonce
-        </p>
-        <p><a href="#" class="btn btn-primary" role="button">Voir l'annonce</a> </p>
-      </div>
-    </div>
-  </div>
+</c:forEach>
 </div>
 
     </jsp:body>
