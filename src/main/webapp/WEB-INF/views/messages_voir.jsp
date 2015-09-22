@@ -13,21 +13,28 @@
   <li role="presentation"><a href="/projetf/messages/envoyes">Messages envoyés</a></li>
   <li role="presentation"><a href="/projetf/messages/new">Nouveau message</a></li>
 </ul>
-	
-<div class="panel panel-info">
-  <div class="panel-heading">Sujet : ${ messagePrive.titre }</div>
-  <div class="panel-body">
-    <p>Auteur : ${ messagePrive.auteur.login }</p>
-    <p>Destinataire(s) :</p>
-    <ul>
-    <c:forEach items="${messagePrive.destinataires}"
-					var="monDestinataire">
-    	<li>${ monDestinataire.login }</li>
-    </c:forEach>
-    </ul>
-    <div class="panel panel-default">
+
+
+<div class="row">
+  <div class="col-sm-4">	
+	<div class="panel panel-info">
+	  <div class="panel-heading">Sujet : ${ messagePrive.titre }</div>
 	  <div class="panel-body">
-	    ${ messagePrive.contenu }
+	  <ul class="list-group">
+	    <li class="list-group-item">Auteur : ${ messagePrive.auteur.login }</li>
+	    <li class="list-group-item">Destinataire(s) :
+		    <c:forEach items="${messagePrive.destinataires}"
+							var="monDestinataire">
+		    	${ monDestinataire.login }
+		    </c:forEach>
+	    </li>
+	  </ul>
+	    <div class="panel panel-default">
+	      <div class="panel-heading">Contenu du message :</div>
+		  <div class="panel-body">
+		    ${ messagePrive.contenu }
+		  </div>
+		</div>
 	  </div>
 	</div>
   </div>
