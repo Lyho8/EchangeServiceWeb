@@ -12,7 +12,7 @@
 	******** --%>
 
 
-	<form:form method="POST" action="/projetf/utilisateur/formulaire" modelAttribute="utilisateur">
+	<form:form method="POST" action="/projetf/utilisateurs/enregistrer" modelAttribute="utilisateur">
 	
 	<div class="container">
 	
@@ -41,15 +41,19 @@
 				<td><form:label path="login">Entrez votre login :</form:label></td>
 				<td><form:input path="login" /></td>
  			</tr>
-			
-			<tr>
+
+ 		<c:if test="${utilisateur.id==0}">		
+ 			<tr>
 				<td><form:label path="motDePasse">Entrez votre mot de passe :</form:label></td>
 				<td><form:password path="motDePasse" /></td>
  			</tr>
-			
+ 		</c:if>
+ 		
 		</table>
 	
 		<form:hidden path="id"/>
+		<form:hidden path="motDePasse"/>
+		
 
 		<input type="submit" value="Envoyer" />
 		
