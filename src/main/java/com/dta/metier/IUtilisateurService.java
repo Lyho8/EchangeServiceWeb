@@ -17,4 +17,6 @@ public interface IUtilisateurService {
 		public void actualiserUtilisateur(Utilisateur c);
 
 		public List<Utilisateur> chercherUtilisateurs(String motCle);
+		
+		public Utilisateur chercherUtilisateurLogin(String login);
 }

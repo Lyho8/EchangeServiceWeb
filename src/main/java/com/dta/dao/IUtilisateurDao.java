@@ -14,11 +14,13 @@ public interface IUtilisateurDao {
 	public void supprimerUtilisateur(int idUtilisateur); 
 	
 	public Utilisateur chercherUtilisateur(int idUtilisateur); 
+	
+	public Utilisateur chercherUtilisateurLogin(String login);
 
 	public void actualiserUtilisateur(Utilisateur u);
 
 	public List<Utilisateur> chercherUtilisateurs(String motCle);
 
-
+	
 	
 }
