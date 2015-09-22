@@ -68,6 +68,12 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
 		
 		return dao.chercherUtilisateurs(motCle);
 	}
+
+	@Override
+	public Utilisateur chercherUtilisateurLogin(String login) {
+		
+		return dao.chercherUtilisateurLogin(login);
+	}
 	
 	
 	
