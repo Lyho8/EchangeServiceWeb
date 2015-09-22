@@ -46,4 +46,9 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping(value = "/connexion", method = RequestMethod.GET)
+	public String connexion() {
+		return "connexion";
+	}
+	
 }
