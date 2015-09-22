@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -43,6 +44,13 @@ public class PaiementController {
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@RequestMapping(value = "/paiement/{id}", method = RequestMethod.GET)
 	public String homePaiement(@PathVariable int id, Locale locale, Model model) {
+		String login = SecurityContextHolder.getContext().getAuthentication().getName();
+		int idC = us.chercherUtilisateurLogin(login).getId();
+		
+		if(id!=idC){
+			return "redirect:/";
+		}
+		
 		model.addAttribute("paiementsE", ps.chercherPaiementsE(us.chercherUtilisateur(id)));
 		model.addAttribute("paiementsR", ps.chercherPaiementsR(us.chercherUtilisateur(id)));
 		return "paiement_utilisateur";
@@ -69,9 +77,12 @@ public class PaiementController {
 //			return "paiement_nouveau";
 //		}
 		
-		ps.creerPaiementFromForm(p, 1, id);
+		String login = SecurityContextHolder.getContext().getAuthentication().getName();
+		int idE = us.chercherUtilisateurLogin(login).getId();
 		
-		return "redirect:/paiement/1";
+		ps.creerDemandePaiement(p, idE, id);
+		
+		return "redirect:/paiement/"+idE;
 	}
 	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
@@ -95,9 +106,12 @@ public class PaiementController {
 //			return "paiement_nouveau_dest";
 //		}
 		
-		ps.creerPaiementFromForm(p, 1);
+		String login = SecurityContextHolder.getContext().getAuthentication().getName();
+		int idE = us.chercherUtilisateurLogin(login).getId();
 		
-		return "redirect:/paiement/1";
+		ps.creerDemandePaiement(p, idE, p.getRecepteur().getId());
+		
+		return "redirect:/paiement/"+idE;
 	}
 	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
@@ -110,8 +124,8 @@ public class PaiementController {
 	}
 	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
-	@RequestMapping(value = "/paiement/direct/{id}", method = RequestMethod.POST)
-	public String newPaiementDirectPost(@Valid Paiement p, BindingResult bindingResult, @PathVariable int id, Locale locale, Model model) {
+	@RequestMapping(value = "/paiement/direct/{idR}", method = RequestMethod.POST)
+	public String newPaiementDirectPost(@Valid Paiement p, BindingResult bindingResult, @PathVariable int idR, Locale locale, Model model) {
 		
 //		for(ObjectError e : bindingResult.getAllErrors()){
 //			System.err.println(e);
@@ -121,9 +135,12 @@ public class PaiementController {
 //			return "paiement_nouveau";
 //		}
 		
-		ps.creerPaiementDirectFromForm(p, 1, id);
+		String login = SecurityContextHolder.getContext().getAuthentication().getName();
+		int idE = us.chercherUtilisateurLogin(login).getId();
 		
-		return "redirect:/paiement/1";
+		ps.creerPaiementDirect(p, idE, idR);
+		
+		return "redirect:/paiement/"+idE;
 	}
 	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
@@ -146,9 +163,12 @@ public class PaiementController {
 //			return "paiement_nouveau_dest";
 //		}
 		
-		ps.creerPaiementDirectFromForm(p, 1);
+		String login = SecurityContextHolder.getContext().getAuthentication().getName();
+		int idE = us.chercherUtilisateurLogin(login).getId();
 		
-		return "redirect:/paiement/1";
+		ps.creerPaiementDirect(p, idE, p.getRecepteur().getId());
+		
+		return "redirect:/paiement/"+idE;
 	}
 	
 	//Liste des paiements à accepter.
@@ -162,6 +182,13 @@ public class PaiementController {
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@RequestMapping(value = "/paiement/en_attente/{id}", method = RequestMethod.GET)
 	public String paiementNonValideById(@PathVariable int id, Locale locale, Model model) {
+		String login = SecurityContextHolder.getContext().getAuthentication().getName();
+		int idC = us.chercherUtilisateurLogin(login).getId();
+		
+		if(id!=idC){
+			return "redirect:/";
+		}
+		
 		Utilisateur e = us.chercherUtilisateur(id);
 		model.addAttribute("paiementsE", ps.chercherPaiementsInvalidesE(e));
 		model.addAttribute("paiementsR", ps.chercherPaiementsInvalidesR(e));
@@ -178,7 +205,10 @@ public class PaiementController {
 		
 		ps.validerPaiement(p);
 		
-		return "redirect:/paiement/en_attente/1";
+		String login = SecurityContextHolder.getContext().getAuthentication().getName();
+		int idE = us.chercherUtilisateurLogin(login).getId();
+		
+		return "redirect:/paiement/en_attente/"+idE;
 	}
 	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
@@ -189,7 +219,10 @@ public class PaiementController {
 		
 		ps.refuserPaiement(p);
 		
-		return "redirect:/paiement/en_attente/1";
+		String login = SecurityContextHolder.getContext().getAuthentication().getName();
+		int idE = us.chercherUtilisateurLogin(login).getId();
+		
+		return "redirect:/paiement/en_attente/"+idE;
 	}
 
 }

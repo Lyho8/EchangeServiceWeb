@@ -17,7 +17,7 @@ public class PaiementServiceImpl implements IPaiementService {
 
 	@Autowired
 	private IPaiementDao dao;
-	
+
 	@Autowired
 	private IUtilisateurDao utilisateurDao;
 
@@ -55,12 +55,12 @@ public class PaiementServiceImpl implements IPaiementService {
 	public List<Paiement> chercherPaiementsE(Utilisateur u) {
 		return dao.chercherPaiementsE(u);
 	}
-	
+
 	@Transactional(readOnly = true)
 	public List<Paiement> chercherPaiementsR(Utilisateur u) {
 		return dao.chercherPaiementsR(u);
 	}
-	
+
 	@Transactional(readOnly = true)
 	public List<Paiement> chercherPaiementsInvalides() {
 		return dao.chercherPaiementsInvalides();
@@ -70,90 +70,97 @@ public class PaiementServiceImpl implements IPaiementService {
 	public List<Paiement> chercherPaiementsInvalidesE(Utilisateur u) {
 		return dao.chercherPaiementsInvalidesE(u);
 	}
-	
+
 	@Transactional(readOnly = true)
 	public List<Paiement> chercherPaiementsInvalidesR(Utilisateur u) {
 		return dao.chercherPaiementsInvalidesR(u);
 	}
 	
 	@Transactional
-	public void creerPaiementFromForm(Paiement p, int idE, int idR){
-		p.setEmetteur(utilisateurDao.chercherUtilisateur(idE));
-		p.setRecepteur(utilisateurDao.chercherUtilisateur(idR));
-		p.setDateDemande(new Date());
-		p.setValide(false);
-		
-		dao.creerPaiement(p);
-	}
-	
-	@Transactional
-	public void creerPaiementFromForm(Paiement p, int idE){
-		p.setEmetteur(utilisateurDao.chercherUtilisateur(idE));
-		p.setDateDemande(new Date());
-		p.setValide(false);
-		
-		dao.creerPaiement(p);
-	}
-	
-	@Transactional
-	public void creerPaiementDirectFromForm(Paiement p, int idE, int idR){
+	public void creerDemandePaiement(Paiement p, int idE, int idR) {
+		//Récupère les utilisateurs
 		Utilisateur emetteur = utilisateurDao.chercherUtilisateur(idE);
 		Utilisateur recepteur = utilisateurDao.chercherUtilisateur(idR);
-		p.setRecepteur(recepteur);
-		creerPaiementDirect(p, emetteur, recepteur);
 		
+		//Liaison utilisateurs/paiement
+		p.setEmetteur(emetteur);
+		p.setRecepteur(recepteur);
+		emetteur.getPaiementsEmis().add(p);
+		recepteur.getPaiementsRecus().add(p);
+		
+		//Prépare le paiement
+		p.setDateDemande(new Date());
+		p.setValide(false);
+
+		//Persiste le paiement
+		dao.creerPaiement(p);
 	}
-	
+
 	@Transactional
-	public void creerPaiementDirectFromForm(Paiement p, int idE){
+	public void creerPaiementDirect(Paiement p, int idE, int idR) {
+
+		// Récupère les 2 utilisateurs
 		Utilisateur emetteur = utilisateurDao.chercherUtilisateur(idE);
-		Utilisateur recepteur = p.getRecepteur();
-		creerPaiementDirect(p, emetteur, recepteur);
-	}
-	
-	
-	private void creerPaiementDirect(Paiement p, Utilisateur emetteur, Utilisateur recepteur){
-		if(emetteur.getSolde()+10>=p.getMontant()){
-			p.setEmetteur(emetteur);
-			p.setDateDemande(new Date());
-			p.setDateValidation(new Date());
-			p.setValide(true);
-			
-			dao.creerPaiement(p);
-			
-			emetteur.setSolde(emetteur.getSolde()-p.getMontant());
-			recepteur.setSolde(recepteur.getSolde()+p.getMontant());
-			utilisateurDao.actualiserUtilisateur(emetteur);
-			utilisateurDao.actualiserUtilisateur(recepteur);
+		Utilisateur recepteur = utilisateurDao.chercherUtilisateur(idR);
+
+		// Renvoie une exception si emetteur non solvable
+		if (emetteur.getRole() != Role.ROLE_ADMIN && emetteur.getSolde() + 10 < p.getMontant()){
+			throw new RuntimeException("*** Erreur métier - credit insuffisant");
+		}
+
+		// Prépare et persiste le paiement
+		p.setEmetteur(emetteur);
+		emetteur.getPaiementsEmis().add(p);
+		p.setRecepteur(recepteur);
+		recepteur.getPaiementsRecus().add(p);
+		p.setDateDemande(new Date());
+		p.setDateValidation(new Date());
+		p.setValide(true);
+		dao.creerPaiement(p);
+
+		// Màj balance destinataire
+		recepteur.setSolde(recepteur.getSolde() + p.getMontant());
+
+		// Si non admin, màj balance emetteur
+		if (emetteur.getRole() != Role.ROLE_ADMIN) {
+			emetteur.setSolde(emetteur.getSolde() - p.getMontant());
 		}
 	}
-	
+
 	@Transactional
-	public void validerPaiement(Paiement p){
+	public void validerPaiement(Paiement p) {
 		Utilisateur e = p.getEmetteur();
 		Utilisateur r = p.getRecepteur();
-		
-		if(e.getSolde()+10<p.getMontant()){
-			refuserPaiement(p);
-		}
-		else{
-			e.setSolde(e.getSolde()-p.getMontant());
-			r.setSolde(r.getSolde()+p.getMontant());
-			utilisateurDao.actualiserUtilisateur(e);
+
+		if (e.getRole() != Role.ROLE_ADMIN) {
+			if (e.getSolde() + 10 < p.getMontant()) {
+				refuserPaiement(p);
+			} else {
+				e.setSolde(e.getSolde() - p.getMontant());
+				r.setSolde(r.getSolde() + p.getMontant());
+				utilisateurDao.actualiserUtilisateur(e);
+				utilisateurDao.actualiserUtilisateur(r);
+
+				p.setValide(true);
+				p.setDateValidation(new Date());
+				dao.actualiserPaiement(p);
+			}
+
+		} else {
+			r.setSolde(r.getSolde() + p.getMontant());
 			utilisateurDao.actualiserUtilisateur(r);
-			
+
 			p.setValide(true);
 			p.setDateValidation(new Date());
 			dao.actualiserPaiement(p);
 		}
-		
 	}
-	
+
 	@Transactional
-	public void refuserPaiement(Paiement p){
+	public void refuserPaiement(Paiement p) {
 		p.setDateValidation(new Date());
 		dao.actualiserPaiement(p);
-		
+
 	}
 
 }

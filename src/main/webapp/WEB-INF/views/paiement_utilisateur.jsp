@@ -68,8 +68,8 @@
 			  
 		</div>
 		
-		<a href="/projetf/paiement/nouveau">Nouveau paiement pour utilisateur au choix</a>
-		<a href="/projetf/paiement/nouveau/1">Nouveau paiement pour utilisateur 1</a>
+		<a href="/projetf/paiement/demande">Nouveau paiement pour utilisateur au choix</a>
+		<a href="/projetf/paiement/demande/1">Nouveau paiement pour utilisateur 1</a>
 		
 
     </jsp:body>

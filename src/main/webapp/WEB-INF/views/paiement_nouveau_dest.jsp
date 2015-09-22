@@ -35,8 +35,8 @@
 				<td><form:errors path="message" /></td>
 			</tr>
 			<tr>
-				<td><form:label path="recepteur"></form:label></td>
-				<td><form:select path="recepteur">
+				<td><form:label path="recepteur.id"></form:label></td>
+				<td><form:select path="recepteur.id">
 					<form:options items="${ users }" itemLabel="login" itemValue="id" />
 				</form:select></td>
 			</tr>			
