@@ -8,7 +8,7 @@ import com.dta.model.Utilisateur;
 public interface IUtilisateurService {
 		public void creerUtilisateur(Utilisateur u); 
 
-		public List<Utilisateur> listerUtilisateurs();
+		public List<Utilisateur> listerUtilisateurs(boolean actif);
 
 		public void supprimerUtilisateur(int idUtilisateur); 
 		

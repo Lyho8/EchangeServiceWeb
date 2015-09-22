@@ -48,7 +48,7 @@ public class Utilisateur {
 	@Size(max = 50, min = 6)
 	private String motDePasse;
 
-	private boolean actif;
+	private boolean actif=true;
 
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)

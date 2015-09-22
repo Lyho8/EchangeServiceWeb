@@ -21,7 +21,7 @@
 				<li role="presentation" <c:if test="${urlCourante=='home'}">class="active"</c:if>><a href="/projetf">Page d'accueil</a></li>
 				<li role="presentation" <c:if test="${urlCourante=='annonces'}">class="active"</c:if>><a href="/projetf/annonces">Annonces</a></li>
 				<sec:authorize access="isAnonymous()">
-					<li role="presentation" <c:if test="${urlCourante=='inscriptionConnection'}">class="active"</c:if>><a href="utilisateur/formulaire/empty">Inscription</a></li>
+					<li role="presentation" <c:if test="${urlCourante=='inscriptionConnection'}">class="active"</c:if>><a href="utilisateurs/enregistrer">Inscription</a></li>
 				</sec:authorize>
 			</ul>
 

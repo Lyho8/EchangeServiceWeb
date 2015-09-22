@@ -24,11 +24,17 @@ public class UtilisateurDaoImpl implements IUtilisateurDao {
 	}
 
 	@Override
-	public List<Utilisateur> listerUtilisateurs() {
+	public List<Utilisateur> listerUtilisateurs(boolean actif) {
 
-		Query req = em.createQuery("select u from Utilisateur u",
+		Query req;
+		
+		if(actif==true){
+		req = em.createQuery("select u from Utilisateur u where u.actif=true",
 				Utilisateur.class);
-
+		}else{
+		req = em.createQuery("select u from Utilisateur u where u.actif=false",
+				Utilisateur.class);
+		}
 		return req.getResultList();
 
 	}
