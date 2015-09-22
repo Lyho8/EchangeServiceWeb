@@ -9,6 +9,8 @@ import com.dta.model.Utilisateur;
 public interface IAnnonceDao {
 	void creerAnnonce(Annonce annonce);
 
+	List<Annonce> listerAnnonces(int premier, int nombre);
+	
 	List<Annonce> rechercherAnnonces(Utilisateur utilisateur);
 
 	List<Annonce> rechercherAnnonces(Categorie categorie);

@@ -2,8 +2,6 @@ package com.dta.metier;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -66,5 +64,10 @@ public class AnnonceServiceImpl implements IAnnonceService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void actualiserAnnonce(Annonce annonce) {
 		dao.actualiserAnnonce(annonce);
+	}
+
+	@Override
+	public List<Annonce> listerAnnonces(int premier, int nombre) {
+		return dao.listerAnnonces(premier, nombre);
 	}
 }

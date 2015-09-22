@@ -10,6 +10,8 @@ public interface IAnnonceService {
 
 	public abstract void creerAnnonce(Annonce annonce);
 
+	public abstract List<Annonce> listerAnnonces(int premier, int nombre);
+
 	public abstract List<Annonce> rechercherAnnonces(Utilisateur utilisateur);
 
 	public abstract List<Annonce> rechercherAnnonces(Categorie categorie);

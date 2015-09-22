@@ -68,4 +68,9 @@ public class AnnonceDaoImpl implements IAnnonceDao {
 		entityManager.merge(annonce);
 	}
 
+	@Override
+	public List<Annonce> listerAnnonces(int premier, int nombre) {
+		return entityManager.createQuery("SELECT a FROM Annonce a WHERE a.active = true ORDER BY a.dateCreation DESC", Annonce.class).setFirstResult(premier).setMaxResults(nombre).getResultList();
+	}
+
 }
