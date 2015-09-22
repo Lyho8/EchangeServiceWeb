@@ -8,7 +8,7 @@
 
 	<jsp:body>
 	
-	<div class="jumbotron">
+
 	
 	<h2>
 		<em> Liste des utilisateurs : </em>
@@ -97,8 +97,7 @@
 	
 	</div>
 
-	</div>	
-	
+
 	</jsp:body>
 
 </t:template>

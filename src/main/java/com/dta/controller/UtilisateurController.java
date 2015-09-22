@@ -24,7 +24,7 @@ public class UtilisateurController {
 
 
 	// TODO afficher le formulaire
-//	@Secured("ROLE_ADMIN")
+	//@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/lister", method = RequestMethod.GET)
 	public String listerUtilisateur(Model model) {
 
@@ -50,7 +50,7 @@ public class UtilisateurController {
 	}
 	
 	// TODO actualiser un utilisateur.
-	@Secured("ROLE_ADMIN")
+	//@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/actualiser", method = RequestMethod.GET)
 	public String editer(@RequestParam(value = "id") int id, Model model) {
 
