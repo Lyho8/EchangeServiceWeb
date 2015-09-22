@@ -41,8 +41,8 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
 
 
 	@Transactional(readOnly=true)
-	public List<Utilisateur> listerUtilisateurs() {
-		return dao.listerUtilisateurs();
+	public List<Utilisateur> listerUtilisateurs(boolean actif) {
+		return dao.listerUtilisateurs(actif);
 	}
 
 	@Transactional
