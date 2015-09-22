@@ -12,4 +12,5 @@ public interface IMessageDao {
 	public List<MessagePrive> listerMessageEnvoie(Utilisateur u);
 	public List<MessagePrive> listerMessageRecu(Utilisateur u);	
 	public List<MessagePrive> chercherMessageParTitre(String motCle);
+	public MessagePrive chercherMessageParId(int id);
 }

@@ -12,6 +12,7 @@ public interface IMessagesService {
 	public List<MessagePrive> listerMessageEnvoie(Utilisateur u);
 	public List<MessagePrive> listerMessageRecu(Utilisateur u);	
 	public List<MessagePrive> chercherMessageParTitre(String motCle);
+	public MessagePrive chercherMessageParId(int idMessage);
 	public List<MessagePrive> supprimerMessageEnvoieParTitre(String motCle,Utilisateur u);
 	public List<MessagePrive> supprimerMessageRecuParTitre(String motCle,Utilisateur u);
 	

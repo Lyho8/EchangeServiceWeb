@@ -71,10 +71,7 @@ public class UtilisateurDaoImpl implements IUtilisateurDao {
 
 	@Override
 	public Utilisateur chercherUtilisateurLogin(String login) {
-		Query req;
-		req=em.createQuery("select u from Utilisateur u where u.login = :log");
-		req.setParameter("log", login);
-		return req.getSingleResult();
+		return em.createQuery("select u from Utilisateur u where u.login = :log", Utilisateur.class).setParameter("log", login).getSingleResult();
 	}
 
 }

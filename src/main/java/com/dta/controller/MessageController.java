@@ -15,6 +15,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,82 +39,116 @@ import com.dta.model.Utilisateur;
  * Handles requests for the application home page.
  */
 @Controller
-@Secured({"ROLE_USER", "ROLE_ADMIN"})
-@RequestMapping(value = "/messages")
+@Secured({ "ROLE_USER", "ROLE_ADMIN" })
+@RequestMapping(value = "messages")
 public class MessageController {
-	
-	private static final Logger logger = LoggerFactory.getLogger(MessageController.class);
-	
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(MessageController.class);
+
 	@Autowired
 	private IMessagesService ms;
-	
+
 	@Autowired
 	private ICategorieService cs;
-	
+
 	@Autowired
 	private IUtilisateurService us;
-	
-	/* Page d'accueil de message avec l'affichage des messages reçus */
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public String home(@PathVariable (value="id") int idUtilisateur,Model model) {
 
-		model.addAttribute("MesMessagesR",ms.listerMessageRecu(us.chercherUtilisateur(idUtilisateur)));	
-		
+	/* Page d'accueil de message avec l'affichage des messages reçus */
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public String home(Model model) {
+
+		Authentication auth = SecurityContextHolder.getContext()
+				.getAuthentication();
+		String name = auth.getName();
+		Utilisateur userContext = us.chercherUtilisateurLogin(name);
+		model.addAttribute("MesMessagesR", ms.listerMessageRecu(userContext));
+
 		return "messages";
 	}
-	
-	/* Page d'affichage des messages envoyés */
-	@RequestMapping(value = "/envoyes/{id}", method = RequestMethod.GET)
-	public String messageEnvoye(@PathVariable (value="id") int idUtilisateur,Model model) {
 
-		model.addAttribute("MesMessagesE",ms.listerMessageEnvoie(us.chercherUtilisateur(idUtilisateur)));	
-		
+	/* Page d'affichage des messages envoyés */
+	@RequestMapping(value = "/envoyes", method = RequestMethod.GET)
+	public String messageEnvoye(Model model) {
+
+		Authentication auth = SecurityContextHolder.getContext()
+				.getAuthentication();
+		String name = auth.getName();
+
+		model.addAttribute("MesMessagesE",
+				ms.listerMessageEnvoie(us.chercherUtilisateurLogin(name)));
+
 		return "messages_envoyes";
 	}
-	
-	@RequestMapping(value = "/new/{id}", method = RequestMethod.GET)
-	public String newMessageForm( Model model,  @PathVariable int id) {
-		
+
+	@RequestMapping(value = "/new", method = RequestMethod.GET)
+	public String newMessageForm(Model model) {
+
+		Authentication auth = SecurityContextHolder.getContext()
+				.getAuthentication();
+		String name = auth.getName();
+
 		MessagePrive mp = new MessagePrive();
-		mp.setAuteur(us.chercherUtilisateur(id));
-		
-		model.addAttribute("messagePrive",mp);	
-		
+		mp.setAuteur(us.chercherUtilisateurLogin(name));
+
+		model.addAttribute("messagePrive", mp);
+
 		return "messages_new";
 	}
-	
+
 	/* Page de formulaire pour envoyé un nouveau message */
-	@RequestMapping(value = "/new/envoie/{id}", method = RequestMethod.POST)
-	public String newMessagePost(@Valid MessagePrive mp,BindingResult BindingResult, Model model,  @PathVariable int id, Locale locale) {
-		
+	@RequestMapping(value = "/new", method = RequestMethod.POST)
+	public String newMessagePost(@Valid MessagePrive mp,
+			BindingResult BindingResult, Model model, Locale locale) {
+
 		for (ObjectError oe : BindingResult.getAllErrors()) {
 			System.out.println(oe);
 		}
-		
+
 		ms.creerMessage(mp);
-		
-		return "messages_new";
+
+		return "redirect:/messages";
 	}
-	
-	@RequestMapping(value = "/supprimer/{id}", method = RequestMethod.GET)
-	public String supprMessage(@RequestParam (value="id") int idMessageP, @PathVariable (value="id") int idUtilisateur,Model model) {
-		
-		ms.supprimerMessage(idMessageP);
-		
-		ms.listerMessageRecu(us.chercherUtilisateur(idUtilisateur));
-		
-		return "messages_envoyes";
+
+	@RequestMapping(value = "/envoyes/voir/{idMessage}", method = RequestMethod.GET)
+	public String voirMessageEnvoye(@PathVariable("idMessage") int idMessage,
+			Model model) {
+
+		MessagePrive mp = ms.chercherMessageParId(idMessage);
+
+		model.addAttribute("messagePrive", mp);
+
+		return "messages_voir";
 	}
-	
+
+	@RequestMapping(value = "/voir/{idMessage}", method = RequestMethod.GET)
+	public String voirMessage(@PathVariable(value = "idMessage") int idMessage,
+			Model model) {
+
+		MessagePrive mp = ms.chercherMessageParId(idMessage);
+
+		model.addAttribute("messagePrive", mp);
+
+		return "messages_voir";
+	}
+
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(List.class, new PropertyEditorSupport() {
 			@Override
 			public void setAsText(String text) {
-				List<Utilisateur> lu= new ArrayList<Utilisateur>();
-				lu.add(us.chercherUtilisateur(1));
-				lu.add(us.chercherUtilisateur(2));
-				
+				List<Utilisateur> lu = new ArrayList<Utilisateur>();
+				String[] tabDes = text.split("\n");
+				for (String log : tabDes) {
+					try {
+						lu.add(us.chercherUtilisateurLogin(log.trim()));
+					} catch (Exception e) {
+
+					}
+
+				}
+
 				setValue(lu);
 			}
 		});

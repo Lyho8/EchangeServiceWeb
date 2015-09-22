@@ -11,9 +11,9 @@
 
 <ul class="nav nav-tabs">
   <li role="presentation" class="active"><a
-				href="/projetf/messages/1">Messages reçus</a></li>
-  <li role="presentation"><a href="/projetf/messages/envoyes/1">Messages envoyés</a></li>
-  <li role="presentation"><a href="/projetf/messages/new/1">Nouveau message</a></li>
+				href="/projetf/messages">Messages reçus</a></li>
+  <li role="presentation"><a href="/projetf/messages/envoyes">Messages envoyés</a></li>
+  <li role="presentation"><a href="/projetf/messages/new">Nouveau message</a></li>
 </ul>
 
 <div class="panel panel-sucess">
@@ -33,7 +33,7 @@
                         	<td>${monMessageR.auteur.login}</td>
                         	<td>${monMessageR.titre}</td>
                         	<td>${monMessageR.dateCreation}</td>
-                        	<td><a href="/projetf/message/voir/${id}" class="btn btn-primary" role="button">
+                        	<td><a href="/projetf/messages/voir/${monMessageR.id}" class="btn btn-primary" role="button">
                         		<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                         	</a></td>
                         </tr>

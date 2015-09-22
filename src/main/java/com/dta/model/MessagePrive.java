@@ -13,7 +13,8 @@ public class MessagePrive extends Message {
 	private String titre;
 	
 	@NotNull
-	@ManyToMany(mappedBy="messagesRecus")
+	@ManyToMany
+	@JoinTable(name = "usr_msg", joinColumns = { @JoinColumn(name = "idMsg") }, inverseJoinColumns = { @JoinColumn(name = "idUsr") })
 	private List<Utilisateur> destinataires;
 	
 	public MessagePrive(){
