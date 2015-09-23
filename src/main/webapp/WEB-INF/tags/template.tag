@@ -31,7 +31,9 @@
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 							<li role="presentation"><a href="<c:url value='/annonces/nouvelle' />">Publier une annonce</a></li>
 							<li role="presentation"><a href="<c:url value='/messages' />">Messages</a></li>
-							<li role="presentation"><a href="<c:url value='/paiements' />">Faire un paiement</a></li>
+							<li role="presentation"><a href="<c:url value='/paiements' />">Mes transactions</a></li>
+							<li role="presentation"><a href="<c:url value='/paiements/demande' />">Emettre une demande de paiement</a></li>
+							<li role="presentation"><a href="<c:url value='/paiements/direct' />">Effectuer un paiement</a></li>
 							<!-- Menu de gestion de l'admin  -->
 							<sec:authorize access="hasRole('ROLE_ADMIN')">
 								<li role="separator" class="divider"></li>
