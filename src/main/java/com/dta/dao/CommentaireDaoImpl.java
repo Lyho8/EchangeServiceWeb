@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
@@ -35,14 +34,11 @@ public class CommentaireDaoImpl implements ICommentaireDao {
 
 	
 	public List<Commentaire> listerCommentaire(Annonce a) {
-		Query req=entityManager.createQuery("select com from Commentaire com where com.annonce=:annonce").setParameter("annonce", a);
-		return  req.getResultList();
+		return  entityManager.createQuery("select com from Commentaire com where com.annonce=:annonce", Commentaire.class).setParameter("annonce", a).getResultList();
 	}
 	
-	public List<Commentaire> chercherCommentaireParAuteur(String motCle) {
-		Query req=entityManager.createQuery("select com from Commentaire com where com.auteur.login like :x");
-		req.setParameter("x",  "%"+motCle+"%");
-		return  req.getResultList();
+	public List<Commentaire> chercherCommentaireParAuteur(String login) {
+		return  entityManager.createQuery("select com from Commentaire com where com.auteur.login = :x", Commentaire.class).setParameter("x",  login).getResultList();
 	}
 
 }

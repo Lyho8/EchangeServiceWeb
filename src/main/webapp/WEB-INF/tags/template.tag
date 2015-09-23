@@ -30,13 +30,12 @@
 						</button>
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 							<li role="presentation"><a href="<c:url value='/annonces/nouvelle' />">Publier une annonce</a></li>
-							<li role="presentation"><a href="#">Messages</a></li>
-							<li role="presentation"><a href="#">Faire un paiement</a></li>
+							<li role="presentation"><a href="<c:url value='/messages' />">Messages</a></li>
+							<li role="presentation"><a href="<c:url value='/paiements' />">Faire un paiement</a></li>
 							<!-- Menu de gestion de l'admin  -->
 							<sec:authorize access="hasRole('ROLE_ADMIN')">
 								<li role="separator" class="divider"></li>
-								<li role="presentation"><a href="#">Gérer les annonces</a></li>
-								<li role="presentation"><a href="#">Gérer les utilisateurs</a></li>
+								<li role="presentation"><a href="<c:url value='/utilisateurs/lister' />">Gérer les utilisateurs</a></li>
 							</sec:authorize>
 							<li role="separator" class="divider"></li>
 							<li role="presentation"><a href="<c:url value='/j_spring_security_logout'/>">Déconnexion</a></li>

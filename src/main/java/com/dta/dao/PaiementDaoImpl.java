@@ -4,13 +4,13 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.dta.model.*;
+import com.dta.model.Paiement;
+import com.dta.model.Utilisateur;
 
 @Repository
 public class PaiementDaoImpl implements IPaiementDao {
@@ -34,9 +34,7 @@ public class PaiementDaoImpl implements IPaiementDao {
 
 	@Transactional(readOnly = true, propagation = Propagation.MANDATORY)
 	public List<Paiement> listerPaiements() {
-
-		Query req = entityManager.createQuery("select p from Paiement p");
-		return req.getResultList();
+		return entityManager.createQuery("select p from Paiement p", Paiement.class).getResultList();
 	}
 
 	@Transactional(propagation = Propagation.MANDATORY)
@@ -59,41 +57,27 @@ public class PaiementDaoImpl implements IPaiementDao {
 
 	@Transactional(readOnly = true, propagation = Propagation.MANDATORY)
 	public List<Paiement> chercherPaiementsE(Utilisateur u) {
-		Query req = entityManager
-				.createQuery("select p from Paiement p  where p.emetteur.id=:id");
-		req.setParameter("id", u.getId());
-		return req.getResultList();
+		return entityManager.createQuery("select p from Paiement p  where p.emetteur.id=:id", Paiement.class).setParameter("id", u.getId()).getResultList();
 	}
 	
 	@Transactional(readOnly = true, propagation = Propagation.MANDATORY)
 	public List<Paiement> chercherPaiementsR(Utilisateur u) {
-		Query req = entityManager
-				.createQuery("select p from Paiement p  where p.recepteur.id=:id");
-		req.setParameter("id", u.getId());
-		return req.getResultList();
+		return entityManager.createQuery("select p from Paiement p  where p.recepteur.id=:id", Paiement.class).setParameter("id", u.getId()).getResultList();
 	}
 
 	@Transactional(readOnly = true, propagation = Propagation.MANDATORY)
 	public List<Paiement> chercherPaiementsInvalides() {
-		Query req = entityManager
-				.createQuery("select p from Paiement p  where p.valide=0 and p.dateValidation is null");
-		return req.getResultList();
+		return entityManager.createQuery("select p from Paiement p  where p.valide=0 and p.dateValidation is null", Paiement.class).getResultList();
 	}
 
 	@Transactional(readOnly = true, propagation = Propagation.MANDATORY)
 	public List<Paiement> chercherPaiementsInvalidesE(Utilisateur u) {
-		Query req = entityManager
-				.createQuery("select p from Paiement p  where p.emetteur.id=:id and p.valide=0 and p.dateValidation is null");
-		req.setParameter("id", u.getId());
-		return req.getResultList();
+		return entityManager.createQuery("select p from Paiement p  where p.emetteur.id=:id and p.valide=0 and p.dateValidation is null", Paiement.class).setParameter("id", u.getId()).getResultList();
 	}
 	
 	@Transactional(readOnly = true, propagation = Propagation.MANDATORY)
 	public List<Paiement> chercherPaiementsInvalidesR(Utilisateur u) {
-		Query req = entityManager
-				.createQuery("select p from Paiement p  where p.recepteur.id=:id and p.valide=0 and p.dateValidation is null");
-		req.setParameter("id", u.getId());
-		return req.getResultList();
+		return entityManager.createQuery("select p from Paiement p  where p.recepteur.id=:id and p.valide=0 and p.dateValidation is null", Paiement.class).setParameter("id", u.getId()).getResultList();
 	}
 
 }

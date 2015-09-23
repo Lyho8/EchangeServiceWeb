@@ -26,7 +26,7 @@
 	<!-- formulaire pour ajouter un commentaire sur l'annonce -->
 	<div class="panel panel-info">
 		<form:form method="post" modelAttribute="commentaire"
- 							action="/projetf/annonces/voir/${id}">  
+ 							action="<c:url value='/annonces/voir/${id}' />">
  			<form:hidden path="auteur.id" />  
  			<form:hidden path="annonce.id" />  
 			<div class="field_group">

@@ -1,18 +1,14 @@
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ page session="false" %>
+<%@ page session="false"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
 <t:template>
 	<jsp:body>
 
-<%-- <a href="<%=request.getContextPath()%>/projetf">vers Accueil</a>
-	******** --%>
-
-
-	<form:form method="POST" action="/projetf/utilisateurs/enregistrer" modelAttribute="utilisateur">
+	<form:form method="POST" action="<c:url value='/utilisateurs/enregistrer' />" modelAttribute="utilisateur">
 	
 	<div class="container">
 	
@@ -51,9 +47,10 @@
  		
 		</table>
 	
-		<form:hidden path="id"/>
-		<form:hidden path="motDePasse"/>
-		
+		<form:hidden path="id" />
+		<c:if test="${utilisateur.id != 0}">
+			<form:hidden path="motDePasse" />
+		</c:if>
 
 		<input type="submit" value="Envoyer" />
 		
@@ -67,4 +64,3 @@
 
 
 
-	

@@ -10,7 +10,7 @@
 			Nouveau paiement
 		</h1>
 		
-		<form:form method="post" action="/projetf/paiement/direct/${ idR }"
+		<form:form method="post" action="<c:url value='/paiements/direct/${ idR }' />"
 		modelAttribute="paiement">
 		<form:hidden path="recepteur.id" value="${ idR }"/>
 		<table class="table table-striped table-bordered">

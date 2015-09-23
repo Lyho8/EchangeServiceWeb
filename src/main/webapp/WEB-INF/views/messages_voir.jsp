@@ -8,11 +8,7 @@
 	Ma messagerie
 </h1>
 
-<ul class="nav nav-tabs">
-  <li role="presentation"><a href="/projetf/messages">Messages reçus</a></li>
-  <li role="presentation"><a href="/projetf/messages/envoyes">Messages envoyés</a></li>
-  <li role="presentation"><a href="/projetf/messages/new">Nouveau message</a></li>
-</ul>
+<c:import url="messages_menu" />
 
 
 <div class="row">
@@ -23,8 +19,7 @@
 	  <ul class="list-group">
 	    <li class="list-group-item">Auteur : ${ messagePrive.auteur.login }</li>
 	    <li class="list-group-item">Destinataire(s) :
-		    <c:forEach items="${messagePrive.destinataires}"
-							var="monDestinataire">
+		    <c:forEach items="${messagePrive.destinataires}" var="monDestinataire">
 		    	${ monDestinataire.login }
 		    </c:forEach>
 	    </li>

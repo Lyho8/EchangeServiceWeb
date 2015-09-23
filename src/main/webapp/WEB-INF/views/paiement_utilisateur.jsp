@@ -19,7 +19,7 @@
 			      		<th>Id</th>
 			      		<th>Montant</th>
 			      		<th>Message</th>
-			      		<th>Emetteur</th>
+<%-- 			      		<th>Emetteur</th> --%>
 			      		<th>Récepteur</th>
 			      		<th>Statut</th>
 			      		<th>Accepter</th>
@@ -30,11 +30,11 @@
 			      		<td>${ p.id }</td>
 			      		<td>${ p.montant }</td>
 			      		<td>${ p.message }</td>
-			      		<td>${ p.emetteur.login }</td>
+<%-- 			      		<td>${ p.emetteur.login }</td> --%>
 			      		<td>${ p.recepteur.login }</td>
 			      		<td>${ p.valide }</td>
-			      		<td><c:if test="${ p.dateValidation==null }"><a href="/projetf/paiement/valider/${ p.id }">Accepter</a></c:if></td>
-			      		<td><c:if test="${ p.dateValidation==null }"><a href="/projetf/paiement/refuser/${ p.id }">Refuser</a></c:if></td>
+			      		<td><c:if test="${ p.dateValidation==null }"><a href="<c:url value='/paiements/valider/${ p.id }' />">Accepter</a></c:if></td>
+			      		<td><c:if test="${ p.dateValidation==null }"><a href="<c:url value='/paiements/refuser/${ p.id }' />">Refuser</a></c:if></td>
 			      	</tr>
 			      	</c:forEach>
 			      </table>
@@ -52,7 +52,8 @@
 			      		<th>Montant</th>
 			      		<th>Message</th>
 			      		<th>Emetteur</th>
-			      		<th>Recepteur</th>
+<%-- 			      		<th>Recepteur</th> --%>
+			      		<th>Statut</th>
 			      	</tr>
 			      	<c:forEach items="${ paiementsR }" var="p">
 			      	<tr>			      	
@@ -60,7 +61,8 @@
 			      		<td>${ p.montant }</td>
 			      		<td>${ p.message }</td>
 			      		<td>${ p.emetteur.login }</td>
-			      		<td>${ p.recepteur.login }</td>
+<%-- 			      		<td>${ p.recepteur.login }</td> --%>
+			      		<td>${ p.valide }</td>
 			      	</tr>
 			      	</c:forEach>
 			      </table>
@@ -68,8 +70,7 @@
 			  
 		</div>
 		
-		<a href="/projetf/paiement/demande">Nouveau paiement pour utilisateur au choix</a>
-		<a href="/projetf/paiement/demande/1">Nouveau paiement pour utilisateur 1</a>
+		<a href="<c:url value='/paiements/demande' />">Nouveau paiement</a>
 		
 
     </jsp:body>

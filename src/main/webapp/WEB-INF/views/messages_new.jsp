@@ -7,15 +7,11 @@
 	Ma messagerie
 </h1>
 
-<ul class="nav nav-tabs">
-  <li role="presentation"><a href="/projetf/messages">Messages reçus</a></li>
-  <li role="presentation"><a href="/projetf/messages/envoyes">Messages envoyés</a></li>
-  <li role="presentation" class="active"><a href="/projetf/messages">Nouveau message</a></li>
-</ul>
+<c:import url="messages_menu" />
 
 <div class="panel panel-info">
 	<form:form method="post" modelAttribute="messagePrive"
-				action="/projetf/messages/new">
+				action="<c:url value='/messages/new' />">
 		<form:hidden path="auteur.id"/>
 		<div class="field_group">
 			<form:label path="destinataires">

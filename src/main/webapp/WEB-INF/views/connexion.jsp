@@ -12,7 +12,7 @@
       <c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session" />
 	</c:if>
 	
-	<form class="form" role="login" action="/projetf/j_spring_security_check" method="post">
+	<form class="form" role="login" action="<c:url value='/j_spring_security_check' />" method="post">
 		<div class="form-group">
 			<input type="text" name="j_username" class="form-control" placeholder="Login"> <input type="password" name="j_password" class="form-control" placeholder="Mot de passe">
 		</div>
