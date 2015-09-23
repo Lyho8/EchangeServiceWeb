@@ -27,8 +27,9 @@
 	<sec:authorize access="isAuthenticated()">
 	<!-- formulaire pour ajouter un commentaire sur l'annonce -->
 	<div class="panel panel-info">
+		<c:url value="/annonces/voir/${id}"  var="formaction" />
 		<form:form method="post" modelAttribute="commentaire"
- 							action="<c:url value='/annonces/voir/${id}' />">
+ 							action="${formaction}">
  			<form:hidden path="auteur.id" />  
  			<form:hidden path="annonce.id" />  
 			<div class="field_group">

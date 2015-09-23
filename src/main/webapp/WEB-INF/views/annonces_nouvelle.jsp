@@ -9,7 +9,8 @@
 	Ajout d'une tâche
 </h1>
 
-<form:form method="post" modelAttribute="annonce" action="<c:url value='/annonces/nouvelle' />">
+<c:url value="/annonces/nouvelle" var="formaction" />
+<form:form method="post" modelAttribute="annonce" action="${formaction}">
 	<form:hidden path="id" />
 	<form:hidden path="auteur.id" />
 	<table id="form">

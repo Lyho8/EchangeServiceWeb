@@ -10,8 +10,9 @@
 <c:import url="messages_menu" />
 
 <div class="panel panel-info">
+	<c:url value="/messages/new" var="formaction" />
 	<form:form method="post" modelAttribute="messagePrive"
-				action="<c:url value='/messages/new' />">
+				action="${formaction}">
 		<form:hidden path="auteur.id"/>
 		<div class="field_group">
 			<form:label path="destinataires">
