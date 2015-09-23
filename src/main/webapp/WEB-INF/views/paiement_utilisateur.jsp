@@ -19,7 +19,7 @@
 			      		<th>Id</th>
 			      		<th>Montant</th>
 			      		<th>Message</th>
-			      		<th>Emetteur</th>
+<%-- 			      		<th>Emetteur</th> --%>
 			      		<th>Récepteur</th>
 			      		<th>Statut</th>
 			      		<th>Accepter</th>
@@ -30,7 +30,7 @@
 			      		<td>${ p.id }</td>
 			      		<td>${ p.montant }</td>
 			      		<td>${ p.message }</td>
-			      		<td>${ p.emetteur.login }</td>
+<%-- 			      		<td>${ p.emetteur.login }</td> --%>
 			      		<td>${ p.recepteur.login }</td>
 			      		<td>${ p.valide }</td>
 			      		<td><c:if test="${ p.dateValidation==null }"><a href="/projetf/paiement/valider/${ p.id }">Accepter</a></c:if></td>
@@ -52,7 +52,8 @@
 			      		<th>Montant</th>
 			      		<th>Message</th>
 			      		<th>Emetteur</th>
-			      		<th>Recepteur</th>
+<%-- 			      		<th>Recepteur</th> --%>
+			      		<th>Statut</th>
 			      	</tr>
 			      	<c:forEach items="${ paiementsR }" var="p">
 			      	<tr>			      	
@@ -60,7 +61,8 @@
 			      		<td>${ p.montant }</td>
 			      		<td>${ p.message }</td>
 			      		<td>${ p.emetteur.login }</td>
-			      		<td>${ p.recepteur.login }</td>
+<%-- 			      		<td>${ p.recepteur.login }</td> --%>
+			      		<td>${ p.valide }</td>
 			      	</tr>
 			      	</c:forEach>
 			      </table>
