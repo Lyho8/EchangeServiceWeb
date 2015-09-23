@@ -11,35 +11,41 @@
 	<c:param name="activetab" value="new"/>
 </c:import>
 
-<div class="panel panel-info">
-	<c:url value="/messages/new" var="formaction" />
-	<form:form method="post" modelAttribute="messagePrive"
-				action="${formaction}">
-		<form:hidden path="auteur.id"/>
-		<div class="field_group">
-			<form:label path="destinataires">
-				Destinataire(s) : </form:label>
-			<form:textarea path="destinataires" required="required" />
-			<form:errors path="destinataires" />
+<div class="row">
+	<div class="col-sm-6">
+		<div class="panel panel-info">
+			<div class="panel-body">
+				<c:url value="/messages/new" var="formaction" />
+				<form:form method="post" modelAttribute="messagePrive"
+							action="${formaction}">
+					<form:hidden path="auteur.id"/>
+						<div class="input-group">
+							<form:label class="form-control" path="destinataires">
+								Destinataire(s) : </form:label>
+							<form:textarea class="form-control" path="destinataires" required="required" />
+							<form:errors path="destinataires" />
+						</div>
+						<br>
+						<div class="input-group">
+							<form:label class="form-control" path="titre">
+								Sujet :</form:label>
+							<form:input class="form-control" type="text" path="titre" />
+							<form:errors path="titre" />
+						</div>
+						<br>
+						<div class="input-group">
+							<form:label class="form-control" path="contenu" > Contenu de votre message:</form:label>
+							<form:textarea class="form-control" type="text" path="contenu" rows="10"/>
+							<form:errors path="contenu" />
+						</div>
+						<br>
+						<div class="input-group">
+							<input class="form-control" type="submit" value="Envoie" />
+						</div>
+				</form:form>
+			</div>
 		</div>
-		<br>
-		<div class="field_group">
-			<form:label path="titre">
-				Titre :</form:label>
-			<form:input type="text" path="titre" />
-			<form:errors path="titre" />
-		</div>
-		<br>
-		<div class="field_group">
-			<form:label path="contenu"> Contenu :</form:label>
-			<form:textarea type="text" path="contenu" />
-			<form:errors path="contenu" />
-		</div>
-		<br>
-		<div class="field_group">
-			<input type="submit" value="Save" />
-		</div>
-	</form:form>
+	</div>
 </div>
 
 

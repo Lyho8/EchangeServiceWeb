@@ -13,28 +13,28 @@
 	<c:param name="activetab" value="envoyes"/>
 </c:import>
 
-<div class="panel panel-sucess">
-			<!-- Default panel contents -->
-			<div class="panel-heading">
-				<p>Liste des messages envoyés</p>
+<div class="row">
+	<div class="col-sm-6">
+		<div class="panel panel-primary">
+			<div class="panel-body">
+				<table class="table">
+		                       <tr>
+		                        <td><h4>Sujet :</h4></td>
+		                        <td><h4>Date :</h4></td>
+		                    </tr>
+		                    <c:forEach items="${MesMessagesE}" var="monMessageE">
+		                    <tr>
+		                       	<td>${monMessageE.titre}</td>
+		                       	<td>${monMessageE.dateCreation}</td>
+		                       	<td><a href="<c:url value='/messages/envoyes/voir/${monMessageE.id}' />" class="btn btn-primary" role="button">
+		                       		<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+		                       	</a></td>
+		                       </tr>
+						</c:forEach>
+				</table>
 			</div>
-			
-			<table class="table">
-                        <tr>
-	                        <td>Titre :</td>
-	                        <td>Date :</td>
-	                    </tr>
-	                    <c:forEach items="${MesMessagesE}" var="monMessageE">
-	                    <tr>
-                        	<td>${monMessageE.titre}</td>
-                        	<td>${monMessageE.dateCreation}</td>
-                        	<td><a href="<c:url value='/messages/envoyes/voir/${monMessageE.id}' />" class="btn btn-primary" role="button">
-                        		<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                        	</a></td>
-                        </tr>
-					</c:forEach>
-			</table>
-			
+		</div>
+	</div>
 </div>
 
 
