@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <t:template>
 	<jsp:body>
 	
@@ -23,6 +24,7 @@
 		</div>
 	</c:forEach>
 	
+	<sec:authorize access="isAuthenticated()">
 	<!-- formulaire pour ajouter un commentaire sur l'annonce -->
 	<div class="panel panel-info">
 		<form:form method="post" modelAttribute="commentaire"
@@ -39,7 +41,8 @@
  				<input type="submit" value="Commenter" /> 
  			</div>  
  		</form:form> 
-  	</div>  
+  	</div>
+  	</sec:authorize> 
 	
     </div>
   </div>
