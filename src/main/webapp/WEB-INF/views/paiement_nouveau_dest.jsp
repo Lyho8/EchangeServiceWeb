@@ -10,7 +10,7 @@
 			Nouvelle demande de paiement
 		</h1>
 		
-		<form:form method="post" action="<c:url value='/paiement/demande' />"
+		<form:form method="post" action="<c:url value='/paiements/demande' />"
 		modelAttribute="paiement">
 		<table class="table table-striped table-bordered">
 			<tr>

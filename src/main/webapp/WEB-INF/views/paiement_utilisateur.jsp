@@ -33,8 +33,8 @@
 <%-- 			      		<td>${ p.emetteur.login }</td> --%>
 			      		<td>${ p.recepteur.login }</td>
 			      		<td>${ p.valide }</td>
-			      		<td><c:if test="${ p.dateValidation==null }"><a href="<c:url value='/paiement/valider/${ p.id }' />">Accepter</a></c:if></td>
-			      		<td><c:if test="${ p.dateValidation==null }"><a href="<c:url value='/paiement/refuser/${ p.id }' />">Refuser</a></c:if></td>
+			      		<td><c:if test="${ p.dateValidation==null }"><a href="<c:url value='/paiements/valider/${ p.id }' />">Accepter</a></c:if></td>
+			      		<td><c:if test="${ p.dateValidation==null }"><a href="<c:url value='/paiements/refuser/${ p.id }' />">Refuser</a></c:if></td>
 			      	</tr>
 			      	</c:forEach>
 			      </table>
@@ -70,7 +70,7 @@
 			  
 		</div>
 		
-		<a href="<c:url value='/paiement/demande' />">Nouveau paiement</a>
+		<a href="<c:url value='/paiements/demande' />">Nouveau paiement</a>
 		
 
     </jsp:body>

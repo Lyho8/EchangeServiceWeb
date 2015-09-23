@@ -35,7 +35,7 @@
 			
 		</div>
 		
-		<a href="<c:url value='/paiement/demande' />">Nouveau paiement pour utilisateur au choix</a>
+		<a href="<c:url value='/paiements/demande' />">Nouveau paiement pour utilisateur au choix</a>
 
     </jsp:body>
 </t:template>

@@ -23,6 +23,7 @@ import com.dta.model.Utilisateur;
  * Handles requests for the application home page.
  */
 @Controller
+@RequestMapping(value = "paiements")
 public class PaiementController {
 
 	@Autowired
@@ -35,14 +36,14 @@ public class PaiementController {
 	 * Affiche les paiements
 	 */
 	@Secured({"ROLE_ADMIN"})
-	@RequestMapping(value = "/paiement", method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String homePaiement(Locale locale, Model model) {
 		model.addAttribute("paiements", ps.listerPaiements());
 		return "paiement";
 	}
 	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
-	@RequestMapping(value = "/paiement/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String homePaiement(@PathVariable int id, Locale locale, Model model) {
 		String login = SecurityContextHolder.getContext().getAuthentication().getName();
 		int idC = us.chercherUtilisateurLogin(login).getId();
@@ -57,7 +58,7 @@ public class PaiementController {
 	}
 
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
-	@RequestMapping(value = "/paiement/demande/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/demande/{id}", method = RequestMethod.GET)
 	public String newPaiementForm(@PathVariable int id, Locale locale, Model model) {
 		model.addAttribute("dest", us.chercherUtilisateur(id));
 		model.addAttribute("paiement", new Paiement());
@@ -66,7 +67,7 @@ public class PaiementController {
 	}
 	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
-	@RequestMapping(value = "/paiement/demande/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/demande/{id}", method = RequestMethod.POST)
 	public String newPaiementPost(@Valid Paiement p, BindingResult bindingResult, @PathVariable int id, Locale locale, Model model) {
 		
 //		for(ObjectError e : bindingResult.getAllErrors()){
@@ -86,7 +87,7 @@ public class PaiementController {
 	}
 	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
-	@RequestMapping(value = "/paiement/demande", method = RequestMethod.GET)
+	@RequestMapping(value = "/demande", method = RequestMethod.GET)
 	public String newPaiementForm(Locale locale, Model model) {
 		model.addAttribute("paiement", new Paiement());
 		model.addAttribute("users", us.listerUtilisateurs(true));
@@ -94,7 +95,7 @@ public class PaiementController {
 	}
 	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
-	@RequestMapping(value = "/paiement/demande", method = RequestMethod.POST)
+	@RequestMapping(value = "/demande", method = RequestMethod.POST)
 	public String newPaiementPost(@Valid Paiement p, BindingResult bindingResult, Locale locale, Model model) {
 
 		
@@ -115,7 +116,7 @@ public class PaiementController {
 	}
 	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
-	@RequestMapping(value = "/paiement/direct/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/direct/{id}", method = RequestMethod.GET)
 	public String newPaiementDirectForm(@PathVariable int id, Locale locale, Model model) {
 		model.addAttribute("dest", us.chercherUtilisateur(id));
 		model.addAttribute("paiement", new Paiement());
@@ -124,7 +125,7 @@ public class PaiementController {
 	}
 	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
-	@RequestMapping(value = "/paiement/direct/{idR}", method = RequestMethod.POST)
+	@RequestMapping(value = "/direct/{idR}", method = RequestMethod.POST)
 	public String newPaiementDirectPost(@Valid Paiement p, BindingResult bindingResult, @PathVariable int idR, Locale locale, Model model) {
 		
 //		for(ObjectError e : bindingResult.getAllErrors()){
@@ -144,7 +145,7 @@ public class PaiementController {
 	}
 	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
-	@RequestMapping(value = "/paiement/direct", method = RequestMethod.GET)
+	@RequestMapping(value = "/direct", method = RequestMethod.GET)
 	public String newPaiementDirectForm(Locale locale, Model model) {
 		model.addAttribute("paiement", new Paiement());
 		model.addAttribute("users", us.listerUtilisateurs(true));
@@ -152,7 +153,7 @@ public class PaiementController {
 	}
 	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
-	@RequestMapping(value = "/paiement/direct", method = RequestMethod.POST)
+	@RequestMapping(value = "/direct", method = RequestMethod.POST)
 	public String newPaiementDirectPost(@Valid Paiement p, BindingResult bindingResult, Locale locale, Model model) {
 		
 //		for(ObjectError e : bindingResult.getAllErrors()){
@@ -173,14 +174,14 @@ public class PaiementController {
 	
 	//Liste des paiements à accepter.
 	@Secured({"ROLE_ADMIN"})
-	@RequestMapping(value = "/paiement/en_attente", method = RequestMethod.GET)
+	@RequestMapping(value = "/en_attente", method = RequestMethod.GET)
 	public String paiementNonValide(Locale locale, Model model) {
 		model.addAttribute("paiements", ps.chercherPaiementsInvalides());
 		return "paiement_utilisateur";
 	}
 	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
-	@RequestMapping(value = "/paiement/en_attente/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/en_attente/{id}", method = RequestMethod.GET)
 	public String paiementNonValideById(@PathVariable int id, Locale locale, Model model) {
 		String login = SecurityContextHolder.getContext().getAuthentication().getName();
 		int idC = us.chercherUtilisateurLogin(login).getId();
@@ -198,7 +199,7 @@ public class PaiementController {
 	
 	//Acceptation du paiement.
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
-	@RequestMapping(value="/paiement/valider/{id}")
+	@RequestMapping(value="/valider/{id}")
 	public String validerPaiement(@PathVariable int id, Locale locale, Model model){
 		
 		Paiement p = ps.chercherPaiement(id);
@@ -212,7 +213,7 @@ public class PaiementController {
 	}
 	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
-	@RequestMapping(value="/paiement/refuser/{id}")
+	@RequestMapping(value="/refuser/{id}")
 	public String refuserPaiement(@PathVariable int id, Locale locale, Model model){
 		
 		Paiement p = ps.chercherPaiement(id);
