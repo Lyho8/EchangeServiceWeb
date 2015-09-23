@@ -9,12 +9,14 @@
 	Ma messagerie
 </h1>
 
-<c:import url="messages_menu" />
+<c:import url="messages_menu.jsp">
+	<c:param name="activetab" value="recus"/>
+</c:import>
 
 <div class="panel panel-sucess">
 			<!-- Default panel contents -->
 			<div class="panel-heading">
-				<p>Liste des messages envoyés</p>
+				<p>Liste des messages reçus</p>
 			</div>
 			
 			<table class="table">

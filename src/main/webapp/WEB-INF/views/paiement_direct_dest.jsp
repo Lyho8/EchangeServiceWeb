@@ -10,7 +10,8 @@
 			Nouveau paiement
 		</h1>
 		
-		<form:form method="post" action="<c:url value='/paiements/direct' />"
+		<c:url value="/paiements/direct" var="formaction" />
+		<form:form method="post" action="${formaction}"
 		modelAttribute="paiement">
 		<table class="table table-striped table-bordered">
 			<tr>

@@ -7,11 +7,14 @@
 	Ma messagerie
 </h1>
 
-<c:import url="messages_menu" />
+<c:import url="messages_menu.jsp">
+	<c:param name="activetab" value="new"/>
+</c:import>
 
 <div class="panel panel-info">
+	<c:url value="/messages/new" var="formaction" />
 	<form:form method="post" modelAttribute="messagePrive"
-				action="<c:url value='/messages/new' />">
+				action="${formaction}">
 		<form:hidden path="auteur.id"/>
 		<div class="field_group">
 			<form:label path="destinataires">

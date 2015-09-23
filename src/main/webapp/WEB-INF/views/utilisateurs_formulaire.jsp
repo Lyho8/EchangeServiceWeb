@@ -8,7 +8,8 @@
 <t:template>
 	<jsp:body>
 
-	<form:form method="POST" action="<c:url value='/utilisateurs/enregistrer' />" modelAttribute="utilisateur">
+	<c:url value="/paiements/demande" var="formaction" />
+	<form:form method="POST" action="${formaction}" modelAttribute="utilisateur">
 	
 	<div class="container">
 	

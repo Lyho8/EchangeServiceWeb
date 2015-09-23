@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -91,19 +92,23 @@ public class AnnonceController {
 		
 		Annonce annonce = as.chercherAnnonce(id);
 
-		Commentaire com = new Commentaire();
-		
-		String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		Utilisateur u = us.chercherUtilisateurLogin(username);
-		com.setAuteur(u);
-		com.setAnnonce(annonce);
-		
-		model.addAttribute("commentaire", com);
+		if(!(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken)) {
+			Commentaire com = new Commentaire();
+			
+			String username = SecurityContextHolder.getContext().getAuthentication().getName();
+			Utilisateur u = us.chercherUtilisateurLogin(username);
+			
+			com.setAuteur(u);
+			com.setAnnonce(annonce);
+			
+			model.addAttribute("commentaire", com);
+		}
 		
 		model.addAttribute("annonce", annonce);  
 		return "annonces_annonce";
 	}
 
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@RequestMapping(value = "/voir/{id}", method = RequestMethod.POST)
 	public String newMessagePost(@Valid Commentaire com,BindingResult BindingResult, Model model,@PathVariable int id) {
 

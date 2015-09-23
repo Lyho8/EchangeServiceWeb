@@ -8,8 +8,8 @@
 	Ma messagerie
 </h1>
 
-<c:import url="messages_menu" />
-
+<c:import url="messages_menu.jsp">
+</c:import>
 
 <div class="row">
   <div class="col-sm-4">	
