@@ -70,7 +70,8 @@
 			  
 		</div>
 		
-		<a href="<c:url value='/paiements/demande' />">Nouveau paiement</a>
+		<c:if test="${!en_attente}"><a href="<c:url value='/paiements/en_attente' />">Mes transactions en attente</a></c:if>
+		<c:if test="${en_attente}"><a href="<c:url value='/paiements' />">Mes transactions</a></c:if>
 		
 
     </jsp:body>

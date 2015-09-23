@@ -36,24 +36,21 @@ public class PaiementController {
 	 * Affiche les paiements
 	 */
 	@Secured({"ROLE_ADMIN"})
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String homePaiement(Locale locale, Model model) {
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
+	public String homePaiementAdmin(Locale locale, Model model) {
 		model.addAttribute("paiements", ps.listerPaiements());
 		return "paiement";
 	}
 	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public String homePaiement(@PathVariable int id, Locale locale, Model model) {
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public String homePaiement(Locale locale, Model model) {
 		String login = SecurityContextHolder.getContext().getAuthentication().getName();
 		int idC = us.chercherUtilisateurLogin(login).getId();
 		
-		if(id!=idC){
-			return "redirect:/";
-		}
-		
-		model.addAttribute("paiementsE", ps.chercherPaiementsE(us.chercherUtilisateur(id)));
-		model.addAttribute("paiementsR", ps.chercherPaiementsR(us.chercherUtilisateur(id)));
+		model.addAttribute("paiementsE", ps.chercherPaiementsE(us.chercherUtilisateur(idC)));
+		model.addAttribute("paiementsR", ps.chercherPaiementsR(us.chercherUtilisateur(idC)));
+		model.addAttribute("en_attente", false);
 		return "paiement_utilisateur";
 	}
 
@@ -174,25 +171,22 @@ public class PaiementController {
 	
 	//Liste des paiements à accepter.
 	@Secured({"ROLE_ADMIN"})
-	@RequestMapping(value = "/en_attente", method = RequestMethod.GET)
-	public String paiementNonValide(Locale locale, Model model) {
+	@RequestMapping(value = "/en_attente/admin", method = RequestMethod.GET)
+	public String paiementNonValideAdmin(Locale locale, Model model) {
 		model.addAttribute("paiements", ps.chercherPaiementsInvalides());
 		return "paiement_utilisateur";
 	}
 	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
-	@RequestMapping(value = "/en_attente/{id}", method = RequestMethod.GET)
-	public String paiementNonValideById(@PathVariable int id, Locale locale, Model model) {
+	@RequestMapping(value = "/en_attente", method = RequestMethod.GET)
+	public String paiementNonValide(Locale locale, Model model) {
 		String login = SecurityContextHolder.getContext().getAuthentication().getName();
 		int idC = us.chercherUtilisateurLogin(login).getId();
 		
-		if(id!=idC){
-			return "redirect:/";
-		}
-		
-		Utilisateur e = us.chercherUtilisateur(id);
+		Utilisateur e = us.chercherUtilisateur(idC);
 		model.addAttribute("paiementsE", ps.chercherPaiementsInvalidesE(e));
 		model.addAttribute("paiementsR", ps.chercherPaiementsInvalidesR(e));
+		model.addAttribute("en_attente", true);
 		return "paiement_utilisateur";
 	}
 	
