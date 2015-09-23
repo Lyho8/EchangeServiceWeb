@@ -3,7 +3,6 @@ package com.dta.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,8 +21,6 @@ public class UtilisateurController {
 	@Autowired
 	private IUtilisateurService ms;
 
-
-	// TODO afficher le formulaire
 	//@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/lister", method = RequestMethod.GET)
 	public String listerUtilisateur(Model model) {
@@ -36,7 +33,6 @@ public class UtilisateurController {
 	}
 
 	
-	//TODO activer un utilisateur
 	@RequestMapping(value="/statut", method = RequestMethod.GET)
 	public String changerStatut(@RequestParam(value = "id") int id){
 		
@@ -49,7 +45,6 @@ public class UtilisateurController {
 		return "redirect:/utilisateurs/lister";
 	}
 	
-	// TODO actualiser un utilisateur.
 	//@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/actualiser", method = RequestMethod.GET)
 	public String editer(@RequestParam(value = "id") int id, Model model) {
@@ -61,8 +56,6 @@ public class UtilisateurController {
 		return "utilisateurs_formulaire";
 	}
 	
-
-	// TODO afficher le formulaire
 	@RequestMapping(value = "/enregistrer", method = RequestMethod.GET)
 	public String bienvenue(Model model) {
 
@@ -71,7 +64,6 @@ public class UtilisateurController {
 		return "utilisateurs_formulaire";
 	}
 
-	// TODO ajouter un utilisateur.
 	@RequestMapping(value = "/enregistrer", method = RequestMethod.POST)
 	public String ajout(@Valid Utilisateur u, BindingResult bindingResult,
 			Model model) {
@@ -86,9 +78,5 @@ public class UtilisateurController {
 	
 		return "redirect:/connexion";
 	}
-
-
-
-
 
 }

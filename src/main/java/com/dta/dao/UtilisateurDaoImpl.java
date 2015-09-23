@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
@@ -20,23 +19,11 @@ public class UtilisateurDaoImpl implements IUtilisateurDao {
 	@Override
 	public void creerUtilisateur(Utilisateur u) {
 		em.persist(u);
-
 	}
 
 	@Override
 	public List<Utilisateur> listerUtilisateurs(boolean actif) {
-
-		Query req;
-		
-		if(actif==true){
-		req = em.createQuery("select u from Utilisateur u where u.actif=true",
-				Utilisateur.class);
-		}else{
-		req = em.createQuery("select u from Utilisateur u where u.actif=false",
-				Utilisateur.class);
-		}
-		return req.getResultList();
-
+		return em.createQuery("select u from Utilisateur u where u.actif=:actif", Utilisateur.class).setParameter("actif", actif).getResultList();
 	}
 
 	@Override
@@ -61,12 +48,7 @@ public class UtilisateurDaoImpl implements IUtilisateurDao {
 
 	@Override
 	public List<Utilisateur> chercherUtilisateurs(String motCle) {
-		Query req = em
-				.createQuery("select u from Utilisateur u where u.nom like :x or u.prenom like :x");
-
-		req.setParameter("x", "%" + motCle + "%");
-
-		return req.getResultList();
+		return em.createQuery("select u from Utilisateur u where u.nom like :x or u.prenom like :x", Utilisateur.class).setParameter("x", "%" + motCle + "%").getResultList();
 	}
 
 	@Override

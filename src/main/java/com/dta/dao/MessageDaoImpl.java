@@ -4,11 +4,9 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
-import com.dta.model.Categorie;
 import com.dta.model.MessagePrive;
 import com.dta.model.Utilisateur;
 
@@ -38,19 +36,15 @@ public class MessageDaoImpl implements IMessageDao {
 	}
 
 	public List<MessagePrive> listerMessageEnvoie(Utilisateur u) {
-		Query req=entityManager.createQuery("select mp from MessagePrive mp where mp.auteur.login=:login").setParameter("login", u.getLogin());
-		return  req.getResultList();
+		return  entityManager.createQuery("select mp from MessagePrive mp where mp.auteur.login=:login", MessagePrive.class).setParameter("login", u.getLogin()).getResultList();
 	}
 
 	public List<MessagePrive> listerMessageRecu(Utilisateur u) {
-		Query req=entityManager.createQuery("select mp from MessagePrive mp join mp.destinataires d where d.login=:login").setParameter("login", u.getLogin());
-		return  req.getResultList();
+		return  entityManager.createQuery("select mp from MessagePrive mp join mp.destinataires d where d.login=:login", MessagePrive.class).setParameter("login", u.getLogin()).getResultList();
 	}
 
 	public List<MessagePrive> chercherMessageParTitre(String motCle) {
-		Query req=entityManager.createQuery("select mp from MessagePrive mp where mp.titre like :x");
-		req.setParameter("x",  "%"+motCle+"%");
-		return  req.getResultList();
+		return entityManager.createQuery("select mp from MessagePrive mp where mp.titre like :x", MessagePrive.class).setParameter("x",  "%"+motCle+"%").getResultList();
 	}
 	
 	

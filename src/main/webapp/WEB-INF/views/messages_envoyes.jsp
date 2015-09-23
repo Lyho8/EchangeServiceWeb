@@ -9,12 +9,7 @@
 	Ma messagerie
 </h1>
 
-<ul class="nav nav-tabs">
-  <li role="presentation"><a href="/projetf/messages">Messages reçus</a></li>
-  <li role="presentation" class="active"><a
-				href="/projetf/messages/envoyes">Messages envoyés</a></li>
-  <li role="presentation"><a href="/projetf/messages/new">Nouveau message</a></li>
-</ul>
+<c:import url="messages_menu" />
 
 <div class="panel panel-sucess">
 			<!-- Default panel contents -->
@@ -31,7 +26,7 @@
 	                    <tr>
                         	<td>${monMessageE.titre}</td>
                         	<td>${monMessageE.dateCreation}</td>
-                        	<td><a href="/projetf/messages/envoyes/voir/${monMessageE.id}" class="btn btn-primary" role="button">
+                        	<td><a href="<c:url value='/messages/envoyes/voir/${monMessageE.id}' />" class="btn btn-primary" role="button">
                         		<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                         	</a></td>
                         </tr>

@@ -1,18 +1,12 @@
 package com.dta.controller;
 
 import java.beans.PropertyEditorSupport;
-import java.security.Principal;
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import javax.annotation.Resource;
 import javax.validation.Valid;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
@@ -26,12 +20,10 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dta.metier.ICategorieService;
 import com.dta.metier.IMessagesService;
 import com.dta.metier.IUtilisateurService;
-import com.dta.model.Categorie;
 import com.dta.model.MessagePrive;
 import com.dta.model.Utilisateur;
 
@@ -42,10 +34,6 @@ import com.dta.model.Utilisateur;
 @Secured({ "ROLE_USER", "ROLE_ADMIN" })
 @RequestMapping(value = "messages")
 public class MessageController {
-
-	private static final Logger logger = LoggerFactory
-			.getLogger(MessageController.class);
-
 	@Autowired
 	private IMessagesService ms;
 

@@ -42,8 +42,8 @@
 				<td> ${utilisateur.prenom} </td>
 				<td> ${utilisateur.nom} </td>
 				<td> ${utilisateur.solde} </td>
-				<td> <a href="/projetf/utilisateurs/actualiser?id=${utilisateur.id}">modifier</a></td>
-				<td> <a href="/projetf/utilisateurs/statut?id=${utilisateur.id}">desactiver</a></td>
+				<td> <a href="<c:url value='/utilisateurs/actualiser?id=${utilisateur.id}' />">modifier</a></td>
+				<td> <a href="<c:url value='/utilisateurs/statut?id=${utilisateur.id}' />">desactiver</a></td>
 			</tr>
 
 		</c:forEach>
@@ -81,8 +81,8 @@
 				<td> ${utilisateur.prenom} </td>
 				<td> ${utilisateur.nom} </td>
 				<td> ${utilisateur.solde} </td>
-				<td> <a href="/projetf/utilisateurs/actualiser?id=${utilisateur.id}">modifier</a></td>
-				<td> <a href="/projetf/utilisateurs/statut?id=${utilisateur.id}">activer</a></td>
+				<td> <a href="<c:url value='/utilisateurs/actualiser?id=${utilisateur.id}' />">modifier</a></td>
+				<td> <a href="<c:url value='/utilisateurs/statut?id=${utilisateur.id}' />">activer</a></td>
 			</tr>
 
 		</c:forEach>

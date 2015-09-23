@@ -1,16 +1,17 @@
 package com.dta.metier;
 
-import java.util.*;
-
-import javax.annotation.*;
-import javax.persistence.Query;
+import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.*;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.dta.model.*;
-import com.dta.dao.*;
+import com.dta.dao.IPaiementDao;
+import com.dta.dao.IUtilisateurDao;
+import com.dta.model.Paiement;
+import com.dta.model.Role;
+import com.dta.model.Utilisateur;
 
 @Service
 public class PaiementServiceImpl implements IPaiementService {
