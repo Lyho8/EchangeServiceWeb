@@ -13,30 +13,31 @@
 	<c:param name="activetab" value="recus"/>
 </c:import>
 
-<div class="panel panel-sucess">
-			<!-- Default panel contents -->
-			<div class="panel-heading">
-				<p>Liste des messages reçus</p>
+
+<div class="row">
+	<div class="col-sm-6">
+		<div class="panel panel-primary">
+			<div class="panel-body">
+				<table class="table">
+                    <tr>
+                     <td><h4>Auteur :</h4></td>
+                     <td><h4>Sujet :</h4></td>
+                     <td><h4>Date :</h4></td>
+                 </tr>
+                 <c:forEach items="${MesMessagesR}" var="monMessageR">
+                 <tr>
+                    	<td>${monMessageR.auteur.login}</td>
+                    	<td>${monMessageR.titre}</td>
+                    	<td>${monMessageR.dateCreation}</td>
+                    	<td><a href="<c:url value='/messages/voir/${monMessageR.id}' />" class="btn btn-primary" role="button">
+                    		<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                    	</a></td>
+                    </tr>
+				</c:forEach>
+				</table>
 			</div>
-			
-			<table class="table">
-                        <tr>
-	                        <td>Auteur :</td>
-	                        <td>Titre :</td>
-	                        <td>Date :</td>
-	                    </tr>
-	                    <c:forEach items="${MesMessagesR}" var="monMessageR">
-	                    <tr>
-                        	<td>${monMessageR.auteur.login}</td>
-                        	<td>${monMessageR.titre}</td>
-                        	<td>${monMessageR.dateCreation}</td>
-                        	<td><a href="<c:url value='/messages/voir/${monMessageR.id}' />" class="btn btn-primary" role="button">
-                        		<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                        	</a></td>
-                        </tr>
-					</c:forEach>
-			</table>
-			
+		</div>
+	</div>
 </div>
 
 

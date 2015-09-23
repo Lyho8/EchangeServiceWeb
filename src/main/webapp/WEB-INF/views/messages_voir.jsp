@@ -20,7 +20,7 @@
 	    <li class="list-group-item">Auteur : ${ messagePrive.auteur.login }</li>
 	    <li class="list-group-item">Destinataire(s) :
 		    <c:forEach items="${messagePrive.destinataires}" var="monDestinataire">
-		    	${ monDestinataire.login }
+		    	 ${ monDestinataire.login } ,
 		    </c:forEach>
 	    </li>
 	  </ul>

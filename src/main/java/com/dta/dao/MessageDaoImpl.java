@@ -36,11 +36,11 @@ public class MessageDaoImpl implements IMessageDao {
 	}
 
 	public List<MessagePrive> listerMessageEnvoie(Utilisateur u) {
-		return  entityManager.createQuery("select mp from MessagePrive mp where mp.auteur.login=:login", MessagePrive.class).setParameter("login", u.getLogin()).getResultList();
+		return  entityManager.createQuery("select mp from MessagePrive mp where mp.auteur.login=:login order by mp.dateCreation desc", MessagePrive.class).setParameter("login", u.getLogin()).getResultList();
 	}
 
 	public List<MessagePrive> listerMessageRecu(Utilisateur u) {
-		return  entityManager.createQuery("select mp from MessagePrive mp join mp.destinataires d where d.login=:login", MessagePrive.class).setParameter("login", u.getLogin()).getResultList();
+		return  entityManager.createQuery("select mp from MessagePrive mp join mp.destinataires d where d.login=:login order by mp.dateCreation desc", MessagePrive.class).setParameter("login", u.getLogin()).getResultList();
 	}
 
 	public List<MessagePrive> chercherMessageParTitre(String motCle) {
