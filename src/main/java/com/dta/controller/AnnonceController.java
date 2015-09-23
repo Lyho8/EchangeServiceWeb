@@ -108,6 +108,7 @@ public class AnnonceController {
 		return "annonces_annonce";
 	}
 
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@RequestMapping(value = "/voir/{id}", method = RequestMethod.POST)
 	public String newMessagePost(@Valid Commentaire com,BindingResult BindingResult, Model model,@PathVariable int id) {
 

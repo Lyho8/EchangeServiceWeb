@@ -9,7 +9,9 @@
 	Ma messagerie
 </h1>
 
-<c:import url="messages_menu" />
+<c:import url="messages_menu.jsp">
+	<c:param name="activetab" value="envoyes"/>
+</c:import>
 
 <div class="panel panel-sucess">
 			<!-- Default panel contents -->

@@ -7,7 +7,9 @@
 	Ma messagerie
 </h1>
 
-<c:import url="messages_menu" />
+<c:import url="messages_menu.jsp">
+	<c:param name="activetab" value="new"/>
+</c:import>
 
 <div class="panel panel-info">
 	<c:url value="/messages/new" var="formaction" />
