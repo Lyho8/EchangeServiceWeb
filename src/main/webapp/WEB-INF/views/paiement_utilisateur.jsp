@@ -7,21 +7,30 @@
 <t:template>
 	<jsp:body>
 		<h1>
-			
-			<c:if test="${!en_attente}">Historique des transactions</c:if>
-			<c:if test="${en_attente}">Transactions en attente</c:if>
+			Mes paiements
 		</h1>
-		
+
+<c:if test="${!en_attente}">		
+	<c:import url="paiements_menu.jsp">
+		<c:param name="activetab" value="historique"/>
+	</c:import>
+</c:if>
+
+<c:if test="${en_attente}">
+	<c:import url="paiements_menu.jsp">
+		<c:param name="activetab" value="en_attente"/>
+	</c:import>
+</c:if>
+
 		<div class="row">
 						
-			  <div class="col-sm-2">
+			  <div class="col-sm-6 col-sm-offset-3">
 			  	<h3>Emis</h3>
 			      <table class="table table-striped table-bordered">
 			      	<tr>
 			      		<th>Id</th>
 			      		<th>Montant</th>
 			      		<th>Message</th>
-<%-- 			      		<th>Emetteur</th> --%>
 			      		<th>Récepteur</th>
 			      		<th>Statut</th>
 			      		<th>Accepter</th>
@@ -32,7 +41,6 @@
 			      		<td>${ p.id }</td>
 			      		<td>${ p.montant }</td>
 			      		<td>${ p.message }</td>
-<%-- 			      		<td>${ p.emetteur.login }</td> --%>
 			      		<td>${ p.recepteur.login }</td>
 			      		<td>${ p.valide }</td>
 			      		<td><c:if test="${ p.dateValidation==null }"><a href="<c:url value='/paiements/valider/${ p.id }' />">Accepter</a></c:if></td>
@@ -46,7 +54,7 @@
 			  
 		  <div class="row">
 		  
-			  <div class="col-sm-2">
+			  <div class="col-sm-6 col-sm-offset-3">
 			  	<h3>Reçus</h3>
 			      <table class="table table-striped table-bordered">
 			      	<tr>
@@ -54,7 +62,6 @@
 			      		<th>Montant</th>
 			      		<th>Message</th>
 			      		<th>Emetteur</th>
-<%-- 			      		<th>Recepteur</th> --%>
 			      		<th>Statut</th>
 			      	</tr>
 			      	<c:forEach items="${ paiementsR }" var="p">
@@ -63,18 +70,13 @@
 			      		<td>${ p.montant }</td>
 			      		<td>${ p.message }</td>
 			      		<td>${ p.emetteur.login }</td>
-<%-- 			      		<td>${ p.recepteur.login }</td> --%>
 			      		<td>${ p.valide }</td>
 			      	</tr>
 			      	</c:forEach>
 			      </table>
 			  </div>
 			  
-		</div>
-		
-		<c:if test="${!en_attente}"><a href="<c:url value='/paiements/en_attente' />">Mes transactions en attente</a></c:if>
-		<c:if test="${en_attente}"><a href="<c:url value='/paiements' />">Mes transactions</a></c:if>
-		
+		</div>		
 
     </jsp:body>
 </t:template>
