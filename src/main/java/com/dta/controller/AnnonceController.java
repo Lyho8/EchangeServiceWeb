@@ -86,15 +86,15 @@ public class AnnonceController {
 	public String ajouterNouvelleCategorie(@Valid @ModelAttribute("categorie") Categorie categorie,
 			BindingResult result, Model model) {
 		
-		model.addAttribute("categories", cs.listerCategories());
-		
 		if (result.hasErrors()) {
+			model.addAttribute("categories", cs.listerCategories());
 			model.addAttribute("categorie", categorie);
 			return "annonce_creer_categorie";
 		}
 		
+		model.addAttribute("categorie", new Categorie());
 		cs.creerCategorie(categorie);
-
+		model.addAttribute("categories", cs.listerCategories());
 		return "annonce_creer_categorie";
 	}
 	
