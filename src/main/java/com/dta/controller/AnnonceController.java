@@ -23,6 +23,7 @@ import com.dta.metier.ICategorieService;
 import com.dta.metier.ICommentaireService;
 import com.dta.metier.IUtilisateurService;
 import com.dta.model.Annonce;
+import com.dta.model.Categorie;
 import com.dta.model.Commentaire;
 import com.dta.model.Type;
 import com.dta.model.Utilisateur;
@@ -69,15 +70,39 @@ public class AnnonceController {
 		return "annonces_nouvelle";
 	}
 
+	@Secured("ROLE_ADMIN")
+	@RequestMapping(value = "/categorie", method = RequestMethod.GET)
+	public String nouvelleCategorie(Model model) {
+		
+		model.addAttribute("categorie", new Categorie());
+		
+		model.addAttribute("categories", cs.listerCategories());
+
+		return "annonce_creer_categorie";
+	}
+	
+	@Secured("ROLE_ADMIN")
+	@RequestMapping(value = "/categorie", method = RequestMethod.POST)
+	public String ajouterNouvelleCategorie(@Valid @ModelAttribute("categorie") Categorie categorie,
+			BindingResult result, Model model) {
+		
+		model.addAttribute("categories", cs.listerCategories());
+		
+		if (result.hasErrors()) {
+			model.addAttribute("categorie", categorie);
+			return "annonce_creer_categorie";
+		}
+		
+		cs.creerCategorie(categorie);
+
+		return "annonce_creer_categorie";
+	}
+	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@RequestMapping(value = "/nouvelle", method = RequestMethod.POST)
 	public String creer(@Valid @ModelAttribute("annonce") Annonce annonce,
 			BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			// for(ObjectError e : result.getAllErrors()) {
-			// System.err.println(e);
-			// }
-
 			model.addAttribute("categories", cs.listerCategories());
 			return "annonces_nouvelle";
 		}

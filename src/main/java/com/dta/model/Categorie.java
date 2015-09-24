@@ -13,6 +13,7 @@ public class Categorie {
 	private int id;
 	
 	@NotNull
+	@Column (unique=true)
 	private String libelle;
 	
 	@OneToMany(mappedBy="categorie")
