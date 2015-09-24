@@ -6,7 +6,7 @@
 	<jsp:body>
 	
 	<div class="row">
-  <div class="col-sm-2">
+  <div class="col-sm-8 col-sm-offset-2">
     <div class="thumbnail">
       <img src="http://www.mot-a-mot.com/media/annonce/annonce_2.jpg"
 						alt="annonce de test">
