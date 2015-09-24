@@ -26,6 +26,7 @@ public class Paiement {
 	private int montant;
 	
 	@NotNull
+	@Column(length = 1024)
 	private String message = "";
 	
 	@NotNull
