@@ -5,39 +5,51 @@
 
 <t:template>
 	<jsp:body>
-<h1>
-	Ajout d'une tâche
-</h1>
-
-<c:url value="/annonces/nouvelle" var="formaction" />
-<form:form method="post" modelAttribute="annonce" action="${formaction}">
-	<form:hidden path="id" />
-	<form:hidden path="auteur.id" />
-	<table id="form">
-		<tr>
-			<td>Type:</td>
-			<td><form:select path="type">
-				<form:options/>
-			</form:select></td>
-			<td><form:errors path="type" /></td>
-		</tr>
-		<tr>
-			<td>Message:</td>
-			<td><form:textarea path="description" /></td>
-			<td><form:errors path="description" /></td>
-		</tr>
-		<tr>
-			<td>Catégorie:</td>
-			<td><form:select path="categorie.id">
-				<form:options items="${categories}" itemLabel="libelle" itemValue="id" />
-			</form:select></td>
-			<td><form:errors path="categorie" /></td>
-		</tr>
-		<tr>
-			<td colspan="3"><input type="submit" value="Créer annonce" /></td>
-		</tr>
-	</table>
-</form:form>
+<div class="row">
+	<div class="col-sm-6 col-sm-offset-3">
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h4>Création d'une nouvelle annonce :</h4>
+			</div>
+			<div class="panel-body">
+				<c:url value="/annonces/nouvelle" var="formaction" />
+				<form:form method="post" modelAttribute="annonce" action="${formaction}">
+					<form:hidden path="id" />
+					<form:hidden path="auteur.id" />
+					
+					<div class="input-group">
+						<form:label class="form-control" path="type">
+							Type : </form:label>
+						<form:select class="form-control" path="type" required="required">
+							<form:options/>
+						</form:select>
+						<form:errors path="type" />
+					</div>
+					<br>
+					<div class="input-group">
+						<form:label class="form-control" path="description">
+							Message : </form:label>
+						<form:textarea class="form-control" path="description" rows="10" />
+						<form:errors path="description" />
+					</div>
+					<br>
+					<div class="input-group">
+						<form:label class="form-control" path="categorie.id">
+							Catégorie : </form:label>
+						<form:select class="form-control" path="categorie.id">
+							<form:options items="${categories}" itemLabel="libelle" itemValue="id" ></form:options>
+						</form:select>
+						<form:errors path="categorie" />
+					</div>
+					<br>
+					<div class="input-group">
+							<input class="form-control" type="submit" value="Poster l'annonce" />
+					</div>
+				</form:form>
+			</div>
+		</div>
+	</div>
+</div>
 
     </jsp:body>
 </t:template>

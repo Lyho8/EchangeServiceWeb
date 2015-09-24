@@ -6,7 +6,7 @@
 	<jsp:body>
 	
 	<div class="row">
-  <div class="col-sm-2">
+  <div class="col-sm-6 col-sm-offset-3">
     <div class="thumbnail">
       <img src="http://www.mot-a-mot.com/media/annonce/annonce_2.jpg"
 						alt="annonce de test">
@@ -27,20 +27,24 @@
 	<sec:authorize access="isAuthenticated()">
 	<!-- formulaire pour ajouter un commentaire sur l'annonce -->
 	<div class="panel panel-info">
+		<div class="panel-heading">
+			<h4>Ajouter un commentaire :</h4> 
+		</div>
 		<c:url value="/annonces/voir/${id}"  var="formaction" />
 		<form:form method="post" modelAttribute="commentaire"
  							action="${formaction}">
  			<form:hidden path="auteur.id" />  
- 			<form:hidden path="annonce.id" />  
-			<div class="field_group">
- 				<form:label path="contenu"></form:label>  
- 				<form:input type="text" path="contenu" placeholder="Votre message ici ..." />  
- 				<form:errors path="contenu" />  
- 			</div> 
-			<br> 
- 		<div class="field_group">  
- 				<input type="submit" value="Commenter" /> 
- 			</div>  
+ 			<form:hidden path="annonce.id" />
+ 			<div class="panel-body">  
+				<div class="input-group">
+	 				<form:textarea class="form-control" path="contenu" placeholder="Votre commentaire ici ..." cols="60" rows="6"/>  
+	 				<form:errors path="contenu" />  
+	 			</div> 
+				<br> 
+	 			<div class="input-group">  
+	 				<input class="form-control" type="submit" value="Commenter" /> 
+	 			</div>
+	 		</div>  
  		</form:form> 
   	</div>
   	</sec:authorize> 

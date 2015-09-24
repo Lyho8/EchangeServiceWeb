@@ -12,7 +12,7 @@
 </c:import>
 
 <div class="row">
-  <div class="col-sm-4">	
+  <div class="col-sm-4 col-sm-offset-4">	
 	<div class="panel panel-info">
 	  <div class="panel-heading">Sujet : ${ messagePrive.titre }</div>
 	  <div class="panel-body">
