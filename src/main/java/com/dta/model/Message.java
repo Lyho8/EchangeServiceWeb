@@ -14,6 +14,7 @@ public class Message {
 	private int id;
 	
 	@NotNull
+	@Column(length = 1024)
 	private String contenu;
 	
 	@NotNull
