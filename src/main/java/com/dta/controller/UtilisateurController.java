@@ -1,5 +1,8 @@
 package com.dta.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dta.metier.IUtilisateurService;
+import com.dta.model.Message;
+import com.dta.model.Paiement;
 import com.dta.model.Utilisateur;
 
 
@@ -77,6 +82,47 @@ public class UtilisateurController {
 			ms.actualiserUtilisateur(u);
 	
 		return "redirect:/connexion";
+	}
+	
+	@RequestMapping(value="/voir", method=RequestMethod.GET)
+	public String voirProfil(@RequestParam(value="id")int id, Model model){
+		
+		
+		Utilisateur u = ms.chercherUtilisateur(id);
+		
+		List<Message> messagesRecus= new ArrayList<Message>();
+		List<Paiement> paiementsEmis= new ArrayList<Paiement>();
+		List<Paiement> paiementsRecus = new ArrayList<Paiement>();
+		
+		int nbMessagesRecus = messagesRecus.size();
+		
+		paiementsEmis = u.getPaiementsEmis();
+		paiementsRecus = u.getPaiementsRecus();
+		
+		int totalPaiementsEmis = 0;
+		for(Paiement p : paiementsEmis){
+			
+			totalPaiementsEmis += p.getMontant();
+			
+		}
+		
+		int totalPaiementsRecus = 0;
+		for(Paiement p : paiementsRecus){
+			
+			totalPaiementsRecus += p.getMontant();
+			
+		}
+		
+		
+		model.addAttribute("utilisateur", u);
+		
+		model.addAttribute("msg", nbMessagesRecus);
+		
+		model.addAttribute("montantsEmis", totalPaiementsEmis);
+		
+		model.addAttribute("montantsRecus", totalPaiementsRecus);
+		
+		return "utilisateurs_profil";
 	}
 
 }
