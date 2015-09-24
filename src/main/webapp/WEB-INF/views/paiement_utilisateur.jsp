@@ -7,7 +7,9 @@
 <t:template>
 	<jsp:body>
 		<h1>
-			Liste des paiements
+			
+			<c:if test="${!en_attente}">Historique des transactions</c:if>
+			<c:if test="${en_attente}">Transactions en attente</c:if>
 		</h1>
 		
 		<div class="row">
