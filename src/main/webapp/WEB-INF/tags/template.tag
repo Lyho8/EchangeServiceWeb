@@ -38,6 +38,7 @@
 							<sec:authorize access="hasRole('ROLE_ADMIN')">
 								<li role="separator" class="divider"></li>
 								<li role="presentation"><a href="<c:url value='/utilisateurs/lister' />">Gérer les utilisateurs</a></li>
+								<li role="presentation"><a href="<c:url value='/annonces/categorie' />">Gérer les catégories</a></li>
 							</sec:authorize>
 							<li role="separator" class="divider"></li>
 							<li role="presentation"><a href="<c:url value='/j_spring_security_logout'/>">Déconnexion</a></li>
