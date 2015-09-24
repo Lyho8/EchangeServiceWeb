@@ -30,6 +30,7 @@
 			<th> PRENOM </th>
 			<th> NOM </th>
 			<th> SOLDE </th>
+			<th> KICEST </th>
 			<th> MODIFIER </th>
 			<th> DESACTIVER </th>
 		</tr>
@@ -42,6 +43,7 @@
 				<td> ${utilisateur.prenom} </td>
 				<td> ${utilisateur.nom} </td>
 				<td> ${utilisateur.solde} </td>
+				<td> <a href="<c:url value='/utilisateurs/voir?id=${utilisateur.id}'/>">voir</a></td>
 				<td> <a href="<c:url value='/utilisateurs/actualiser?id=${utilisateur.id}' />">modifier</a></td>
 				<td> <a href="<c:url value='/utilisateurs/statut?id=${utilisateur.id}' />">desactiver</a></td>
 			</tr>
@@ -69,6 +71,7 @@
 			<th> PRENOM </th>
 			<th> NOM </th>
 			<th> SOLDE </th>
+			<th> KICEST </th>
 			<th> MODIFIER </th>
 			<th> ACTIVER </th>
 		</tr>
@@ -81,6 +84,7 @@
 				<td> ${utilisateur.prenom} </td>
 				<td> ${utilisateur.nom} </td>
 				<td> ${utilisateur.solde} </td>
+				<td> <a href="<c:url value='/utilisateurs/voir?id=${utilisateur.id}'/>">voir</a></td>
 				<td> <a href="<c:url value='/utilisateurs/actualiser?id=${utilisateur.id}' />">modifier</a></td>
 				<td> <a href="<c:url value='/utilisateurs/statut?id=${utilisateur.id}' />">activer</a></td>
 			</tr>
