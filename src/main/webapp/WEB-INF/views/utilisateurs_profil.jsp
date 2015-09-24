@@ -11,7 +11,7 @@
 	<div class="container">
 	
 		<h2> ${utilisateur.prenom} ${ utilisateur.nom } </h2>
-		<a href="<c:url value='/utilisateurs/actualiser/${utilisateur.id}' />">modifier le profil</a><br>
+		<a href="<c:url value='/utilisateurs/actualiser/${utilisateur.id}' />"><spring:message code="utilisateurs.profil.editer" /></a><br>
 		<div class="row">
 				<div class="col-sm-3">		
 					<div class="jumbotron">
@@ -21,17 +21,17 @@
 				<div class="col-sm-6">
 					<div class="jumbotron">
 						<p>
-							inscrit depuis le :<br> ${utilisateur.dateInscription}.
+							<spring:message code="utilisateurs.profil.date" /><br> ${utilisateur.dateInscription}.
 						</p>
-						<p>Statut:
+						<p><spring:message code="utilisateurs.profil.statut" />
 							<c:choose>
 							
 								<c:when test="${utilisateur.actif}">
-									Actif
+									<spring:message code="utilisateurs.profil.actif" />
 								</c:when>
 								
 								<c:otherwise>
-									Inactif
+									<spring:message code="utilisateurs.profil.inactif" />
 								</c:otherwise>
 							
 							</c:choose>
@@ -43,17 +43,17 @@
 							E-Mail : ${ utilisateur.email }
 						</p>
 						<p>
-							<em>Solde restant</em>  ${utilisateur.solde} crédits.
+							<em><spring:message code="utilisateurs.profil.soldeRestant" /></em>  ${utilisateur.solde} crédits.
 						</p>
 							<a href="<c:url value='/utilisateurs/statut/${utilisateur.id}' />">
 							<c:choose>
 							
 								<c:when test="${utilisateur.actif}">
-									Désactiver le compte
+									<spring:message code="utilisateurs.profil.desactiver" />
 								</c:when>
 								
 								<c:otherwise>
-									Activer le compte
+									<spring:message code="utilisateurs.profil.activer" />
 								</c:otherwise>
 							
 							</c:choose>
