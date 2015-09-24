@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,8 +39,8 @@ public class UtilisateurController {
 	}
 
 	
-	@RequestMapping(value="/statut", method = RequestMethod.GET)
-	public String changerStatut(@RequestParam(value = "id") int id){
+	@RequestMapping(value="/statut/{id}", method = RequestMethod.GET)
+	public String changerStatut(@PathVariable(value = "id") int id, Model model){
 		
 		Utilisateur u = ms.chercherUtilisateur(id);
 
@@ -47,12 +48,16 @@ public class UtilisateurController {
 		
 		ms.actualiserUtilisateur(u);
 		
-		return "redirect:/utilisateurs/lister";
+		model.addAttribute("listeUtilisateursActifs", ms.listerUtilisateurs(true));
+		
+		model.addAttribute("listeUtilisateursInactifs", ms.listerUtilisateurs(false));
+		
+		return "utilisateurs_liste";
 	}
 	
 	//@Secured("ROLE_ADMIN")
-	@RequestMapping(value = "/actualiser", method = RequestMethod.GET)
-	public String editer(@RequestParam(value = "id") int id, Model model) {
+	@RequestMapping(value = "/actualiser/{id}", method = RequestMethod.GET)
+	public String editer(@PathVariable(value = "id") int id, Model model) {
 
 		Utilisateur u = ms.chercherUtilisateur(id);
 
@@ -84,8 +89,8 @@ public class UtilisateurController {
 		return "redirect:/connexion";
 	}
 	
-	@RequestMapping(value="/voir", method=RequestMethod.GET)
-	public String voirProfil(@RequestParam(value="id")int id, Model model){
+	@RequestMapping(value="/voir/{id}", method=RequestMethod.GET)
+	public String voirProfil(@PathVariable(value = "id") int id, Model model){
 		
 		
 		Utilisateur u = ms.chercherUtilisateur(id);

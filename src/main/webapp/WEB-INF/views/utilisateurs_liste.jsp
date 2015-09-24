@@ -8,8 +8,6 @@
 
 	<jsp:body>
 	
-
-	
 	<h2>
 		<em> Liste des utilisateurs : </em>
 	</h2>
@@ -30,7 +28,7 @@
 			<th> PRENOM </th>
 			<th> NOM </th>
 			<th> SOLDE </th>
-			<th> KICEST </th>
+			<th> PROFIL </th>
 			<th> MODIFIER </th>
 			<th> DESACTIVER </th>
 		</tr>
@@ -43,9 +41,9 @@
 				<td> ${utilisateur.prenom} </td>
 				<td> ${utilisateur.nom} </td>
 				<td> ${utilisateur.solde} </td>
-				<td> <a href="<c:url value='/utilisateurs/voir?id=${utilisateur.id}'/>">voir</a></td>
-				<td> <a href="<c:url value='/utilisateurs/actualiser?id=${utilisateur.id}' />">modifier</a></td>
-				<td> <a href="<c:url value='/utilisateurs/statut?id=${utilisateur.id}' />">desactiver</a></td>
+				<td> <a href="<c:url value='/utilisateurs/voir/${utilisateur.id}'/>">voir</a></td>
+				<td> <a href="<c:url value='/utilisateurs/actualiser/${utilisateur.id}' />">modifier</a></td>
+				<td> <a href="<c:url value='/utilisateurs/statut/${utilisateur.id}' />">desactiver</a></td>
 			</tr>
 
 		</c:forEach>
@@ -71,7 +69,7 @@
 			<th> PRENOM </th>
 			<th> NOM </th>
 			<th> SOLDE </th>
-			<th> KICEST </th>
+			<th> PROFIL </th>
 			<th> MODIFIER </th>
 			<th> ACTIVER </th>
 		</tr>
@@ -84,9 +82,9 @@
 				<td> ${utilisateur.prenom} </td>
 				<td> ${utilisateur.nom} </td>
 				<td> ${utilisateur.solde} </td>
-				<td> <a href="<c:url value='/utilisateurs/voir?id=${utilisateur.id}'/>">voir</a></td>
-				<td> <a href="<c:url value='/utilisateurs/actualiser?id=${utilisateur.id}' />">modifier</a></td>
-				<td> <a href="<c:url value='/utilisateurs/statut?id=${utilisateur.id}' />">activer</a></td>
+				<td> <a href="<c:url value='/utilisateurs/voir/${utilisateur.id}'/>">voir</a></td>
+				<td> <a href="<c:url value='/utilisateurs/actualiser/${utilisateur.id}' />">modifier</a></td>
+				<td> <a href="<c:url value='/utilisateurs/statut/${utilisateur.id}' />">activer</a></td>
 			</tr>
 
 		</c:forEach>
