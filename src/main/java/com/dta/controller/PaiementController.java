@@ -80,7 +80,7 @@ public class PaiementController {
 		
 		ps.creerDemandePaiement(p, id, idR);
 		
-		return "redirect:/paiement/"+idR;
+		return "redirect:/paiements";
 	}
 	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
@@ -109,7 +109,7 @@ public class PaiementController {
 		
 		ps.creerDemandePaiement(p, p.getEmetteur().getId(), idR);
 		
-		return "redirect:/paiement/"+idR;
+		return "redirect:/paiements";
 	}
 	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
@@ -138,7 +138,7 @@ public class PaiementController {
 		
 		ps.creerPaiementDirect(p, idE, idR);
 		
-		return "redirect:/paiement/"+idE;
+		return "redirect:/paiements";
 	}
 	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
@@ -166,7 +166,7 @@ public class PaiementController {
 		
 		ps.creerPaiementDirect(p, idE, p.getRecepteur().getId());
 		
-		return "redirect:/paiement/"+idE;
+		return "redirect:/paiements";
 	}
 	
 	//Liste des paiements à accepter.
@@ -203,7 +203,7 @@ public class PaiementController {
 		String login = SecurityContextHolder.getContext().getAuthentication().getName();
 		int idE = us.chercherUtilisateurLogin(login).getId();
 		
-		return "redirect:/paiement/en_attente/"+idE;
+		return "redirect:/paiements/en_attente";
 	}
 	
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
@@ -214,10 +214,7 @@ public class PaiementController {
 		
 		ps.refuserPaiement(p);
 		
-		String login = SecurityContextHolder.getContext().getAuthentication().getName();
-		int idE = us.chercherUtilisateurLogin(login).getId();
-		
-		return "redirect:/paiement/en_attente/"+idE;
+		return "redirect:/paiements/en_attente";
 	}
 
 }
