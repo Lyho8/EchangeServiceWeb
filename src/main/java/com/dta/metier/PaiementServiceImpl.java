@@ -21,6 +21,9 @@ public class PaiementServiceImpl implements IPaiementService {
 
 	@Autowired
 	private IUtilisateurDao utilisateurDao;
+	
+	@Autowired
+	private IMailService ms;
 
 	public void setDao(IPaiementDao dao) {
 		this.dao = dao;
@@ -160,6 +163,10 @@ public class PaiementServiceImpl implements IPaiementService {
 				p.setValide(true);
 				p.setDateValidation(new Date());
 				dao.actualiserPaiement(p);
+				
+				String sujet = "Paiement accepté par " + p.getEmetteur().getLogin();
+				String contenu = "L'utilisateur " + p.getEmetteur().getLogin() + " a accepté votre demande de paiement d'un montant de " + p.getMontant() + ".\nCommentaire : " + p.getMessage();
+				ms.sendMail(p.getRecepteur(), sujet, contenu);
 			}
 
 		} else {
@@ -169,6 +176,10 @@ public class PaiementServiceImpl implements IPaiementService {
 			p.setValide(true);
 			p.setDateValidation(new Date());
 			dao.actualiserPaiement(p);
+			
+			String sujet = "Paiement accepté par " + p.getEmetteur().getLogin();
+			String contenu = "L'utilisateur " + p.getEmetteur().getLogin() + " a accepté votre demande de paiement d'un montant de " + p.getMontant() + ".\nCommentaire : " + p.getMessage();
+			ms.sendMail(p.getRecepteur(), sujet, contenu);
 		}
 	}
 
@@ -176,6 +187,10 @@ public class PaiementServiceImpl implements IPaiementService {
 	public void refuserPaiement(Paiement p) {
 		p.setDateValidation(new Date());
 		dao.actualiserPaiement(p);
+		
+		String sujet = "Paiement refusé par " + p.getEmetteur().getLogin();
+		String contenu = "L'utilisateur " + p.getEmetteur().getLogin() + " a refusé votre demande de paiement d'un montant de " + p.getMontant() + ".\nCommentaire : " + p.getMessage();
+		ms.sendMail(p.getRecepteur(), sujet, contenu);
 
 	}
 
