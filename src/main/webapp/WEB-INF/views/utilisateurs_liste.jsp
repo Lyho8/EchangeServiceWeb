@@ -21,7 +21,7 @@
 	<div class="container">
 	<h3><spring:message code="utilisateurs.liste.actifs" /></h3>
 
-	<table class="table table-bordered ">
+	<table class="table table-striped table-bordered">
 
 		<tr>
 			<th> ID </th>
@@ -71,7 +71,7 @@
 	<h3><spring:message code="utilisateurs.liste.inactifs" /></h3>
 	
 	
-	<table class="table table-bordered ">
+	<table class="table table-striped table-bordered">
 
 		<tr>
 			<th> ID </th>
