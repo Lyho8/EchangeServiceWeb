@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dta.metier.IAnnonceService;
 import com.dta.metier.ICategorieService;
@@ -44,8 +45,15 @@ public class AnnonceController {
 	private ICommentaireService coms;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String home(Model model) {
-		List<Annonce> annonces = as.listerAnnonces(0, 50);
+	public String home(@RequestParam(value = "utilisateur", required = false) Integer idUtilisateur, Model model) {
+		List<Annonce> annonces;
+		System.out.println(idUtilisateur);
+		if(idUtilisateur != null) {
+			model.addAttribute("utilisateur", us.chercherUtilisateur(idUtilisateur.intValue()));
+			annonces = as.listerAnnoncesUtilisateur(idUtilisateur.intValue());
+		} else {
+			annonces = as.listerAnnonces(0, 50);
+		}
 		model.addAttribute("annonces", annonces);
 		return "annonces_home";
 	}

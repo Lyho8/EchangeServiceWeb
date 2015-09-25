@@ -79,4 +79,9 @@ public class AnnonceDaoImpl implements IAnnonceDao {
 		return entityManager.createQuery("SELECT a FROM Annonce a WHERE a.active = true AND a.type = :type ORDER BY a.dateCreation DESC", Annonce.class).setParameter("type", type).setFirstResult(0).setMaxResults(nombre).getResultList();
 	}
 
+	@Override
+	public List<Annonce> listerAnnoncesUtilisateur(int idUtilisateur) {
+		return entityManager.createQuery("SELECT a FROM Annonce a WHERE a.active = true AND a.auteur.id = :id ORDER BY a.dateCreation DESC", Annonce.class).setParameter("id", idUtilisateur).getResultList();
+	}
+
 }
