@@ -64,7 +64,7 @@
  			<form:hidden path="annonce.id" />
  			<div class="panel-body">  
 				<div class="input-group">
-	 				<form:textarea class="form-control" path="contenu" placeholder="Votre commentaire ici ..." cols="60" rows="6"/>  
+	 				<form:textarea class="form-control" path="contenu" placeholder="Votre commentaire ici ..." cols="60" rows="6"/>
 	 				<form:errors path="contenu" />  
 	 			</div> 
 				<br> 

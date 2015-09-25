@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dta.dao.ICommentaireDao;
 import com.dta.model.Annonce;
 import com.dta.model.Commentaire;
+import com.dta.model.Utilisateur;
 
 @Service
 public class CommentaireServiceImpl implements ICommentaireService {
@@ -38,6 +39,10 @@ public class CommentaireServiceImpl implements ICommentaireService {
 	
 	public List<Commentaire> chercherCommentaireParAuteur(String motCle) {
 		return dao.chercherCommentaireParAuteur(motCle);
+	}
+
+	public List<Annonce> chercherCommentairesNonLus(Utilisateur u) {
+		return dao.chercherCommentairesNonLus(u);
 	}
 
 }

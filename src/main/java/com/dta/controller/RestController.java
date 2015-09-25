@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.dta.metier.ICommentaireService;
 import com.dta.metier.IPaiementService;
 import com.dta.metier.IUtilisateurService;
 import com.dta.model.Utilisateur;
@@ -25,6 +26,9 @@ public class RestController {
 
 	@Autowired
 	private IPaiementService ps;
+	
+	@Autowired
+	private ICommentaireService cs;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	@ResponseBody
@@ -42,7 +46,7 @@ public class RestController {
 		
 		int nbPaiements = ps.chercherPaiementsInvalidesE(u).size();
 		int nbMPnonlus = 0;
-		int nbComsnonlus = 0;
+		int nbComsnonlus = cs.chercherCommentairesNonLus(u).size();
 		
 		Map<String, Integer> m = new HashMap<String, Integer>();
 		m.put("paiements", nbPaiements);
