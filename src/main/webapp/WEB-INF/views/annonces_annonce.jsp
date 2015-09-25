@@ -5,17 +5,44 @@
 <t:template>
 	<jsp:body>
 	
-	<div class="row">
-  <div class="col-sm-6 col-sm-offset-3">
+<div class="container">
+ 
     <div class="thumbnail">
       <img src="http://www.mot-a-mot.com/media/annonce/annonce_2.jpg"
 						alt="annonce de test">
       <div class="caption">
-      	<small style="float:right">${ annonce.categorie.libelle }</small>
-        <h3>${ annonce.type } de <a href="<c:url value="/utilisateurs/voir/${ annonce.auteur.id }" />">${ annonce.auteur.login }</a></h3>
-        <p>${ annonce.description }</p>
-      </div>
-      
+      	<div class="row">
+      	 <div class="col-sm-3">
+	      	<div class="panel panel-info" >
+				<div class="panel-body">
+					<h3>Catégorie : <span class="label label-info" >${ annonce.categorie.libelle }</span></h3>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-3 col-sm-offset-6">
+			<div class="panel panel-info">
+				<div class="panel-body">
+					<h3>${ annonce.type } de <a href="<c:url value="/utilisateurs/voir/${ annonce.auteur.id }" />">${ annonce.auteur.login }</a></h3>
+				</div>
+			</div>
+		</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-primary ">
+					<div class="panel-body text-center">
+					   ${ annonce.description }
+					</div>
+				</div>
+			</div>
+		</div>
+       </div>
+	</div>
+     
+</div>
+
+ <div class="row">
+  <div class="col-sm-6 col-sm-offset-3">     
 	<!-- affichage des commentaires de l'annonce -->
 	<c:forEach items="${ annonce.commentaires }" var="comm">
 		<div class="panel panel-default">
@@ -51,7 +78,6 @@
 	
     </div>
   </div>
-  </div>	
 	
     </jsp:body>
 </t:template>
