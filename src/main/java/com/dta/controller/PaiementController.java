@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.dta.metier.IMailService;
 import com.dta.metier.IPaiementService;
 import com.dta.metier.IUtilisateurService;
 import com.dta.model.Paiement;
@@ -31,6 +32,9 @@ public class PaiementController {
 	
 	@Autowired
 	private IUtilisateurService us;
+	
+	@Autowired
+	private IMailService ms;
 
 	/**
 	 * Affiche les paiements
@@ -80,6 +84,10 @@ public class PaiementController {
 		
 		ps.creerDemandePaiement(p, id, idR);
 		
+		String sujet = "Nouvelle demande de paiement par " + login;
+		String contenu = "L'utilisateur " + login + " a émis une demande de paiement d'un montant de " + p.getMontant() + ".\nCommentaire : " + p.getMessage();
+		ms.sendMail(us.chercherUtilisateur(id), sujet, contenu);
+		
 		return "redirect:/paiements";
 	}
 	
@@ -108,6 +116,10 @@ public class PaiementController {
 		int idR = us.chercherUtilisateurLogin(login).getId();
 		
 		ps.creerDemandePaiement(p, p.getEmetteur().getId(), idR);
+		
+		String sujet = "Nouvelle demande de paiement par " + login;
+		String contenu = "L'utilisateur " + login + " a émis une demande de paiement d'un montant de " + p.getMontant() + ".\nCommentaire : " + p.getMessage();
+		ms.sendMail(p.getEmetteur(), sujet, contenu);
 		
 		return "redirect:/paiements";
 	}
@@ -138,6 +150,10 @@ public class PaiementController {
 		
 		ps.creerPaiementDirect(p, idE, idR);
 		
+		String sujet = "Nouveau paiement par " + login;
+		String contenu = "L'utilisateur " + login + " a émis un paiement d'un montant de " + p.getMontant() + ".\nCommentaire : " + p.getMessage();
+		ms.sendMail(us.chercherUtilisateur(idR), sujet, contenu);
+		
 		return "redirect:/paiements";
 	}
 	
@@ -165,6 +181,10 @@ public class PaiementController {
 		int idE = us.chercherUtilisateurLogin(login).getId();
 		
 		ps.creerPaiementDirect(p, idE, p.getRecepteur().getId());
+		
+		String sujet = "Nouveau paiement par " + login;
+		String contenu = "L'utilisateur " + login + " a émis un paiement d'un montant de " + p.getMontant() + ".\nCommentaire : " + p.getMessage();
+		ms.sendMail(p.getRecepteur(), sujet, contenu);
 		
 		return "redirect:/paiements";
 	}
@@ -198,10 +218,8 @@ public class PaiementController {
 		
 		Paiement p = ps.chercherPaiement(id);
 		
+		//L'envoi de mail se fait au sein de la fonction valider
 		ps.validerPaiement(p);
-		
-		String login = SecurityContextHolder.getContext().getAuthentication().getName();
-		int idE = us.chercherUtilisateurLogin(login).getId();
 		
 		return "redirect:/paiements/en_attente";
 	}
@@ -212,6 +230,7 @@ public class PaiementController {
 		
 		Paiement p = ps.chercherPaiement(id);
 		
+		//L'envoi de mail se fait au sein de la fonction refuser
 		ps.refuserPaiement(p);
 		
 		return "redirect:/paiements/en_attente";
