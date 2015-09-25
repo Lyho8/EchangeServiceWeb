@@ -56,6 +56,7 @@
 					</div>
 					<button type="submit" class="btn btn-default">Submit</button>
 				</form>
+				<span style="float: right"> <a href="?lang=fr">fr</a> | <a href="?lang=en">en</a></span>
 			</sec:authorize>
 		</div>
 	</nav>

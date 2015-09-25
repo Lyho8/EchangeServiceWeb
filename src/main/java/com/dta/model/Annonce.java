@@ -15,6 +15,7 @@ public class Annonce {
 	private int id;
 	
 	@NotNull
+	@Column(columnDefinition = "TEXT")
 	private String description;
 	
 	@NotNull

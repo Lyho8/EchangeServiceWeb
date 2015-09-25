@@ -15,33 +15,33 @@
 	
 	<div class="jumbotron">
 	
-	<h3> Entrez vos coordonnées :</h3>
+	<h3><spring:message code="utilisateurs.formulaire.titre" /></h3>
 	
 		<table class="table table-bordered">
 			
 			<tr>
-				<td><form:label path="prenom">Entrez votre prénom :</form:label></td>
+				<td><form:label path="prenom"><spring:message code="utilisateurs.liste.attributPrenom" /></form:label></td>
 				<td><form:input path="prenom" /></td>
 			</tr>
 			
 			<tr>
-				<td><form:label path="nom">Entrez votre nom :</form:label></td>
+				<td><form:label path="nom"><spring:message code="utilisateurs.liste.attributNom" /></form:label></td>
 				<td><form:input path="nom" /></td>
 			</tr>
 			
 			<tr>
-				<td><form:label path="email">Entrez votre email :</form:label></td>
+				<td><form:label path="email"><spring:message code="utilisateurs.formulaire.attributEmail" /></form:label></td>
 				<td><form:input path="email" /></td>
 			</tr>
 
 			<tr>
-				<td><form:label path="login">Entrez votre login :</form:label></td>
+				<td><form:label path="login"><spring:message code="utilisateurs.formulaire.attributLogin" /></form:label></td>
 				<td><form:input path="login" /></td>
  			</tr>
 
  		<c:if test="${utilisateur.id==0}">		
  			<tr>
-				<td><form:label path="motDePasse">Entrez votre mot de passe :</form:label></td>
+				<td><form:label path="motDePasse"><spring:message code="utilisateurs.formulaire.attributMotDePasse" /></form:label></td>
 				<td><form:password path="motDePasse" /></td>
  			</tr>
  		</c:if>
@@ -53,7 +53,7 @@
 			<form:hidden path="motDePasse" />
 		</c:if>
 
-		<input type="submit" value="Envoyer" />
+		<input type="submit" value="<spring:message code="utilisateurs.formulaire.envoyer" />" />
 		
 		</div>
 		</div>
