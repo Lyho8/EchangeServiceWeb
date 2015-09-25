@@ -29,4 +29,6 @@ public interface IAnnonceService {
 
 	public abstract void actualiserAnnonce(Annonce annonce);
 
+	public abstract List<Annonce> listerAnnoncesUtilisateur(int idUtilisateur);
+
 }

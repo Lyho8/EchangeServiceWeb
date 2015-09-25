@@ -74,4 +74,8 @@ public class AnnonceServiceImpl implements IAnnonceService {
 	public List<Annonce> listerDernieresAnnoncesParType(int nombre, Type type) {
 		return dao.listerDernieresAnnoncesParType(nombre, type);
 	}
+
+	public List<Annonce> listerAnnoncesUtilisateur(int idUtilisateur) {
+		return dao.listerAnnoncesUtilisateur(idUtilisateur);
+	}
 }

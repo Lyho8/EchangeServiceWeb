@@ -27,4 +27,6 @@ public interface IAnnonceDao {
 	void actualiserAnnonce(Annonce annonce);
 
 	List<Annonce> listerDernieresAnnoncesParType(int nombre, Type type);
+
+	List<Annonce> listerAnnoncesUtilisateur(int idUtilisateur);
 }

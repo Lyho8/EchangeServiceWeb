@@ -1,11 +1,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <t:template>
 	<jsp:body>
 <h1>
-	Liste des annonces
+	Liste des annonces <c:if test="${ not empty utilisateur }">de ${ utilisateur.login }</c:if>
 </h1>
 
+<c:choose>
+<c:when test="${fn:length(annonces) gt 0}">
 <div class="row">
 <c:forEach items="${annonces}" var="annonce">
   <div class="col-sm-2">
@@ -20,6 +23,11 @@
   </div>
 </c:forEach>
 </div>
+</c:when>
+<c:otherwise>
+	<div class="alert alert-danger" role="alert">Cet utilisateur n'a posté aucune annonce.</div>
+</c:otherwise>
+</c:choose>
 
     </jsp:body>
 </t:template>
