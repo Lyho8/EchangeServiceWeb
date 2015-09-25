@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dta.metier.ICategorieService;
+import com.dta.metier.IMailService;
 import com.dta.metier.IMessagesService;
 import com.dta.metier.IUtilisateurService;
 import com.dta.model.MessagePrive;
@@ -42,6 +43,9 @@ public class MessageController {
 
 	@Autowired
 	private IUtilisateurService us;
+	
+	@Autowired
+	private IMailService mser;
 
 	/* Page d'accueil de message avec l'affichage des messages reçus */
 	@RequestMapping(value = "", method = RequestMethod.GET)
@@ -91,12 +95,20 @@ public class MessageController {
 	public String newMessagePost(@Valid MessagePrive mp,
 			BindingResult BindingResult, Model model, Locale locale) {
 
+		Authentication auth = SecurityContextHolder.getContext()
+				.getAuthentication();
+		String name = auth.getName();
+		
 		for (ObjectError oe : BindingResult.getAllErrors()) {
 			System.out.println(oe);
 		}
 
 		ms.creerMessage(mp);
-
+		
+		for (Utilisateur u: mp.getDestinataires()) {
+			mser.sendMail(u, "Vous avez reçu un message", "Va voir ta boîte de messagerie sur notre putain de site !!!");
+		}
+		
 		return "redirect:/messages";
 	}
 
@@ -119,6 +131,11 @@ public class MessageController {
 		
 		mp.setLu(true);
 		
+		ms.actualiserMessage(mp);
+		
+		mp = ms.chercherMessageParId(idMessage);
+		
+		System.out.println("\n\n\n -------" + mp.isLu() + "-------\n\n\n");
 		model.addAttribute("messagePrive", mp);
 
 		return "messages_voir";

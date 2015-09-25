@@ -64,7 +64,7 @@ public class MessagesServiceImpl implements IMessagesService {
 		return dao.chercherMessageParId(idMessage);
 	}
 
-	
+	@Transactional(propagation=Propagation.REQUIRES_NEW)
 	public void actualiserMessage(MessagePrive mp) {
 		dao.actualiserMessage(mp);
 	}
