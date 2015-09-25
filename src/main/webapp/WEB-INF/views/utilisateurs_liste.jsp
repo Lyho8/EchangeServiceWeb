@@ -8,20 +8,21 @@
 
 	<jsp:body>
 	
-	
-	
-	<h2>
-		<em><spring:message code="utilisateurs.liste.titre" /></em>
-	</h2>
+
+	<c:import url="utilisateurs_menu.jsp">
+		<c:param name="activetab" value="${actif? 'actifs' : 'inactifs'}"/>
+	</c:import>
+
+
 	<br>
 	<hr>
 	<div class="container">
 		<c:choose>
 					
 			<c:when test="${actif}">
-				<spring:message code="utilisateurs.profil.actif" />
+				<spring:message code="utilisateurs.liste.actifs" />
 				<div class="row">
-					<div class="col-sm-6 col-sm-offset-3">
+					<div class="col-sm-12">
 						<div class="panel panel-primary">
 							<div class="panel-body">
 				<table class="table table-striped table-bordered">
@@ -71,10 +72,10 @@
 			</c:when>
 									
 			<c:otherwise>
-				<spring:message code="utilisateurs.profil.inactif" />
+				<spring:message code="utilisateurs.liste.inactifs" />
 				
 				<div class="row">
-					<div class="col-sm-6 col-sm-offset-3">
+					<div class="col-sm-12">
 						<div class="panel panel-primary">
 							<div class="panel-body">
 				<table class="table table-striped table-bordered">
@@ -114,6 +115,7 @@
 					</c:forEach>
 				
 				</table>
+				
 				</div>
 				</div>
 				</div>

@@ -34,6 +34,7 @@ public class UtilisateurController {
 		boolean actif = statut.equals("actifs");
 		
 		model.addAttribute("listeUtilisateurs", ms.listerUtilisateurs(actif));
+		
 		model.addAttribute("actif", actif);
 		
 		return "utilisateurs_liste";
