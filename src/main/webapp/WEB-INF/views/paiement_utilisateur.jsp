@@ -25,6 +25,39 @@
 	</c:import>
 </c:if>
 
+		 <div class="row">
+		  
+			  <div class="col-sm-6 col-sm-offset-3">
+			  	<c:if test="${en_attente}"><h3>Demandes émises</h3></c:if>
+			  	<c:if test="${!en_attente}"><h3>Paiements reçus</h3></c:if>
+			      <table class="table table-striped table-bordered">
+			      	<tr>
+			      		<th>Id</th>
+			      		<th>Montant</th>
+			      		<th>Message</th>
+			      		<th>Emetteur</th>
+			      		<c:if test="${en_attente}"><th>Date d'émission</th></c:if>
+			  			<c:if test="${!en_attente}"><th>Date de validation</th></c:if>
+			      		<th>Statut</th>
+			      	</tr>
+			      	<c:forEach items="${ paiementsR }" var="p">
+			      	<tr>			      	
+			      		<td>${ p.id }</td>
+			      		<td>${ p.montant }</td>
+			      		<td>${ p.message }</td>
+			      		<td>${ p.emetteur.login }</td>
+			      		<c:if test="${en_attente}"><td><fmt:formatDate type="both" value="${ p.dateDemande }" /></td></c:if>
+			  			<c:if test="${!en_attente}"><td><fmt:formatDate type="both" value="${ p.dateValidation }" /></td></c:if>
+			  			<c:if test="${p.valide}"><td class="success">Validé</td></c:if>
+			  			<c:if test="${!p.valide}"><c:if test="${en_attente}"><td class="info">En attente</td></c:if></c:if>
+			  			<c:if test="${!p.valide}"><c:if test="${!en_attente}"><td class="danger">Refusé</td></c:if></c:if>
+			      	</tr>
+			      	</c:forEach>
+			      </table>
+			  </div>
+			  
+		</div>
+
 		<div class="row">
 						
 			  <div class="col-sm-6 col-sm-offset-3">
@@ -50,9 +83,9 @@
 			      		<td>${ p.recepteur.login }</td>
 			      		<c:if test="${en_attente}"><td><fmt:formatDate type="both" value="${ p.dateDemande }" /></td></c:if>
 			  			<c:if test="${!en_attente}"><td><fmt:formatDate type="both" value="${ p.dateValidation }" /></td></c:if>
-			      		<c:if test="${p.valide}"><td>Validé</td></c:if>
-			  			<c:if test="${!p.valide}"><c:if test="${en_attente}"><td>En attente</td></c:if></c:if>
-			  			<c:if test="${!p.valide}"><c:if test="${!en_attente}"><td>Refusé</td></c:if></c:if>
+			      		<c:if test="${p.valide}"><td class="success">Validé</td></c:if>
+			  			<c:if test="${!p.valide}"><c:if test="${en_attente}"><td class="info">En attente</td></c:if></c:if>
+			  			<c:if test="${!p.valide}"><c:if test="${!en_attente}"><td class="danger">Refusé</td></c:if></c:if>
 			      		<c:if test="${en_attente}"><td><c:if test="${ p.dateValidation==null }"><a href="<c:url value='/paiements/valider/${ p.id }' />">Accepter</a></c:if></td></c:if>
 			      		<c:if test="${en_attente}"><td><c:if test="${ p.dateValidation==null }"><a href="<c:url value='/paiements/refuser/${ p.id }' />">Refuser</a></c:if></td></c:if>
 			      	</tr>
@@ -61,39 +94,6 @@
 			  </div>
 			  
 		  </div>
-			  
-		  <div class="row">
-		  
-			  <div class="col-sm-6 col-sm-offset-3">
-			  	<c:if test="${en_attente}"><h3>Demandes émises</h3></c:if>
-			  	<c:if test="${!en_attente}"><h3>Paiements reçus</h3></c:if>
-			      <table class="table table-striped table-bordered">
-			      	<tr>
-			      		<th>Id</th>
-			      		<th>Montant</th>
-			      		<th>Message</th>
-			      		<th>Emetteur</th>
-			      		<c:if test="${en_attente}"><th>Date d'émission</th></c:if>
-			  			<c:if test="${!en_attente}"><th>Date de validation</th></c:if>
-			      		<th>Statut</th>
-			      	</tr>
-			      	<c:forEach items="${ paiementsR }" var="p">
-			      	<tr>			      	
-			      		<td>${ p.id }</td>
-			      		<td>${ p.montant }</td>
-			      		<td>${ p.message }</td>
-			      		<td>${ p.emetteur.login }</td>
-			      		<c:if test="${en_attente}"><td><fmt:formatDate type="both" value="${ p.dateDemande }" /></td></c:if>
-			  			<c:if test="${!en_attente}"><td><fmt:formatDate type="both" value="${ p.dateValidation }" /></td></c:if>
-			  			<c:if test="${p.valide}"><td>Validé</td></c:if>
-			  			<c:if test="${!p.valide}"><c:if test="${en_attente}"><td>En attente</td></c:if></c:if>
-			  			<c:if test="${!p.valide}"><c:if test="${!en_attente}"><td>Refusé</td></c:if></c:if>
-			      	</tr>
-			      	</c:forEach>
-			      </table>
-			  </div>
-			  
-		</div>		
 
     </jsp:body>
 </t:template>
