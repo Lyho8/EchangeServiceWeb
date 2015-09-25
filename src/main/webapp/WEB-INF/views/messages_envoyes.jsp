@@ -2,6 +2,7 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <t:template>
 	<jsp:body>
@@ -25,7 +26,7 @@
 		                    <c:forEach items="${MesMessagesE}" var="monMessageE">
 		                    <tr>
 		                       	<td>${monMessageE.titre}</td>
-		                       	<td>${monMessageE.dateCreation}</td>
+		                       	<td><fmt:formatDate type="both" value="${monMessageR.dateCreation}"></fmt:formatDate></td>
 		                       	<td><a href="<c:url value='/messages/envoyes/voir/${monMessageE.id}' />" class="btn btn-primary" role="button">
 		                       		<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
 		                       	</a></td>

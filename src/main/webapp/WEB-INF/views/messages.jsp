@@ -2,6 +2,7 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <t:template>
 	<jsp:body>
@@ -23,15 +24,16 @@
                      <td><h4>Auteur :</h4></td>
                      <td><h4>Sujet :</h4></td>
                      <td><h4>Date :</h4></td>
+                     <td><h4>Lu :</h4></td>
                  </tr>
                  <c:forEach items="${MesMessagesR}" var="monMessageR">
                  <tr>
                     	<td>${monMessageR.auteur.login}</td>
                     	<td>${monMessageR.titre}</td>
-                    	<td>${monMessageR.dateCreation}</td>
+                    	<td><fmt:formatDate type="both" value="${monMessageR.dateCreation}"></fmt:formatDate> </td>
                     	<td>
                     		<c:if test="${monMessageR.lu == true}"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></c:if>
-                    		<c:if test="${monMessageR.lu == false}"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></c:if>
+                    		<c:if test="${monMessageR.lu == false}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></c:if>
                     	</td>
                     	<td><a href="<c:url value='/messages/voir/${monMessageR.id}' />" class="btn btn-primary" role="button">
                     		<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
