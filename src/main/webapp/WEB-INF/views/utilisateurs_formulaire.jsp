@@ -17,7 +17,7 @@
 	
 	<h3><spring:message code="utilisateurs.formulaire.titre" /></h3>
 	
-		<table class="table table-bordered">
+		<table class="table table-striped table-bordered">
 			
 			<tr>
 				<td><form:label path="prenom"><spring:message code="utilisateurs.liste.attributPrenom" /></form:label></td>
@@ -31,7 +31,7 @@
 			
 			<tr>
 				<td><form:label path="email"><spring:message code="utilisateurs.formulaire.attributEmail" /></form:label></td>
-				<td><form:input path="email" /></td>
+				<td><form:input type="email" path="email" /></td>
 			</tr>
 
 			<tr>

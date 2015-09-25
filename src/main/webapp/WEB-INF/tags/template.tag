@@ -13,6 +13,7 @@
 </head>
 <body>
 	<nav class="navbar navbar-default">
+		<span style="float: right"><h2><a href="utilisateurs/profil"><sec:authentication property="principal.username" /></a></h2> <a href="?lang=fr">fr</a> | <a href="?lang=en">en</a></span>
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<li role="presentation" <c:if test="${urlCourante=='home'}">class="active"</c:if>><a href="<c:url value='/' />">Page d'accueil</a></li>
@@ -30,7 +31,7 @@
 						</button>
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 							<li role="presentation"><a href="<c:url value='/annonces/nouvelle' />">Publier une annonce</a></li>
-							<li role="presentation"><a href="<c:url value='/messages' />">Messages</a></li>
+							<li role="presentation"><a href="<c:url value='/messages' />">Messages privés</a></li>
 							<li role="presentation"><a href="<c:url value='/paiements' />">Mes transactions</a></li>
 							<li role="presentation"><a href="<c:url value='/paiements/demande' />">Emettre une demande de paiement</a></li>
 							<li role="presentation"><a href="<c:url value='/paiements/direct' />">Effectuer un paiement</a></li>
@@ -45,7 +46,7 @@
 						</ul>
 					</div>
 				</li>
-				</sec:authorize>
+				</sec:authorize>		
 			</ul>
 
 			<!-- formulaire de connection et lien inscription  -->
@@ -56,7 +57,6 @@
 					</div>
 					<button type="submit" class="btn btn-default">Submit</button>
 				</form>
-				<span style="float: right"> <a href="?lang=fr">fr</a> | <a href="?lang=en">en</a></span>
 			</sec:authorize>
 		</div>
 	</nav>

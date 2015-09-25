@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,8 +34,8 @@ public class UtilisateurController {
 		model.addAttribute("listeUtilisateursActifs", ms.listerUtilisateurs(true));
 		
 		model.addAttribute("listeUtilisateursInactifs", ms.listerUtilisateurs(false));
-
-		return "utilisateurs_liste";
+		
+		return "utilisateurs_menu";
 	}
 
 	
@@ -127,6 +128,16 @@ public class UtilisateurController {
 		model.addAttribute("montantsRecus", totalPaiementsRecus);
 		
 		return "utilisateurs_profil";
+	}
+	
+	@RequestMapping(value="/profil", method=RequestMethod.GET)
+	public String profil(Model model){
+		
+		String login = SecurityContextHolder.getContext().getAuthentication().getName();
+		
+		Utilisateur u = ms.chercherUtilisateurLogin(login);
+		
+		return "redirect:/utilisateurs/voir/"+u.getId();
 	}
 
 }

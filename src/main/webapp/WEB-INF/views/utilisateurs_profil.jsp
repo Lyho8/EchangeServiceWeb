@@ -64,6 +64,8 @@
 	
 	</div>
 
+<!-- 	url vers annonces /annonces/id
+ -->
 	</jsp:body>
 
 </t:template>
