@@ -23,7 +23,7 @@ public class UtilisateurDaoImpl implements IUtilisateurDao {
 
 	@Override
 	public List<Utilisateur> listerUtilisateurs(boolean actif) {
-		return em.createQuery("select u from Utilisateur u where u.actif=:actif", Utilisateur.class).setParameter("actif", actif).getResultList();
+		return em.createQuery("select u from Utilisateur u where u.actif=:actif order by u.login asc", Utilisateur.class).setParameter("actif", actif).getResultList();
 	}
 
 	@Override
