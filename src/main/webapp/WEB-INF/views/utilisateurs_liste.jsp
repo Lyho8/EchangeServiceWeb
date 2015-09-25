@@ -8,7 +8,6 @@
 
 	<jsp:body>
 	
-
 	<c:import url="utilisateurs_menu.jsp">
 		<c:param name="activetab" value="${actif? 'actifs' : 'inactifs'}"/>
 	</c:import>
@@ -89,7 +88,6 @@
 						<th> <spring:message code="utilisateurs.liste.modifier" />  </th>
 						<th> <spring:message code="utilisateurs.liste.activer" />  </th>
 					</tr>
-			
 			
 					<c:forEach items="${listeUtilisateurs}" var="utilisateur">
 			
