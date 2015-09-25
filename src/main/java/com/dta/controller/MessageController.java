@@ -134,8 +134,10 @@ public class MessageController {
 		MessagePrive mp = new MessagePrive();
 		mp.setAuteur(us.chercherUtilisateurLogin(name));
 		mp.getDestinataires().add(origine.getAuteur());
-		String s = "Message d'origine envoyé par "+origine.getAuteur().getLogin()+" le "+origine.getDateCreation()+" :\n"+origine.getContenu();
+		String s = "\n\n\n--------------\nMessage d'origine envoyé par "+origine.getAuteur().getLogin()+" le "+origine.getDateCreation()+" :\n"+origine.getContenu();
 		mp.setContenu(s);
+		s = "Re: " + origine.getTitre();
+		mp.setTitre(s);
 
 		model.addAttribute("users", us.listerUtilisateurs(true));
 		model.addAttribute("messagePrive", mp);
