@@ -31,11 +31,11 @@
 					<!-- Menu de gestion de l'admin  -->
 					<sec:authorize access="hasRole('ROLE_ADMIN')">
 						<li role="separator" class="divider"></li>
-						<li role="presentation" <c:if test="${requestScope['javax.servlet.forward.request_uri']=='/projetf/utilisateurs/lister'}">class="active"</c:if>><a href="<c:url value='/utilisateurs/lister' />">Gérer les utilisateurs</a></li>
+						<li role="presentation" <c:if test="${requestScope['javax.servlet.forward.request_uri']=='/projetf/utilisateurs/lister/inactifs' || '/projetf/utilisateurs/lister/actifs'}">class="active"</c:if>><a href="<c:url value='/utilisateurs/lister/inactifs' />">Gérer les utilisateurs</a></li>
 						<li role="presentation" <c:if test="${requestScope['javax.servlet.forward.request_uri']=='/projetf/annonces/categorie'}">class="active"</c:if>><a href="<c:url value='/annonces/categorie' />">Gérer les catégories</a></li>
 					</sec:authorize>
 					<!--------------------------------->
-					<li role="presentation" <c:if test="${requestScope['javax.servlet.forward.request_uri']=='/projetf/utilisateurs/profil'}">class="active"</c:if>><a href="<c:url value='/utilisateurs/profil'/>"><sec:authentication property="principal.username" /></a></li>
+					<li role="presentation"><a href="<c:url value='/utilisateurs/profil'/>"><sec:authentication property="principal.username" /></a></li>
 					<li role="presentation" <c:if test="${requestScope['javax.servlet.forward.request_uri']=='/projetf/j_spring_security_logout'}">class="active"</c:if>><a href="<c:url value='/j_spring_security_logout'/>">Déconnexion</a></li>
 				</sec:authorize>		
 			</ul>
