@@ -12,15 +12,15 @@
 						alt="annonce de test">
       <div class="caption">
       	<small style="float:right">${ annonce.categorie.libelle }</small>
-        <h3>${ annonce.type } de ${ annonce.auteur.login }</h3>
+        <h3>${ annonce.type } de <a href="<c:url value="/utilisateurs/voir/${ annonce.auteur.id }" />">${ annonce.auteur.login }</a></h3>
         <p>${ annonce.description }</p>
       </div>
       
 	<!-- affichage des commentaires de l'annonce -->
 	<c:forEach items="${ annonce.commentaires }" var="comm">
 		<div class="panel panel-default">
-		  <div class="panel-heading">${ comm.auteur.login }</div>
-		  <div class="panel-body"> ${ comm.contenu }</div>
+		  <div class="panel-heading"><a href="<c:url value="/utilisateurs/voir/${ annonce.auteur.id }" />">${ comm.auteur.login }</a></div>
+		  <div class="panel-body">${ comm.contenu }</div>
 		</div>
 	</c:forEach>
 	
