@@ -80,6 +80,7 @@ public class MessageController {
 		MessagePrive mp = new MessagePrive();
 		mp.setAuteur(us.chercherUtilisateurLogin(name));
 
+		model.addAttribute("users", us.listerUtilisateurs(true));
 		model.addAttribute("messagePrive", mp);
 
 		return "messages_new";
@@ -126,11 +127,12 @@ public class MessageController {
 		binder.registerCustomEditor(List.class, new PropertyEditorSupport() {
 			@Override
 			public void setAsText(String text) {
+				System.out.println(text);
 				List<Utilisateur> lu = new ArrayList<Utilisateur>();
-				String[] tabDes = text.split("\n");
+				String[] tabDes = text.split(",");
 				for (String log : tabDes) {
 					try {
-						lu.add(us.chercherUtilisateurLogin(log.trim()));
+						lu.add(us.chercherUtilisateur(Integer.parseInt(log.trim())));
 					} catch (Exception e) {
 
 					}

@@ -21,8 +21,10 @@
 					<form:hidden path="auteur.id"/>
 						<div class="input-group">
 							<form:label class="form-control" path="destinataires">
-								Destinataire(s) : </form:label>
-							<form:textarea class="form-control" path="destinataires" required="required" />
+								Destinataire : </form:label>
+							<form:select class="form-control" path="destinataires">
+								<form:options items="${ users }" itemLabel="login" itemValue="id" />
+							</form:select>
 							<form:errors path="destinataires" />
 						</div>
 						<br>

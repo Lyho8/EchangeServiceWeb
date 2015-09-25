@@ -27,19 +27,19 @@
 					</div>
 					<br>
 					<div class="input-group">
-						<form:label class="form-control" path="description">
-							Message : </form:label>
-						<form:textarea class="form-control" path="description" rows="10" />
-						<form:errors path="description" />
-					</div>
-					<br>
-					<div class="input-group">
 						<form:label class="form-control" path="categorie.id">
 							Catégorie : </form:label>
 						<form:select class="form-control" path="categorie.id">
 							<form:options items="${categories}" itemLabel="libelle" itemValue="id" ></form:options>
 						</form:select>
 						<form:errors path="categorie" />
+					</div>
+					<br>
+					<div class="input-group">
+						<form:label class="form-control" path="description">
+							Message : </form:label>
+						<form:textarea class="form-control" path="description" rows="10" />
+						<form:errors path="description" />
 					</div>
 					<br>
 					<div class="input-group">
