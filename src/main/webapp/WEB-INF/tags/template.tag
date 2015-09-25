@@ -31,7 +31,7 @@
 					<!-- Menu de gestion de l'admin  -->
 					<sec:authorize access="hasRole('ROLE_ADMIN')">
 						<li role="separator" class="divider"></li>
-						<li role="presentation" <c:if test="${requestScope['javax.servlet.forward.request_uri']=='/projetf/utilisateurs/lister/inactifs' || '/projetf/utilisateurs/lister/actifs'}">class="active"</c:if>><a href="<c:url value='/utilisateurs/lister/inactifs' />">Gérer les utilisateurs</a></li>
+						<li role="presentation" <c:if test="${requestScope['javax.servlet.forward.request_uri']=='/projetf/utilisateurs/lister/inactifs' }">class="active"</c:if>><a href="<c:url value='/utilisateurs/lister/inactifs' />">Gérer les utilisateurs</a></li>
 						<li role="presentation" <c:if test="${requestScope['javax.servlet.forward.request_uri']=='/projetf/annonces/categorie'}">class="active"</c:if>><a href="<c:url value='/annonces/categorie' />">Gérer les catégories</a></li>
 					</sec:authorize>
 					<!--------------------------------->

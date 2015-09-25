@@ -26,7 +26,7 @@
 		                    <c:forEach items="${MesMessagesE}" var="monMessageE">
 		                    <tr>
 		                       	<td>${monMessageE.titre}</td>
-		                       	<td><fmt:formatDate type="both" value="${monMessageR.dateCreation}"></fmt:formatDate></td>
+		                       	<td><fmt:formatDate type="both" value="${monMessageE.dateCreation}"></fmt:formatDate></td>
 		                       	<td><a href="<c:url value='/messages/envoyes/voir/${monMessageE.id}' />" class="btn btn-primary" role="button">
 		                       		<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
 		                       	</a></td>
