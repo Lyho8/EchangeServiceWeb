@@ -52,4 +52,9 @@ public class MessageDaoImpl implements IMessageDao {
 		return entityManager.createQuery("SELECT mp FROM MessagePrive mp WHERE mp.id  = :id", MessagePrive.class).setParameter("id", idMessage).getSingleResult();	
 	}
 
+	
+	public void actualiserMessage(MessagePrive mp) {
+		entityManager.merge(mp);
+	}
+
 }

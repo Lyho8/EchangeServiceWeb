@@ -14,6 +14,9 @@ public class Message {
 	private int id;
 	
 	@NotNull
+	private boolean lu = false;
+	
+	@NotNull
 	@Column(length = 1024)
 	private String contenu;
 	
@@ -78,6 +81,15 @@ public class Message {
 
 	public void setAuteur(Utilisateur auteur) {
 		this.auteur = auteur;
+	}
+	
+	public boolean isLu() {
+		return lu;
+	}
+
+	public void setLu(boolean lu) {
+		this.lu = lu;
 	}	
+	
 	
 }

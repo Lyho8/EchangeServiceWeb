@@ -63,6 +63,11 @@ public class MessagesServiceImpl implements IMessagesService {
 	public MessagePrive chercherMessageParId(int idMessage) {
 		return dao.chercherMessageParId(idMessage);
 	}
+
+	
+	public void actualiserMessage(MessagePrive mp) {
+		dao.actualiserMessage(mp);
+	}
 	
 	
 
