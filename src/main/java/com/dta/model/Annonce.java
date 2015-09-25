@@ -3,6 +3,7 @@ package com.dta.model;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.eclipse.persistence.annotations.PrivateOwned;
 
 import java.util.*;
