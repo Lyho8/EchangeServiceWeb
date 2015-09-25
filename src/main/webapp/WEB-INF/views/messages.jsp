@@ -29,6 +29,10 @@
                     	<td>${monMessageR.auteur.login}</td>
                     	<td>${monMessageR.titre}</td>
                     	<td>${monMessageR.dateCreation}</td>
+                    	<td>
+                    		<c:if test="${monMessageR.lu == true}"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></c:if>
+                    		<c:if test="${monMessageR.lu == false}"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></c:if>
+                    	</td>
                     	<td><a href="<c:url value='/messages/voir/${monMessageR.id}' />" class="btn btn-primary" role="button">
                     		<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                     	</a></td>

@@ -15,5 +15,6 @@ public interface IMessagesService {
 	public MessagePrive chercherMessageParId(int idMessage);
 	public List<MessagePrive> supprimerMessageEnvoieParTitre(String motCle,Utilisateur u);
 	public List<MessagePrive> supprimerMessageRecuParTitre(String motCle,Utilisateur u);
+	public void actualiserMessage(MessagePrive mp);
 	
 }

@@ -116,7 +116,9 @@ public class MessageController {
 			Model model) {
 
 		MessagePrive mp = ms.chercherMessageParId(idMessage);
-
+		
+		mp.setLu(true);
+		
 		model.addAttribute("messagePrive", mp);
 
 		return "messages_voir";

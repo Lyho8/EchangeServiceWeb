@@ -43,4 +43,5 @@ public class MessagePrive extends Message {
 		this.destinataires = destinataires;
 	}
 
+	
 }
