@@ -13,7 +13,7 @@
 </head>
 <body>
 	<nav class="navbar navbar-default">
-		<span style="float: right"><h2><a href="utilisateurs/profil"><sec:authentication property="principal.username" /></a></h2> <a href="?lang=fr">fr</a> | <a href="?lang=en">en</a></span>
+		<span style="float: right"><sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"><h2><a href="utilisateurs/profil"><sec:authentication property="principal.username" /></a></h2></sec:authorize> <a href="?lang=fr">fr</a> | <a href="?lang=en">en</a></span>
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<li role="presentation" <c:if test="${urlCourante=='home'}">class="active"</c:if>><a href="<c:url value='/' />">Page d'accueil</a></li>
