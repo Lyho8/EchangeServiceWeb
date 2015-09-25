@@ -20,6 +20,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.eclipse.persistence.annotations.PrivateOwned;
 
 @Entity
@@ -181,7 +182,7 @@ public class Utilisateur {
 	public void setLogin(String login) {
 		this.login = login;
 	}
-
+	
 	public String getMotDePasse() {
 		return motDePasse;
 	}
@@ -206,6 +207,7 @@ public class Utilisateur {
 		this.dateInscription = dateInscription;
 	}
 
+	@JsonIgnore
 	public List<Message> getMessages() {
 		return messages;
 	}
@@ -214,6 +216,7 @@ public class Utilisateur {
 		this.messages = messages;
 	}
 
+	@JsonIgnore
 	public List<Annonce> getAnnonces() {
 		return annonces;
 	}
@@ -222,6 +225,7 @@ public class Utilisateur {
 		this.annonces = annonces;
 	}
 
+	@JsonIgnore
 	public List<Message> getMessagesRecus() {
 		return messagesRecus;
 	}
@@ -238,6 +242,7 @@ public class Utilisateur {
 		this.actif = actif;
 	}
 
+	@JsonIgnore
 	public List<Paiement> getPaiementsEmis() {
 		return paiementsEmis;
 	}
@@ -246,6 +251,7 @@ public class Utilisateur {
 		this.paiementsEmis = paiementsEmis;
 	}
 
+	@JsonIgnore
 	public List<Paiement> getPaiementsRecus() {
 		return paiementsRecus;
 	}
