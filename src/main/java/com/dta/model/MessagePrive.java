@@ -15,7 +15,7 @@ public class MessagePrive extends Message {
 	@NotNull
 	@ManyToMany
 	@JoinTable(name = "usr_msg", joinColumns = { @JoinColumn(name = "idMsg") }, inverseJoinColumns = { @JoinColumn(name = "idUsr") })
-	private List<Utilisateur> destinataires;
+	private List<Utilisateur> destinataires = new ArrayList<Utilisateur>();
 	
 	public MessagePrive(){
 		super();

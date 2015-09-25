@@ -13,39 +13,30 @@
 </head>
 <body>
 	<nav class="navbar navbar-default">
-		<span style="float: right"><h2><a href="utilisateurs/profil"><sec:authentication property="principal.username" /></a></h2> <a href="?lang=fr">fr</a> | <a href="?lang=en">en</a></span>
+		<span style="float: right"><a href="?lang=fr">fr</a> | <a href="?lang=en">en</a></span>
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
-				<li role="presentation" <c:if test="${urlCourante=='home'}">class="active"</c:if>><a href="<c:url value='/' />">Page d'accueil</a></li>
-				<li role="presentation" <c:if test="${urlCourante=='annonces'}">class="active"</c:if>><a href="<c:url value='/annonces' />">Annonces</a></li>
+				<li role="presentation" <c:if test="${requestScope['javax.servlet.forward.request_uri']=='/projetf/'}">class="active"</c:if>><a href="<c:url value='/' />">Page d'accueil</a></li>
+				<li role="presentation" <c:if test="${requestScope['javax.servlet.forward.request_uri']=='/projetf/annonces'}">class="active"</c:if>><a href="<c:url value='/annonces' />">Annonces</a></li>
 				<sec:authorize access="isAnonymous()">
-					<li role="presentation" <c:if test="${urlCourante=='inscriptionConnection'}">class="active"</c:if>><a href="<c:url value='/utilisateurs/enregistrer' />">Inscription</a></li>
+					<li role="presentation" <c:if test="${requestScope['javax.servlet.forward.request_uri']=='/projetf/utilisateurs/enregistrer'}">class="active"</c:if>><a href="<c:url value='/utilisateurs/enregistrer' />">Inscription</a></li>
 				</sec:authorize>
 				<!-- Menu de gestion des utilisateurs  -->
 				<sec:authorize access="isAuthenticated()">
-				<li role="presentation">
-					<div class="dropdown">
-						<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-						  <sec:authentication property="principal.username" />
-						  <span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-							<li role="presentation"><a href="<c:url value='/annonces/nouvelle' />">Publier une annonce</a></li>
-							<li role="presentation"><a href="<c:url value='/messages' />">Messages privés</a></li>
-							<li role="presentation"><a href="<c:url value='/paiements' />">Mes transactions</a></li>
-							<li role="presentation"><a href="<c:url value='/paiements/demande' />">Emettre une demande de paiement</a></li>
-							<li role="presentation"><a href="<c:url value='/paiements/direct' />">Effectuer un paiement</a></li>
-							<!-- Menu de gestion de l'admin  -->
-							<sec:authorize access="hasRole('ROLE_ADMIN')">
-								<li role="separator" class="divider"></li>
-								<li role="presentation"><a href="<c:url value='/utilisateurs/lister' />">Gérer les utilisateurs</a></li>
-								<li role="presentation"><a href="<c:url value='/annonces/categorie' />">Gérer les catégories</a></li>
-							</sec:authorize>
-							<li role="separator" class="divider"></li>
-							<li role="presentation"><a href="<c:url value='/j_spring_security_logout'/>">Déconnexion</a></li>
-						</ul>
-					</div>
-				</li>
+					<li role="presentation" <c:if test="${requestScope['javax.servlet.forward.request_uri']=='/projetf/annonces/nouvelle'}">class="active"</c:if>><a href="<c:url value='/annonces/nouvelle' />">Publier une annonce</a></li>
+					<li role="presentation" <c:if test="${requestScope['javax.servlet.forward.request_uri']=='/projetf/messages'}">class="active"</c:if>><a href="<c:url value='/messages' />">Ma messagerie</a></li>
+					<li role="presentation" <c:if test="${requestScope['javax.servlet.forward.request_uri']=='/projetf/paiements'}">class="active"</c:if>><a href="<c:url value='/paiements' />">Mes transactions</a></li>
+					<li role="presentation" <c:if test="${requestScope['javax.servlet.forward.request_uri']=='/projetf/paiements/demande'}">class="active"</c:if>><a href="<c:url value='/paiements/demande' />">Faire une demande de paiement</a></li>
+					<li role="presentation" <c:if test="${requestScope['javax.servlet.forward.request_uri']=='/projetf/paiements/direct'}">class="active"</c:if>><a href="<c:url value='/paiements/direct' />">Effectuer un paiement</a></li>
+					<!-- Menu de gestion de l'admin  -->
+					<sec:authorize access="hasRole('ROLE_ADMIN')">
+						<li role="separator" class="divider"></li>
+						<li role="presentation" <c:if test="${requestScope['javax.servlet.forward.request_uri']=='/projetf/utilisateurs/lister'}">class="active"</c:if>><a href="<c:url value='/utilisateurs/lister' />">Gérer les utilisateurs</a></li>
+						<li role="presentation" <c:if test="${requestScope['javax.servlet.forward.request_uri']=='/projetf/annonces/categorie'}">class="active"</c:if>><a href="<c:url value='/annonces/categorie' />">Gérer les catégories</a></li>
+					</sec:authorize>
+					<!--------------------------------->
+					<li role="presentation" <c:if test="${requestScope['javax.servlet.forward.request_uri']=='/projetf/utilisateurs/profil'}">class="active"</c:if>><a href="<c:url value='/utilisateurs/profil'/>"><sec:authentication property="principal.username" /></a></li>
+					<li role="presentation" <c:if test="${requestScope['javax.servlet.forward.request_uri']=='/projetf/j_spring_security_logout'}">class="active"</c:if>><a href="<c:url value='/j_spring_security_logout'/>">Déconnexion</a></li>
 				</sec:authorize>		
 			</ul>
 
