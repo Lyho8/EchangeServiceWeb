@@ -121,6 +121,40 @@ public class MessageController {
 
 		return "messages_voir";
 	}
+	
+	@RequestMapping(value = "/repondre/{id}", method = RequestMethod.GET)
+	public String newMessageForm(@PathVariable int id, Model model) {
+
+		Authentication auth = SecurityContextHolder.getContext()
+				.getAuthentication();
+		String name = auth.getName();
+		
+		MessagePrive origine = ms.chercherMessageParId(id);
+
+		MessagePrive mp = new MessagePrive();
+		mp.setAuteur(us.chercherUtilisateurLogin(name));
+		mp.getDestinataires().add(origine.getAuteur());
+		String s = "Message d'origine envoyé par "+origine.getAuteur().getLogin()+" le "+origine.getDateCreation()+" :\n"+origine.getContenu();
+		mp.setContenu(s);
+
+		model.addAttribute("users", us.listerUtilisateurs(true));
+		model.addAttribute("messagePrive", mp);
+
+		return "messages_new";
+	}
+	
+	@RequestMapping(value = "/repondre/{id}", method = RequestMethod.POST)
+	public String newMessagePost(@PathVariable int id, @Valid MessagePrive mp,
+			BindingResult BindingResult, Model model, Locale locale) {
+
+		for (ObjectError oe : BindingResult.getAllErrors()) {
+			System.out.println(oe);
+		}
+
+		ms.creerMessage(mp);
+
+		return "redirect:/messages";
+	}
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
