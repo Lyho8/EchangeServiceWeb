@@ -61,6 +61,21 @@ public class PaiementServiceImpl implements IPaiementService {
 	public List<Paiement> chercherPaiementsR(Utilisateur u) {
 		return dao.chercherPaiementsR(u);
 	}
+	
+	@Transactional(readOnly = true)
+	public List<Paiement> chercherPaiementsValides() {
+		return dao.chercherPaiementsValides();
+	}
+
+	@Transactional(readOnly = true)
+	public List<Paiement> chercherPaiementsValidesE(Utilisateur u) {
+		return dao.chercherPaiementsValidesE(u);
+	}
+
+	@Transactional(readOnly = true)
+	public List<Paiement> chercherPaiementsValidesR(Utilisateur u) {
+		return dao.chercherPaiementsValidesR(u);
+	}
 
 	@Transactional(readOnly = true)
 	public List<Paiement> chercherPaiementsInvalides() {
