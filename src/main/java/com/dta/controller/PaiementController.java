@@ -48,8 +48,8 @@ public class PaiementController {
 		String login = SecurityContextHolder.getContext().getAuthentication().getName();
 		int idC = us.chercherUtilisateurLogin(login).getId();
 		
-		model.addAttribute("paiementsE", ps.chercherPaiementsE(us.chercherUtilisateur(idC)));
-		model.addAttribute("paiementsR", ps.chercherPaiementsR(us.chercherUtilisateur(idC)));
+		model.addAttribute("paiementsE", ps.chercherPaiementsValidesE(us.chercherUtilisateur(idC)));
+		model.addAttribute("paiementsR", ps.chercherPaiementsValidesR(us.chercherUtilisateur(idC)));
 		model.addAttribute("en_attente", false);
 		return "paiement_utilisateur";
 	}

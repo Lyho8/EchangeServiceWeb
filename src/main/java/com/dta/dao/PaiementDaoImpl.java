@@ -66,18 +66,33 @@ public class PaiementDaoImpl implements IPaiementDao {
 	}
 
 	@Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+	public List<Paiement> chercherPaiementsValides() {
+		return entityManager.createQuery("select p from Paiement p  where not p.dateValidation is null order by p.dateValidation desc", Paiement.class).getResultList();
+	}
+
+	@Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+	public List<Paiement> chercherPaiementsValidesE(Utilisateur u) {
+		return entityManager.createQuery("select p from Paiement p  where p.emetteur.id=:id and not p.dateValidation is null order by p.dateValidation desc", Paiement.class).setParameter("id", u.getId()).getResultList();
+	}
+	
+	@Transactional(readOnly = true, propagation = Propagation.MANDATORY)
+	public List<Paiement> chercherPaiementsValidesR(Utilisateur u) {
+		return entityManager.createQuery("select p from Paiement p  where p.recepteur.id=:id and not p.dateValidation is null order by p.dateValidation desc", Paiement.class).setParameter("id", u.getId()).getResultList();
+	}
+	
+	@Transactional(readOnly = true, propagation = Propagation.MANDATORY)
 	public List<Paiement> chercherPaiementsInvalides() {
-		return entityManager.createQuery("select p from Paiement p  where p.valide=0 and p.dateValidation is null", Paiement.class).getResultList();
+		return entityManager.createQuery("select p from Paiement p  where p.dateValidation is null", Paiement.class).getResultList();
 	}
 
 	@Transactional(readOnly = true, propagation = Propagation.MANDATORY)
 	public List<Paiement> chercherPaiementsInvalidesE(Utilisateur u) {
-		return entityManager.createQuery("select p from Paiement p  where p.emetteur.id=:id and p.valide=0 and p.dateValidation is null", Paiement.class).setParameter("id", u.getId()).getResultList();
+		return entityManager.createQuery("select p from Paiement p  where p.emetteur.id=:id and p.dateValidation is null", Paiement.class).setParameter("id", u.getId()).getResultList();
 	}
 	
 	@Transactional(readOnly = true, propagation = Propagation.MANDATORY)
 	public List<Paiement> chercherPaiementsInvalidesR(Utilisateur u) {
-		return entityManager.createQuery("select p from Paiement p  where p.recepteur.id=:id and p.valide=0 and p.dateValidation is null", Paiement.class).setParameter("id", u.getId()).getResultList();
+		return entityManager.createQuery("select p from Paiement p  where p.recepteur.id=:id and p.dateValidation is null", Paiement.class).setParameter("id", u.getId()).getResultList();
 	}
 
 }

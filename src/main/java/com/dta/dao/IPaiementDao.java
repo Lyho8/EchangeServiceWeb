@@ -20,6 +20,12 @@ public interface IPaiementDao {
 	
 	public List<Paiement> chercherPaiementsR(Utilisateur u);
 	
+	public List<Paiement> chercherPaiementsValides();
+	
+	public List<Paiement> chercherPaiementsValidesE(Utilisateur u);
+	
+	public List<Paiement> chercherPaiementsValidesR(Utilisateur u);
+	
 	public List<Paiement> chercherPaiementsInvalides();
 	
 	public List<Paiement> chercherPaiementsInvalidesE(Utilisateur u);
