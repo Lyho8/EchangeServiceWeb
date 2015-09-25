@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ page session="false"%>
@@ -21,12 +22,12 @@
 				<div class="col-sm-6">
 					<div class="jumbotron">
 						<p>
-							<spring:message code="utilisateurs.profil.date" /><br> ${utilisateur.dateInscription}.
+							<spring:message code="utilisateurs.profil.date" /><br> <fmt:formatDate type="both" value="${utilisateur.dateInscription}" />
 						</p>
 						<p><spring:message code="utilisateurs.profil.statut" />
 							<c:choose>
 							
-								<c:when test="${utilisateur.actif}">
+								<c:when test="${ utilisateur.actif }">
 									<spring:message code="utilisateurs.profil.actif" />
 								</c:when>
 								
@@ -64,8 +65,7 @@
 	
 	</div>
 
-<!-- 	url vers annonces /annonces/id
- -->
+
 	</jsp:body>
 
 </t:template>
