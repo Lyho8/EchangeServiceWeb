@@ -28,14 +28,15 @@ public class UtilisateurController {
 	private IUtilisateurService ms;
 
 	//@Secured("ROLE_ADMIN")
-	@RequestMapping(value = "/lister", method = RequestMethod.GET)
-	public String listerUtilisateur(Model model) {
-
-		model.addAttribute("listeUtilisateursActifs", ms.listerUtilisateurs(true));
+	@RequestMapping(value = "/lister/{statut}", method = RequestMethod.GET)
+	public String listerUtilisateur(@PathVariable(value = "statut") String statut, Model model) {
 		
-		model.addAttribute("listeUtilisateursInactifs", ms.listerUtilisateurs(false));
+		boolean actif = statut.equals("actifs");
 		
-		return "utilisateurs_menu";
+		model.addAttribute("listeUtilisateurs", ms.listerUtilisateurs(actif));
+		model.addAttribute("actif", actif);
+		
+		return "utilisateurs_liste";
 	}
 
 	
@@ -48,11 +49,7 @@ public class UtilisateurController {
 		
 		ms.actualiserUtilisateur(u);
 		
-		model.addAttribute("listeUtilisateursActifs", ms.listerUtilisateurs(true));
-		
-		model.addAttribute("listeUtilisateursInactifs", ms.listerUtilisateurs(false));
-		
-		return "utilisateurs_liste";
+		return "redirect:/utilisateurs/lister/actifs";
 	}
 	
 	//@Secured("ROLE_ADMIN")
