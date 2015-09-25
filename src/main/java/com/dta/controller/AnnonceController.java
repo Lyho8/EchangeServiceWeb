@@ -45,15 +45,15 @@ public class AnnonceController {
 	private ICommentaireService coms;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String home(@RequestParam(value = "utilisateur", required = false) Integer idUtilisateur, Model model) {
-		List<Annonce> annonces;
-		System.out.println(idUtilisateur);
-		if(idUtilisateur != null) {
-			model.addAttribute("utilisateur", us.chercherUtilisateur(idUtilisateur.intValue()));
-			annonces = as.listerAnnoncesUtilisateur(idUtilisateur.intValue());
-		} else {
-			annonces = as.listerAnnonces(0, 50);
-		}
+	public String home(Model model) {
+		model.addAttribute("annonces", as.listerAnnonces(0, 50));
+		return "annonces_home";
+	}
+
+	@RequestMapping(value = "/{idUtilisateur}", method = RequestMethod.GET)
+	public String home(@PathVariable int idUtilisateur, Model model) {
+		List<Annonce> annonces = as.listerAnnoncesUtilisateur(idUtilisateur);
+		model.addAttribute("utilisateur", us.chercherUtilisateur(idUtilisateur));
 		model.addAttribute("annonces", annonces);
 		return "annonces_home";
 	}
