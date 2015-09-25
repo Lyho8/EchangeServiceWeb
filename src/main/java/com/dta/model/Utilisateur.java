@@ -182,8 +182,7 @@ public class Utilisateur {
 	public void setLogin(String login) {
 		this.login = login;
 	}
-
-	@JsonIgnore
+	
 	public String getMotDePasse() {
 		return motDePasse;
 	}
