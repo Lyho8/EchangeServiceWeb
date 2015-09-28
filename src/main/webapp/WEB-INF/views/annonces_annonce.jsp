@@ -8,7 +8,7 @@
 <div class="container">
  
     <div class="thumbnail">
-      <img src="http://www.mot-a-mot.com/media/annonce/annonce_2.jpg"
+      <img src="${annonce.image}"
 						alt="annonce de test">
       <div class="caption">
       	<div class="row">

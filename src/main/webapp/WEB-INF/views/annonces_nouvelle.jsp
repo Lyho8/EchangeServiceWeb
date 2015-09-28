@@ -18,6 +18,13 @@
 					<form:hidden path="auteur.id" />
 					
 					<div class="input-group">
+						<form:label class="form-control" path="image">
+							Image source : </form:label>
+						<form:input type="text" class="form-control" path="image" required="required"/>
+						<form:errors path="image" />
+					</div>
+					<br>
+					<div class="input-group">
 						<form:label class="form-control" path="type">
 							Type : </form:label>
 						<form:select class="form-control" path="type" required="required">

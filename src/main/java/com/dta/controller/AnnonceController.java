@@ -76,7 +76,7 @@ public class AnnonceController {
 
 		return "annonces_nouvelle";
 	}
-
+	
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/categorie", method = RequestMethod.GET)
 	public String nouvelleCategorie(Model model) {

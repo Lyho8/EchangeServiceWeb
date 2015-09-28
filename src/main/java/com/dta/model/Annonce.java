@@ -33,6 +33,8 @@ public class Annonce {
 	@NotNull
 	private boolean active;
 	
+	private String image;
+	
 	@NotNull
 	private Type type;
 	
@@ -152,5 +154,15 @@ public class Annonce {
 	public void setType(Type type) {
 		this.type = type;
 	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
+	
 	
 }
