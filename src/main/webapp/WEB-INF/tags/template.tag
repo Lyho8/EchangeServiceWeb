@@ -35,7 +35,7 @@
 						<li role="presentation" <c:if test="${requestScope['javax.servlet.forward.request_uri']=='/projetf/annonces/categorie'}">class="active"</c:if>><a href="<c:url value='/annonces/categorie' />">Gérer les catégories</a></li>
 					</sec:authorize>
 					<!--------------------------------->
-					<li role="presentation"><a href="<c:url value='/utilisateurs/profil'/>"><sec:authentication property="principal.username" /> ({{ mainCtl.solde }})</a></li>
+					<li role="presentation"><a href="<c:url value='/utilisateurs/profil'/>"><sec:authentication property="principal.username" /> ({{ mainCtl.solde }}<span class="glyphicon glyphicon glyphicon-rub"></span>)</a></li>
 					<li role="presentation" <c:if test="${requestScope['javax.servlet.forward.request_uri']=='/projetf/j_spring_security_logout'}">class="active"</c:if>><a href="<c:url value='/j_spring_security_logout'/>">Déconnexion</a></li>
 				</sec:authorize>
 			</ul>
