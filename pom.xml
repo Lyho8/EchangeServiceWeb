@@ -15,8 +15,6 @@
 		<spring.security.version>3.1.1.RELEASE</spring.security.version>
 	</properties>
 	<dependencies>
-
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -72,7 +70,6 @@
 			<artifactId>jackson-core-asl</artifactId>
 			<version>1.8.5</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
@@ -152,7 +149,6 @@
 			</plugin>
 		</plugins>
 	</build>
-
 	<repositories>
 		<repository>
 			<id>eclipselink</id>
