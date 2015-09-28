@@ -13,7 +13,7 @@
 <c:forEach items="${annonces}" var="annonce">
   <div class="col-sm-2">
     <div class="thumbnail">
-      <img src="http://www.mot-a-mot.com/media/annonce/annonce_2.jpg" alt="annonce de test">
+      <img src="${annonce.image}" alt="annonce de test">
       <div class="caption">
         <h3>${ annonce.type } de <a href="<c:url value="/utilisateurs/voir/${ annonce.auteur.id }" />">${ annonce.auteur.login }</a></h3>
         <p>${ annonce.categorie.libelle }</p>
