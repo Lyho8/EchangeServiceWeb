@@ -5,9 +5,9 @@
 						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
 						http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
 						http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
-						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 
-	<security:http auto-config="true" use-expressions="true" access-denied-page="/interdit">
+	<security:http auto-config="true" use-expressions="true">
 		<security:form-login login-processing-url="/j_spring_security_check " login-page="/connexion" authentication-failure-url="/connexion" default-target-url="/" />
 		<security:logout/>
 	</security:http>

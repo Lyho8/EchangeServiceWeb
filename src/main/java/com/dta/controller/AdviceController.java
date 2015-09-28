@@ -10,7 +10,8 @@ public class AdviceController {
 	// Le type d'exception interceptée
 	public ModelAndView exceptionHandler(Exception e) {
 		ModelAndView mav = new ModelAndView();
-		mav.getModel().put("message", e.getMessage());// Varibales passées à la cible
+		mav.getModel().put("titre", e.getClass());
+		mav.getModel().put("message", e.getMessage());// Variables passées à la cible
 		mav.setViewName("error");// Page cible
 		return mav;
 	}
