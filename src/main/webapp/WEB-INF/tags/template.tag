@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 <title></title>
 </head>
-<body>
+<body ng-app="EchangeServiceWeb" ng-controller="MainController as mainCtl">
 	<nav class="navbar navbar-default">
 		<span style="float: right"><a href="?lang=fr">fr</a> | <a href="?lang=en">en</a></span>
 		<div class="collapse navbar-collapse">
@@ -35,9 +35,9 @@
 						<li role="presentation" <c:if test="${requestScope['javax.servlet.forward.request_uri']=='/projetf/annonces/categorie'}">class="active"</c:if>><a href="<c:url value='/annonces/categorie' />">Gérer les catégories</a></li>
 					</sec:authorize>
 					<!--------------------------------->
-					<li role="presentation"><a href="<c:url value='/utilisateurs/profil'/>"><sec:authentication property="principal.username" /></a></li>
+					<li role="presentation"><a href="<c:url value='/utilisateurs/profil'/>"><sec:authentication property="principal.username" /> ({{ mainCtl.solde }}<span class="glyphicon glyphicon glyphicon-rub"></span>)</a></li>
 					<li role="presentation" <c:if test="${requestScope['javax.servlet.forward.request_uri']=='/projetf/j_spring_security_logout'}">class="active"</c:if>><a href="<c:url value='/j_spring_security_logout'/>">Déconnexion</a></li>
-				</sec:authorize>		
+				</sec:authorize>
 			</ul>
 
 			<!-- formulaire de connection et lien inscription  -->
@@ -57,5 +57,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular.min.js"></script>
+	<script type="text/javascript" src="<c:url value='/resources/js/app.js' />"></script>
+	<script type="text/javascript" src="<c:url value='/resources/js/controllers/MainController.js' />"></script>
 </body>
 </html>
