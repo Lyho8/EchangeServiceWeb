@@ -33,6 +33,7 @@ public class Annonce {
 	@NotNull
 	private boolean active;
 	
+	@Column(columnDefinition = "TEXT")
 	private String image;
 	
 	@NotNull
