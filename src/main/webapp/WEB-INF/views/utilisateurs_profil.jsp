@@ -2,7 +2,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ page session="false"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
 <t:template>
@@ -12,7 +12,11 @@
 	<div class="container">
 	
 		<h2> ${utilisateur.prenom} ${ utilisateur.nom } </h2>
-		<a href="<c:url value='/utilisateurs/actualiser/${utilisateur.id}' />"><spring:message code="utilisateurs.profil.editer" /></a><br>
+		<sec:authorize access="isAuthenticated()">
+			<c:if test="${ loggedID == utilisateur.id }">
+				<a href="<c:url value='/utilisateurs/actualiser/${utilisateur.id}' />"><spring:message code="utilisateurs.profil.editer" /></a><br>
+			</c:if>
+		</sec:authorize>
 		<div class="row">
 				<div class="col-sm-3">		
 					<div class="jumbotron">
@@ -46,6 +50,20 @@
 						<p>
 							<em><spring:message code="utilisateurs.profil.soldeRestant" /></em>  ${utilisateur.solde} crédits.
 						</p>
+						<p>
+							<a href="<c:url value='/annonces/${utilisateur.id}' />">
+								<c:choose>
+									<c:when test="${ loggedID == utilisateur.id }">
+										voir mes annonces
+									</c:when>
+									<c:otherwise>
+										voir les annonces de cet utilisateur
+									</c:otherwise>
+								</c:choose>
+							</a>
+						</p>
+						<sec:authorize access="hasRole('ROLE_ADMIN')">
+						<p>
 							<a href="<c:url value='/utilisateurs/statut/${utilisateur.id}' />">
 							<c:choose>
 							
@@ -59,6 +77,8 @@
 							
 							</c:choose>
 							</a>
+						</p>
+						</sec:authorize>
 					</div>
 					</div>
 				</div>	

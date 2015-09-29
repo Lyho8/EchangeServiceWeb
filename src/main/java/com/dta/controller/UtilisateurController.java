@@ -89,8 +89,6 @@ public class UtilisateurController {
 	
 	@RequestMapping(value="/voir/{id}", method=RequestMethod.GET)
 	public String voirProfil(@PathVariable(value = "id") int id, Model model){
-		
-		
 		Utilisateur u = ms.chercherUtilisateur(id);
 		
 		List<Message> messagesRecus= new ArrayList<Message>();
@@ -124,6 +122,10 @@ public class UtilisateurController {
 		model.addAttribute("montantsEmis", totalPaiementsEmis);
 		
 		model.addAttribute("montantsRecus", totalPaiementsRecus);
+
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Utilisateur loggedU = ms.chercherUtilisateurLogin(username);
+		model.addAttribute("loggedID", loggedU.getId());
 		
 		return "utilisateurs_profil";
 	}

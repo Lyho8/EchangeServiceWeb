@@ -54,10 +54,18 @@ public class AnnonceController {
 		List<Annonce> annonces = as.listerAnnoncesUtilisateur(idUtilisateur);
 		model.addAttribute("utilisateur", us.chercherUtilisateur(idUtilisateur));
 		model.addAttribute("annonces", annonces);
+
+		if (!(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken)) {
+			String username = SecurityContextHolder.getContext().getAuthentication().getName();
+			Utilisateur loggedU = us.chercherUtilisateurLogin(username);
+			model.addAttribute("loggedID", loggedU.getId());
+		} else {
+			model.addAttribute("loggedID", -1);
+		}
 		return "annonces_home";
 	}
 
-	@Secured({"ROLE_USER", "ROLE_ADMIN"})
+	@Secured({ "ROLE_USER", "ROLE_ADMIN" })
 	@RequestMapping(value = "/nouvelle", method = RequestMethod.GET)
 	public String nouvelle(Model model) {
 		List<Type> types = new ArrayList<Type>();
@@ -65,7 +73,7 @@ public class AnnonceController {
 		types.add(Type.OFFRE);
 
 		Annonce annonce = new Annonce();
-		
+
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		Utilisateur u = us.chercherUtilisateurLogin(username);
 		annonce.setAuteur(u);
@@ -76,39 +84,37 @@ public class AnnonceController {
 
 		return "annonces_nouvelle";
 	}
-	
+
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/categorie", method = RequestMethod.GET)
 	public String nouvelleCategorie(Model model) {
-		
+
 		model.addAttribute("categorie", new Categorie());
-		
+
 		model.addAttribute("categories", cs.listerCategories());
 
 		return "annonce_creer_categorie";
 	}
-	
+
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/categorie", method = RequestMethod.POST)
-	public String ajouterNouvelleCategorie(@Valid @ModelAttribute("categorie") Categorie categorie,
-			BindingResult result, Model model) {
-		
+	public String ajouterNouvelleCategorie(@Valid @ModelAttribute("categorie") Categorie categorie, BindingResult result, Model model) {
+
 		if (result.hasErrors()) {
 			model.addAttribute("categories", cs.listerCategories());
 			model.addAttribute("categorie", categorie);
 			return "annonce_creer_categorie";
 		}
-		
+
 		model.addAttribute("categorie", new Categorie());
 		cs.creerCategorie(categorie);
 		model.addAttribute("categories", cs.listerCategories());
 		return "annonce_creer_categorie";
 	}
-	
-	@Secured({"ROLE_USER", "ROLE_ADMIN"})
+
+	@Secured({ "ROLE_USER", "ROLE_ADMIN" })
 	@RequestMapping(value = "/nouvelle", method = RequestMethod.POST)
-	public String creer(@Valid @ModelAttribute("annonce") Annonce annonce,
-			BindingResult result, Model model) {
+	public String creer(@Valid @ModelAttribute("annonce") Annonce annonce, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			model.addAttribute("categories", cs.listerCategories());
 			return "annonces_nouvelle";
@@ -121,43 +127,43 @@ public class AnnonceController {
 
 	@RequestMapping(value = "/voir/{id}", method = RequestMethod.GET)
 	public String voir(@PathVariable int id, Model model) {
-		
+
 		Annonce annonce = as.chercherAnnonce(id);
 
-		if(!(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken)) {
+		if (!(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken)) {
 			Commentaire com = new Commentaire();
-			
+
 			String username = SecurityContextHolder.getContext().getAuthentication().getName();
 			Utilisateur u = us.chercherUtilisateurLogin(username);
-			
+
 			com.setAuteur(u);
 			com.setAnnonce(annonce);
-			
+
 			model.addAttribute("commentaire", com);
 		}
-		
-		model.addAttribute("annonce", annonce);  
+
+		model.addAttribute("annonce", annonce);
 		return "annonces_annonce";
 	}
 
-	@Secured({"ROLE_USER", "ROLE_ADMIN"})
+	@Secured({ "ROLE_USER", "ROLE_ADMIN" })
 	@RequestMapping(value = "/voir/{id}", method = RequestMethod.POST)
-	public String newMessagePost(@Valid Commentaire com,BindingResult BindingResult, Model model,@PathVariable int id) {
+	public String newMessagePost(@Valid Commentaire com, BindingResult BindingResult, Model model, @PathVariable int id) {
 
 		for (ObjectError oe : BindingResult.getAllErrors()) {
 			System.out.println(oe);
 		}
-		
+
 		Annonce annonce = as.chercherAnnonce(id);
-		
+
 		coms.creerCommentaire(com);
-	
+
 		List<Commentaire> listCom = annonce.getCommentaires();
-		
+
 		listCom.add(com);
-				
+
 		as.actualiserAnnonce(annonce);
-		
+
 		return "redirect:/annonces/voir/" + id;
 	}
 }

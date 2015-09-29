@@ -4,7 +4,14 @@
 <t:template>
 	<jsp:body>
 <h1>
-	Liste des annonces <c:if test="${ not empty utilisateur }">de ${ utilisateur.login }</c:if>
+	<c:choose>
+		<c:when test="${ loggedID == utilisateur.id }">
+			Vos annonces
+		</c:when>
+		<c:otherwise>
+			Liste des annonces <c:if test="${ not empty utilisateur }">de ${ utilisateur.login }</c:if>
+		</c:otherwise>
+	</c:choose>
 </h1>
 
 <c:choose>
@@ -25,7 +32,16 @@
 </div>
 </c:when>
 <c:otherwise>
-	<div class="alert alert-danger" role="alert">Cet utilisateur n'a posté aucune annonce.</div>
+	<div class="alert alert-danger" role="alert">
+		<c:choose>
+			<c:when test="${ loggedID == utilisateur.id }">
+				Vous n'avez posté aucune annonce.
+			</c:when>
+			<c:otherwise>
+				Cet utilisateur n'a posté aucune annonce.
+			</c:otherwise>
+		</c:choose>
+	</div>
 </c:otherwise>
 </c:choose>
 
