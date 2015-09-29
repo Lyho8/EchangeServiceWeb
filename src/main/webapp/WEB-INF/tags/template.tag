@@ -46,6 +46,7 @@
 					<div class="form-group">
 						<input type="text" name="j_username" class="form-control" placeholder="Login"> <input type="password" name="j_password" class="form-control" placeholder="Mot de passe">
 					</div>
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<button type="submit" class="btn btn-default">Submit</button>
 				</form>
 			</sec:authorize>
@@ -59,5 +60,21 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular.min.js"></script>
 	<script type="text/javascript" src="<c:url value='/resources/js/app.js' />"></script>
 	<script type="text/javascript" src="<c:url value='/resources/js/controllers/MainController.js' />"></script>
+	<sec:authorize access="isAuthenticated()">
+	<script type="text/javascript">
+	angular.module("EchangeServiceWeb")
+	.controller("MainController", function($scope, $http, $timeout) {
+		"use strict";
+		
+		var mainCtl = this;
+		mainCtl.solde = 0;
+		(function tick() {
+			$http.get('/projetf/rest/solde').success(function(data) {
+				mainCtl.solde = data;
+	            $timeout(tick, 10000);
+			});
+	    })();
+	});</script>
+	</sec:authorize>
 </body>
 </html>

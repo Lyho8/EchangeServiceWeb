@@ -22,6 +22,8 @@
 		<property name="entityManagerFactory" ref="entityManagerFactory"></property>
 	</bean>
 	
+	<bean id="webexpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
+	
 	<bean id="encoder" class="com.dta.utils.MyPassEncoder"></bean>
 	
 	<bean id="entityManagerFactory"

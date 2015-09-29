@@ -16,6 +16,7 @@
 		<div class="form-group">
 			<input type="text" name="j_username" class="form-control" placeholder="Login"> <input type="password" name="j_password" class="form-control" placeholder="Mot de passe">
 		</div>
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<button type="submit" class="btn btn-default">Submit</button>
 	</form>
 	

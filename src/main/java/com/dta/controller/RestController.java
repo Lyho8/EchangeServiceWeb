@@ -54,4 +54,13 @@ public class RestController {
 		m.put("commentaires", nbComsnonlus);
 		return m;
 	}
+	
+	@RequestMapping(value = "/solde", method = RequestMethod.GET)
+	@ResponseBody
+	public int solde() {
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Utilisateur u = us.chercherUtilisateurLogin(username);
+		
+		return u.getSolde();
+	}
 }
